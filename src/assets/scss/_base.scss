@@ -1,0 +1,115 @@
+/* color palette from <https://github.com/vuejs/theme> */
+:root {
+  --c-white: #fff;
+  --c-white-soft: #f3f3f2;
+  --c-grey: #5f5753;
+  --c-black: #000;
+  --c-black-soft: #121212;
+
+  --c-orange: #e65718;
+  --c-green: #45983c;
+  --c-red: #dd2038;
+
+  /* these will be overriden in the theme.config.js */
+  --c-primary: #e0fa08;
+  --c-secondary: #ef05d2;
+}
+
+/* semantic color variables for this project */
+:root {
+  --color-background: var(--c-white);
+  --color-background-soft: var(--c-white-soft);
+
+  --color-border: var(--c-grey);
+  --color-text: var(--c-black);
+  --color-highlight: var(--c-primary);
+
+  --color-primary: var(--c-primary);
+  --color-secondary: var(--c-secondary);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  position: relative;
+  font-weight: normal;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  position: relative;
+  min-height: 100vh;
+  color: var(--color-text);
+  background: var(--color-background);
+  transition: color 200ms, background-color 200ms;
+  line-height: 1.6;
+  font-size: 1.6rem;
+
+  &.no-scroll {
+    overflow: hidden;
+  }
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: #fff;
+  opacity: 0.5;
+  pointer-events: all;
+  z-index: 9;
+}
+
+*:focus-visible {
+  outline: none;
+}
+
+a {
+  color: var(--color-secondary);
+  font-style: italic;
+  font-weight: 700;
+  text-decoration: underline;
+  transition: 100ms all ease-in-out;
+
+  &:hover {
+    background-color: var(--color-primary);
+  }
+}
+
+strong {
+  font-weight: 700;
+}
+
+.h-flex {
+  display: flex;
+  gap: 1rem;
+
+  & > * {
+    flex: 1 1 0;
+  }
+}
+
+.v-flex {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+hr {
+  border: 0;
+  width: 100%;
+  height: 1px;
+  background-color: var(--color-border);
+  margin: 1rem 0;
+}
+
+.error {
+  color: var(--c-red);
+}
