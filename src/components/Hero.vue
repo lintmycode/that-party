@@ -2,7 +2,7 @@
 import { ref, onMounted } from 'vue'
 import BigYellowButton from './ui/BigYellowButton.vue';
 
-const showVideo = ref(true)
+const showVideo = ref(false)
 
 onMounted(() => {
   if (showVideo.value) {

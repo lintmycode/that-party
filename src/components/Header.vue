@@ -16,7 +16,7 @@ import ContentSection from './layout/ContentSection.vue';
       <li>Das 16h às 23h; a notária vem às 17h.</li>
       <li>Vestuário informal; traz o que já tens.</li>
       <li>Não queremos presentes, já temos tudo. Mas aceitamos contributos para a festa.</li>
-      <li>O essêncial é registares-te, dizeres quem vem e o que vais trazer. <a href="#">Aqui!</a></li>
+      <li>O essêncial é registares-te, dizeres quem vem e o que vais trazer. <a href="#">AQUI</a></li>
     </UnorderedList>
 
     <blockquote>

@@ -75,9 +75,12 @@ a {
   color: var(--color-secondary);
   font-style: italic;
   font-weight: 700;
-  text-decoration: underline;
+  text-decoration: none;
   transition: 100ms all ease-in-out;
-
+  text-decoration: underline;
+  text-decoration-thickness: .4rem;
+  text-underline-position: under;
+  
   &:hover {
     background-color: var(--color-primary);
   }

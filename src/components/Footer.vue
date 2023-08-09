@@ -1,5 +1,21 @@
 <template>
-  <section>
-    Footer: Include any necessary contact information and social media handles (if you want to share them).
-  </section>
+  <footer>
+    <p>Ainda tens dúvidas? Sugestões? Escreve para <a href="mailto:aquelafesta@gmail.com">aquelafesta@gmail.com</a></p>
+    <p>//</p>
+    <p>Nítida &copy; 2023</p>
+  </footer>
 </template>
+
+<style lang="scss" scoped>
+@import '@/assets/scss/mixins/padding.scss';
+
+footer {
+  @include padding-section;
+  background-color: var(--color-text);
+  text-align: center;
+
+  p {
+    color: var(--color-background);
+  }
+}
+</style>
