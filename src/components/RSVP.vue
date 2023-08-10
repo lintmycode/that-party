@@ -1,8 +1,11 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import StepsContent from '../components/StepsContent.vue'
 import RSVPForm from '../components/forms/RSVPForm.vue';
 import ContributionForm from '../components/forms/ContributionForm.vue';
+import SectionTitle from './atoms/SectionTitle.vue';
+import ContentSection from './layout/ContentSection.vue';
+import BigYellowButton from './ui/BigYellowButton.vue';
 
 const showForm = ref(false)
 
@@ -10,28 +13,43 @@ const openForm = () => {
   showForm.value = true
 }
 
+//
+const canProceed = ref(false)
+const formStatusChanged = (ok) => {
+  canProceed.value = ok
+}
+
+//
+const nav = computed(() => ([
+  {
+    name: 'Quem Vai?',
+    condition: true,
+  }, 
+  {
+    name: 'O Que Vou Levar',
+    condition: canProceed.value
+  }
+]))
 </script>
 
 <template>
-<section>
-  <h2>RSVP</h2>
-  <!-- <template v-if="showForm"> -->
-    <h2>Fixe :)</h2>
-
-    <StepsContent :nav="['Quem Vai', 'O Que Vou Levar']" :active-step="1">
+<ContentSection>
+  
+  <template v-if="showForm">
+    <StepsContent :nav="nav" :active-step="0">
       <template #step-0>
-        <RSVPForm />
+        <RSVPForm @formOK="formStatusChanged"/>
       </template>
 
       <template #step-1>
         <ContributionForm />  
       </template>
     </StepsContent>
-
-  <!-- </template>
+  </template>
   
   <template v-else>
-    <button type="button" @click="openForm">Marcar Presença!</button>
-  </template> -->
-</section>
+    <SectionTitle>RSVP</SectionTitle>
+    <BigYellowButton @click="openForm">Marcar Presença!</BigYellowButton>
+  </template>
+</ContentSection>
 </template>

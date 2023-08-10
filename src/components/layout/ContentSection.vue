@@ -1,14 +1,20 @@
 <template>
-  <section>
+  <section class="content-section">
     <slot/>
   </section>
 </template>
 
 <style lang="scss" scoped>
-section {
+.content-section {
   padding: 10rem 1rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
+  align-items: center;
+  gap: 8rem;
+
+  & + .content-section {
+    border-top: .5rem solid var(--color-secondary);
+  }
 }
 </style>

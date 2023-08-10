@@ -1,5 +1,7 @@
 <script setup>
 import { ref } from 'vue'
+import SectionTitle from './atoms/SectionTitle.vue';
+import BigYellowButton from './ui/BigYellowButton.vue';
 
 const props = defineProps({
   nav: Array,
@@ -8,8 +10,8 @@ const props = defineProps({
     default: 0
   }
 })
-const activeIndex = ref(props.activeStep)
 
+const activeIndex = ref(props.activeStep)
 const setActiveStep = (index) => {
   console.log(index)
   activeIndex.value = index
@@ -18,25 +20,37 @@ const setActiveStep = (index) => {
 
 <template>
   <div>
-    <ul>
+    <!-- <ul>
       <li v-for="(item, index) in nav" :key="index" :class="{ active: activeIndex === index }">
         <button @click="setActiveStep(index)" v-if="index < activeIndex">{{ item }}</button>
         <span v-else>{{ item }}</span>
       </li>
-    </ul>
+    </ul> -->
 
     <ul>
       <li v-for="(item, index) in nav" :key="index" :hidden="activeIndex !== index">
+        <SectionTitle>{{ item.name }}</SectionTitle>
         <slot :name="'step-' + index" />
         
-        <button type="button" v-if="activeIndex > 0" 
-          @click="setActiveStep(activeIndex - 1)">Voltar</button>
-          <button type="button" v-if="activeIndex < nav.length - 1" 
-          @click="setActiveStep(activeIndex + 1)">Avançar</button>
+        <BigYellowButton v-if="activeIndex > 0" 
+          @click="setActiveStep(activeIndex - 1)">&lt; {{ nav[activeIndex - 1].name }}</BigYellowButton>
+        <BigYellowButton v-if="activeIndex < nav.length - 1" :disabled="!nav[activeIndex + 1].condition" 
+          @click="setActiveStep(activeIndex + 1)">{{ nav[activeIndex + 1].name }} </BigYellowButton>
       </li>
     </ul>
   </div>
 </template>
 
-<style>
+<style lang="scss" scoped>
+ul {
+  li {
+    &:not([hidden]) {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 8rem;
+    }
+  }
+}
 </style>

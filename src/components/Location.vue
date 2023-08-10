@@ -77,13 +77,14 @@ section {
     transform: translateY(-50%);
     right: 10vw;
     width: 55rem;
-    padding: 2rem;
+    padding: 3rem 2rem;
     background-color: var(--color-background);
     z-index: 1;
     box-shadow: 1rem 1rem 0 0 var(--color-primary);
 
     h2 {
       font-size: 3rem;
+      font-weight: 700;
     }
 
     p, a {

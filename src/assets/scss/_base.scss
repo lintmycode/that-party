@@ -93,10 +93,11 @@ strong {
 .h-flex {
   display: flex;
   gap: 1rem;
+  align-items: center;
 
-  & > * {
-    flex: 1 1 0;
-  }
+  // & > * {
+  //   flex: 1 1 0;
+  // }
 }
 
 .v-flex {

@@ -17,7 +17,6 @@ button {
   text-transform: uppercase;
   font-family: AnonymousPro;
   border: 0;
-  margin-top: 8rem;
   cursor: pointer;
   z-index: 1;
   transition: 100ms all ease-in;
@@ -44,12 +43,19 @@ button {
     transition: 200ms all ease-in;
   }
 
-  &:hover {
+  &:hover,
+  &:focus {
     color: var(--color-background);
 
     &:after {
       width: 100%;
     }
+  }
+
+  &[disabled] {
+    opacity: .3;
+    cursor: default;
+    pointer-events: none;
   }
 }
 </style>

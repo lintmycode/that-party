@@ -64,6 +64,8 @@ const add = (catIndex, itemIndex) => {
       </li>
     </template>
   </ul>
-  <p>Vou levar {{ myContribution.map(item => item.name + ' (' + item.qty + ')' ).join(', ') }} </p>
+  <p>Vou levar {{ myContribution.map(item => item.name + 
+    (item.qty > 1 ? ' x' + item.qty : '')
+    ).join(', ') }} </p>
   
 </template>

@@ -6,7 +6,7 @@
 
 <style lang="scss" scoped>
 ul {
-  margin: 2rem auto;
+  margin: 0 auto;
   max-width: 50vw;
   list-style-type: disc;
   font-size: 3rem;

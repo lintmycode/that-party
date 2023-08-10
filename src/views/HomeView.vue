@@ -12,8 +12,8 @@ import RSVP from '../components/RSVP.vue'
     <Hero />
     <Header />
     <Location />
-    <FAQs />
     <RSVP />
+    <FAQs />
     <Footer />
   </main>
 </template>

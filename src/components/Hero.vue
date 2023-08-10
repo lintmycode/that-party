@@ -2,17 +2,17 @@
 import { ref, onMounted } from 'vue'
 import BigYellowButton from './ui/BigYellowButton.vue';
 
-const showVideo = ref(false)
+const debug = ref(false)
 
 onMounted(() => {
-  if (showVideo.value) {
+  if (debug.value) {
     document.body.classList.add('no-scroll')
   }
 })
 
 const isPartyStarted = ref(false)
 let audio = null
-if (showVideo.value) {
+if (debug.value) {
   audio = new Audio('/mp3/comanchero.mp3');
 } else {
   isPartyStarted.value = false
@@ -40,7 +40,7 @@ const getThisPartyStarted = () => {
         <BigYellowButton>O Quê ??!</BigYellowButton>
       </div>
       
-      <video playsinline autoplay muted loop id="bgVideo" v-if="isPartyStarted">
+      <video playsinline autoplay muted loop id="bgVideo" v-if="!debug">
         <source src="/video/aquela-festa.mp4" type="video/mp4">
       </video>
     </section>
@@ -72,6 +72,7 @@ section {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 8rem;
 
   .content {
     text-align: center;
