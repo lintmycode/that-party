@@ -18,7 +18,8 @@ button {
   border-radius: 0.5rem;
   transition: 100ms all;
 
-  &:hover {
+  &:hover,
+  &:focus {
     color: var(--color-primary);
   }
 }

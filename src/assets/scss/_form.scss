@@ -59,7 +59,7 @@ form {
   input[type='checkbox'] {
     border: 0;
     background-color: transparent;
-    width: 40px;
+    width: 0;
     height: 0;
     position: relative;
 
@@ -74,17 +74,19 @@ form {
     }
 
     &:focus {
-      &:before {
-        background-color: var(--color-primary);
+      &,
+      &:checked {
+        &:before {
+          background-color: var(--color-primary);
+        }
       }
     }
-
+    
     &:checked {
       &:before {
         content: '✔';
         position: absolute;
         font-size: 4rem;
-        // background-color: var(--color-secondary);
       }
     }
   }
