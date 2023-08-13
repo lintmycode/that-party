@@ -78,9 +78,9 @@ a {
   text-decoration: none;
   transition: 100ms all ease-in-out;
   text-decoration: underline;
-  text-decoration-thickness: .4rem;
+  text-decoration-thickness: 0.4rem;
   text-underline-position: under;
-  
+
   &:hover {
     background-color: var(--color-primary);
   }

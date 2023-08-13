@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
-import SectionTitle from './atoms/SectionTitle.vue';
-import BigYellowButton from './ui/BigYellowButton.vue';
+import SectionTitle from './atoms/SectionTitle.vue'
+import BigYellowButton from './ui/BigYellowButton.vue'
 
 const props = defineProps({
   nav: Array,
@@ -31,15 +31,19 @@ const setActiveStep = (index) => {
       <li v-for="(item, index) in nav" :key="index" :hidden="activeIndex !== index">
         <SectionTitle>{{ item.name }}</SectionTitle>
         <slot :name="'step-' + index" />
-        
       </li>
     </ul>
 
     <nav>
-      <BigYellowButton v-if="activeIndex > 0" 
-        @click="setActiveStep(activeIndex - 1)">&lt; {{ nav[activeIndex - 1].nav }}</BigYellowButton>
-      <BigYellowButton v-if="activeIndex < nav.length - 1" :disabled="!nav[activeIndex + 1].condition" 
-        @click="setActiveStep(activeIndex + 1)">{{ nav[activeIndex + 1].nav }} &gt;</BigYellowButton>
+      <BigYellowButton v-if="activeIndex > 0" @click="setActiveStep(activeIndex - 1)"
+        >&lt; {{ nav[activeIndex - 1].nav }}</BigYellowButton
+      >
+      <BigYellowButton
+        v-if="activeIndex < nav.length - 1"
+        :disabled="!nav[activeIndex + 1].condition"
+        @click="setActiveStep(activeIndex + 1)"
+        >{{ nav[activeIndex + 1].nav }} &gt;</BigYellowButton
+      >
     </nav>
   </div>
 </template>

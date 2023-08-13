@@ -1,7 +1,7 @@
 <script setup>
-import SectionTitle from './atoms/SectionTitle.vue';
-import UnorderedList from './atoms/UnorderedList.vue';
-import ContentSection from './layout/ContentSection.vue';
+import SectionTitle from './atoms/SectionTitle.vue'
+import UnorderedList from './atoms/UnorderedList.vue'
+import ContentSection from './layout/ContentSection.vue'
 </script>
 
 <template>
@@ -26,7 +26,10 @@ import ContentSection from './layout/ContentSection.vue';
       </li>
       <li>
         <h3>Lista de casamento?</h3>
-        <p>Nem pensar nisso! Se és daquelas pessoas que acha que parece mal vir de mãos a abanar, vai treinando 👋.</p>
+        <p>
+          Nem pensar nisso! Se és daquelas pessoas que acha que parece mal vir de mãos a abanar, vai
+          treinando 👋.
+        </p>
       </li>
       <li>
         <h3>Gostava de contribuir com algo diferente e/ou inusitado, vai dar?</h3>

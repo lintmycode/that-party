@@ -3,9 +3,9 @@
     <!-- Header: This is where you can briefly explain the plan for the day and your concept of the celebration. 
       Make it welcoming and personal. It's also a good place to clarify the informal dress code and mention 
       that it's a "bring your own" food and drink event. -->
-    
+
     <h2>Vem Celebrar</h2>
-    
+
     <blockquote>
       <p>Finalmente.</p>
       <cite>- toda a gente</cite>
@@ -15,7 +15,6 @@
       <li>Das 16h às 23h; a notária vem às 17h</li>
       <li>Vestuário informal; traz o que já tens</li>
       <li></li>
-
     </ul>
   </section>
 </template>
@@ -33,12 +32,12 @@ section {
 
   blockquote {
     padding: 1rem 2rem;
-    border-left: 8px solid var(--color-secondary); 
+    border-left: 8px solid var(--color-secondary);
     position: relative;
     //background: #f4f4f8; /* A light background color for contrast */
     max-width: 50rem;
     margin: 2rem auto;
-  
+
     &:before {
       content: '“';
       position: absolute;
@@ -48,14 +47,14 @@ section {
       line-height: 12rem;
       color: var(--color-secondary);
     }
-    
+
     p {
       font-size: 5rem;
       margin-left: 5rem;
-      font-style: italic;  
-      font-family: 'Georgia', serif; 
+      font-style: italic;
+      font-family: 'Georgia', serif;
     }
-   
+
     cite {
       display: block;
       text-align: right;

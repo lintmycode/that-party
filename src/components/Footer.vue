@@ -1,6 +1,9 @@
 <template>
   <footer>
-    <p>Ainda tens dúvidas? Sugestões? Escreve para <a href="mailto:aquelafesta@gmail.com">aquelafesta@gmail.com</a></p>
+    <p>
+      Ainda tens dúvidas? Sugestões? Escreve para
+      <a href="mailto:aquelafesta@gmail.com">aquelafesta@gmail.com</a>
+    </p>
     <p>//</p>
     <p>Nítida &copy; 2023</p>
   </footer>

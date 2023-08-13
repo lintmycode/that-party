@@ -7,7 +7,7 @@ const partyStore = usePartyStore()
 const { contributions } = storeToRefs(partyStore)
 
 // get available contributions
-const availableContributions = ref([]);
+const availableContributions = ref([])
 onMounted(async () => {
   availableContributions.value = await partyStore.getAvailableContributions()
 })()
@@ -24,49 +24,57 @@ const add = (catIndex, itemIndex) => {
   availableContributions.value[catIndex].items[itemIndex].qty--
 
   // add item to contributions array
-  const item = availableContributions.value[catIndex].items[itemIndex];
-  const existingIndex = contributions.value.findIndex(i => i.name === item.name)
+  const item = availableContributions.value[catIndex].items[itemIndex]
+  const existingIndex = contributions.value.findIndex((i) => i.name === item.name)
   if (existingIndex === -1) {
     // if it doesn't exist, add it with qty 1
-    contributions.value.push({ ...item, qty: 1 });
+    contributions.value.push({ ...item, qty: 1 })
   } else {
     // else increment the qty
-    contributions.value[existingIndex].qty++;
+    contributions.value[existingIndex].qty++
   }
 }
 
 // remove an item from the contributions array
 const removeItem = (item) => {
-  const catIndex = availableContributions.value.findIndex(cat => cat.items.some(i => i.name === item.name));
-  const itemIndex = availableContributions.value[catIndex].items.findIndex(i => i.name === item.name);
-  
+  const catIndex = availableContributions.value.findIndex((cat) =>
+    cat.items.some((i) => i.name === item.name)
+  )
+  const itemIndex = availableContributions.value[catIndex].items.findIndex(
+    (i) => i.name === item.name
+  )
+
   // increment the quantity of the item in available contributions
-  availableContributions.value[catIndex].items[itemIndex].qty++;
-  
+  availableContributions.value[catIndex].items[itemIndex].qty++
+
   // remove or decrease the quantity of the item in contributions
-  const itemName = availableContributions.value[catIndex].items[itemIndex].name;
-  const existingIndex = contributions.value.findIndex(i => i.name === itemName);
+  const itemName = availableContributions.value[catIndex].items[itemIndex].name
+  const existingIndex = contributions.value.findIndex((i) => i.name === itemName)
   if (existingIndex !== -1) {
     if (contributions.value[existingIndex].qty > 1) {
-      contributions.value[existingIndex].qty--;
+      contributions.value[existingIndex].qty--
     } else {
-      contributions.value.splice(existingIndex, 1);
+      contributions.value.splice(existingIndex, 1)
     }
   }
 }
 </script>
 
 <template>
-
   <ul>
-    <template v-for="cat, catIndex in availableContributions" :key="'cat-' + catIndex">
-      <li v-if="cat.items.some(i => i.qty > 0)" :class="['category', openCategory === catIndex ? 'active' : '']">
+    <template v-for="(cat, catIndex) in availableContributions" :key="'cat-' + catIndex">
+      <li
+        v-if="cat.items.some((i) => i.qty > 0)"
+        :class="['category', openCategory === catIndex ? 'active' : '']"
+      >
         <button type="button" @click="toggleCategory(catIndex)">{{ cat.name }}</button>
         <ul>
-          <template v-for="item, itemIndex in cat.items" :key="'cat-' + catIndex + '-' + itemIndex">
+          <template
+            v-for="(item, itemIndex) in cat.items"
+            :key="'cat-' + catIndex + '-' + itemIndex"
+          >
             <li v-if="openCategory === catIndex && item.qty > 0" class="item">
-              <button type="button" 
-                @click="add(catIndex, itemIndex)">+ {{ item.name }}</button>
+              <button type="button" @click="add(catIndex, itemIndex)">+ {{ item.name }}</button>
               ({{ item.qty }})
             </li>
           </template>
@@ -74,12 +82,12 @@ const removeItem = (item) => {
       </li>
     </template>
   </ul>
-  
+
   <div class="my-contribution" v-if="contributions.length > 0">
-    Vou levar 
-    <template v-for="item, index in contributions" :key="item.name">
+    Vou levar
+    <template v-for="(item, index) in contributions" :key="item.name">
       <strong>
-        {{ item.name }} 
+        {{ item.name }}
         {{ item.qty > 1 ? ' x' + item.qty + ' ' : ' ' }}
       </strong>
       <button type="button" @click="removeItem(item)">(remover)</button>
@@ -131,7 +139,7 @@ ul {
         button {
           border: 0;
           background-color: transparent;
-          border-bottom: .3rem solid var(--color-text);
+          border-bottom: 0.3rem solid var(--color-text);
           font-size: 2rem;
           transition: 100ms all;
           cursor: pointer;

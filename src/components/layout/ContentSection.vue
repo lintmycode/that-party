@@ -1,6 +1,6 @@
 <template>
   <section class="content-section">
-    <slot/>
+    <slot />
   </section>
 </template>
 
@@ -14,7 +14,7 @@
   gap: 8rem;
 
   & + .content-section {
-    border-top: .5rem solid var(--color-secondary);
+    border-top: 0.5rem solid var(--color-secondary);
   }
 }
 </style>

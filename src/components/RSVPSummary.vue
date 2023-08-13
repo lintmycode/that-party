@@ -7,25 +7,25 @@ const { attendees, contributions, contact } = storeToRefs(partyStore)
 </script>
 
 <template>
-<div>
-  <h3>Quem Vai</h3>
-  <ul>
-    <li v-for="attendee, index in attendees" :key="'attendee-' + index">
-      {{ attendee.name + (attendee.isChild ? ' (criança)' : '') }}
-    </li>
-  </ul>
+  <div>
+    <h3>Quem Vai</h3>
+    <ul>
+      <li v-for="(attendee, index) in attendees" :key="'attendee-' + index">
+        {{ attendee.name + (attendee.isChild ? ' (criança)' : '') }}
+      </li>
+    </ul>
 
-  <h3>Vou levar</h3>
-  <ul>
-    <li v-for="contribution, index in contributions" :key="'contribution-' + index">
-      {{ contribution.name + ' (' + contribution.qty + ')' }}
-    </li>
-  </ul>
+    <h3>Vou levar</h3>
+    <ul>
+      <li v-for="(contribution, index) in contributions" :key="'contribution-' + index">
+        {{ contribution.name + ' (' + contribution.qty + ')' }}
+      </li>
+    </ul>
 
-  <h3>Contacto</h3>
-  <p>{{ contact.email }}</p>
-  <p>{{ contact.message }}</p>
-</div>
+    <h3>Contacto</h3>
+    <p>{{ contact.email }}</p>
+    <p>{{ contact.message }}</p>
+  </div>
 </template>
 
 <style lang="scss" scoped>

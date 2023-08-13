@@ -15,7 +15,7 @@ button {
   background-color: var(--color-text);
   color: var(--color-background);
   cursor: pointer;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   transition: 100ms all;
 
   &:hover {

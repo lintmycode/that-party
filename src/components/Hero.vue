@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import BigYellowButton from './ui/BigYellowButton.vue';
+import BigYellowButton from './ui/BigYellowButton.vue'
 
 const debug = ref(false)
 
@@ -13,11 +13,11 @@ onMounted(() => {
 const isPartyStarted = ref(false)
 let audio = null
 if (debug.value) {
-  audio = new Audio('/mp3/comanchero.mp3');
+  audio = new Audio('/mp3/comanchero.mp3')
 } else {
   isPartyStarted.value = false
 }
-const getThisPartyStarted = () => {  
+const getThisPartyStarted = () => {
   isPartyStarted.value = true
   console.log('comanchero')
   audio.play()
@@ -31,7 +31,7 @@ const getThisPartyStarted = () => {
       <h1>já aqui estás?</h1>
       <BigYellowButton @click="getThisPartyStarted">Entra</BigYellowButton>
     </section>
-  
+
     <section v-else>
       <div class="content">
         <p class="who">-&gt; Filipa &amp; Nuno convidam para &lt;-</p>
@@ -39,30 +39,32 @@ const getThisPartyStarted = () => {
         <p class="when">16 Setembro - Afife</p>
         <BigYellowButton>O Quê ??!</BigYellowButton>
       </div>
-      
+
       <video playsinline autoplay muted loop id="bgVideo" v-if="!debug">
-        <source src="/video/aquela-festa.mp4" type="video/mp4">
+        <source src="/video/aquela-festa.mp4" type="video/mp4" />
       </video>
     </section>
   </transition>
 </template>
 
 <style lang="scss" scoped>
-.fade-enter-active, .fade-leave-active {
+.fade-enter-active,
+.fade-leave-active {
   transition: opacity 3s;
 }
 
-.fade-enter-from, .fade-leave-to {
+.fade-enter-from,
+.fade-leave-to {
   opacity: 0;
 }
 
-.fade-enter-to, .fade-leave-from {
+.fade-enter-to,
+.fade-leave-from {
   opacity: 1;
 }
 
-
 section {
-  background: radial-gradient(at left top, #010101, #743C9A);
+  background: radial-gradient(at left top, #010101, #743c9a);
   background-size: cover;
   background-repeat: no-repeat;
 
@@ -78,7 +80,7 @@ section {
     text-align: center;
     position: relative;
     z-index: 1;
-    
+
     &::before {
       content: '';
       background-image: url(/icons/heart.svg);
@@ -93,9 +95,9 @@ section {
 
     p {
       text-transform: uppercase;
-      letter-spacing: .3rem;
+      letter-spacing: 0.3rem;
       color: var(--color-primary);
-      
+
       &.who {
         font-family: AnonymousPro;
         font-size: 2.3rem;

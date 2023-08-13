@@ -9,7 +9,7 @@ button {
   padding: 1.6rem 2rem;
   color: var(--color-text);
   background-color: var(--color-primary);
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   text-align: center;
   min-width: 22rem;
   font-weight: 600;
@@ -29,7 +29,7 @@ button {
     top: 0;
     bottom: 0;
     background-color: var(--color-secondary);
-    border-radius: .5rem;
+    border-radius: 0.5rem;
     z-index: -1;
   }
 
@@ -53,7 +53,7 @@ button {
   }
 
   &[disabled] {
-    opacity: .3;
+    opacity: 0.3;
     cursor: default;
     pointer-events: none;
   }
