@@ -21,7 +21,8 @@ form {
   }
 
   input,
-  select {
+  select, 
+  textarea {
     border: 1px solid var(--color-border);
     min-height: 40px;
     transition: 100ms all;
@@ -29,6 +30,14 @@ form {
 
     &.error {
       border-color: var(--color-red);
+    }
+  }
+
+  textarea {
+    padding: 1rem;
+
+    &:focus {
+      background-color: var(--color-primary);
     }
   }
 

@@ -1,22 +1,23 @@
 <script setup>
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted } from 'vue'
+import { storeToRefs } from 'pinia'
+import { usePartyStore } from '@/stores/partyStore.js'
 import SecondaryButton from '../ui/SecondaryButton.vue';
 
-const attendees = ref([{name: '', isChild: false}])
+const partyStore = usePartyStore()
+const { attendees } = storeToRefs(partyStore)
+
 const message = ref("")
 const plusOne = () => {
-  const lastIndex = attendees.value.length - 1
-  if (attendees.value[lastIndex].name.trim().length === 0) {
-    message.value = "Falta o nome do último acompanhante"
-    document.getElementsByName('name-' + lastIndex)[0].classList.add('error')
-    return false
-  }
-
-  attendees.value.push({name: '', isChild: false})
-  setTimeout(() => {
-    focusLastName()
-  }, 50)
-  // console.log('attendees', attendees.value)
+  if(partyStore.attendeesOk()) {
+    attendees.value.push({name: '', isChild: false})
+    setTimeout(() => {
+      focusLastName()
+    }, 50)
+  } else {
+    message.value = "Ops, faltam nomes!"
+    document.getElementsByName('name-' + (attendees.value.length - 1))[0].classList.add('error')
+  } 
 }
 
 //
@@ -27,21 +28,12 @@ const nameEdited = (e) => {
   }
 }
 
-// 
-const emit = defineEmits(['formOK']);
-watch(attendees, () => {
-  const allFilled = attendees.value.every(att => att.name.trim() !== '');
-  console.log(allFilled)
-  emit('formOK', allFilled);
-}, { deep: true });
-
 //
 onMounted(() => {
-  // focusLastName()
+  focusLastName()
 })
 
 const focusLastName = () => {
-  console.log()
   document.getElementsByName("name-" + (attendees.value.length - 1))[0].focus()
 }
 </script>
@@ -50,7 +42,6 @@ const focusLastName = () => {
   <!-- <p>Adiciona o nome de todos os que vão contigo</p> -->
   <form>
     <div class="form-item" v-for="attendee, index in attendees" :key="index">
-      <!-- <label>Nome</label> -->
       <input type="text" :name="'name-' + index" v-model="attendee.name" placeholder="Nome" @keyup="nameEdited">
       <label>Criança?</label>
       <input type="checkbox" :name="'is-child-' + index" v-model="attendee.isChild">

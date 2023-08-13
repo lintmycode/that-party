@@ -32,12 +32,15 @@ const setActiveStep = (index) => {
         <SectionTitle>{{ item.name }}</SectionTitle>
         <slot :name="'step-' + index" />
         
-        <BigYellowButton v-if="activeIndex > 0" 
-          @click="setActiveStep(activeIndex - 1)">&lt; {{ nav[activeIndex - 1].name }}</BigYellowButton>
-        <BigYellowButton v-if="activeIndex < nav.length - 1" :disabled="!nav[activeIndex + 1].condition" 
-          @click="setActiveStep(activeIndex + 1)">{{ nav[activeIndex + 1].name }} </BigYellowButton>
       </li>
     </ul>
+
+    <nav>
+      <BigYellowButton v-if="activeIndex > 0" 
+        @click="setActiveStep(activeIndex - 1)">&lt; {{ nav[activeIndex - 1].nav }}</BigYellowButton>
+      <BigYellowButton v-if="activeIndex < nav.length - 1" :disabled="!nav[activeIndex + 1].condition" 
+        @click="setActiveStep(activeIndex + 1)">{{ nav[activeIndex + 1].nav }} &gt;</BigYellowButton>
+    </nav>
   </div>
 </template>
 
@@ -52,5 +55,12 @@ ul {
       gap: 8rem;
     }
   }
+}
+
+nav {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  margin-top: 6rem;
 }
 </style>

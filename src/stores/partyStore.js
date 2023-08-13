@@ -1,28 +1,43 @@
-// import { ref } from 'vue'
+import { ref } from 'vue'
 import { defineStore } from 'pinia'
 
-export const useContributionStore = defineStore('contribution', () => {
+export const usePartyStore = defineStore('party', () => {
+
+  const attendees = ref([{name: '', isChild: false}])
+  const contributions = ref([])
+  const contact = ref({email: '', message: ''})
+
+  function attendeesOk() {
+    return attendees.value.every(a => a.name.trim().length > 0)
+  }
+
+  function contactOk() {
+    return /\S+@\S+\.\S+/.test(contact.value.email)
+  }
 
   async function getAvailableContributions() {
-    return {
-      grill: {
+    return [
+      {
+        id: 1,
         name: "Para a grelha",
         items: [
           { name: "Frango", qty: 10 },
           { name: "Costelinha", qty: 20 },
-          { name: "Carne 🐄", qty: 10 },
+          { name: "Hamburgeres", qty: 10 },
           { name: "Chouriço", qty: 20 },
           { name: "Toscanas", qty: 20 },
-        ]
+        ],
       },
-      desserts: {
+      {
+        id: 2,
         name: "Sobremesas",
         items: [
           { name: "Aletria", qty: 10 },
           { name: "Bolo de noiva", qty: 10 },
         ]
       },
-      booze: {
+      {
+        id: 3,
         name: "Bebidas alcoólicas",
         items: [
           { name: "Vinho branco", qty: 10 },
@@ -32,7 +47,8 @@ export const useContributionStore = defineStore('contribution', () => {
           { name: "Cerveja (pack 6)", qty: 10 },
         ]
       },
-      softdrinks: {
+      {
+        id: 4,
         name: "Bebidas não-alcoólicas",
         items: [
           { name: "Água das Pedras (pack 6)", qty: 20 },
@@ -43,17 +59,12 @@ export const useContributionStore = defineStore('contribution', () => {
           { name: "Sumos de fruta (1l)", qty: 10 },
         ]
       },
-      other: {
-        name: "Outros",
-        items: [
-          { name: "Comida/bebida?", qty: -1 },
-          { name: "Serviços?", qty: -1 },
-        ]
-      },
-    }
+    ]
   }
   
   return {
+    attendees, contributions, contact,
+    attendeesOk, contactOk,
     getAvailableContributions,
   }
 })
