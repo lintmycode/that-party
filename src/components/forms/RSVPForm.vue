@@ -46,7 +46,7 @@ const focusLastName = () => {
         type="text"
         :name="'name-' + index"
         v-model="attendee.name"
-        placeholder="Nome"
+        placeholder="Nome *"
         @keyup="nameEdited"
       />
       <label>Criança?</label>

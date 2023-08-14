@@ -2,17 +2,18 @@
 import { ref, onMounted } from 'vue'
 import BigYellowButton from './ui/BigYellowButton.vue'
 
-const debug = ref(false)
+const debug = ref(true)
 
 onMounted(() => {
-  if (debug.value) {
+  window.scrollTo(0, 0)
+  if (!debug.value) {
     document.body.classList.add('no-scroll')
   }
 })
 
 const isPartyStarted = ref(false)
 let audio = null
-if (debug.value) {
+if (!debug.value) {
   audio = new Audio('/mp3/comanchero.mp3')
 } else {
   isPartyStarted.value = false
@@ -20,7 +21,9 @@ if (debug.value) {
 const getThisPartyStarted = () => {
   isPartyStarted.value = true
   console.log('comanchero')
-  audio.play()
+  if (!debug.value) {
+    audio.play()
+  }
   document.body.classList.remove('no-scroll')
 }
 </script>
@@ -107,6 +110,10 @@ section {
         font-family: CormorantGaramond;
         font-size: 2.4rem;
       }
+    }
+
+    button {
+      margin-top: 10rem;
     }
   }
 

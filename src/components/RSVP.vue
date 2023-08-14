@@ -21,6 +21,11 @@ const openForm = () => {
 const partyStore = usePartyStore()
 const { contributions } = storeToRefs(partyStore)
 
+const submit = async () => {
+  console.log('submit')
+  await partyStore.submit()
+}
+
 // steps nav items
 const nav = computed(() => [
   {
@@ -41,7 +46,8 @@ const nav = computed(() => [
   {
     name: 'Resumo',
     nav: 'Resumo',
-    condition: partyStore.contactOk()
+    condition: partyStore.contactOk(),
+    submit: true
   }
 ])
 </script>
@@ -49,7 +55,7 @@ const nav = computed(() => [
 <template>
   <ContentSection>
     <template v-if="showForm">
-      <StepsContent :nav="nav" :active-step="0">
+      <StepsContent :nav="nav" :active-step="1" @submit="submit">
         <template #step-0>
           <RSVPForm />
         </template>

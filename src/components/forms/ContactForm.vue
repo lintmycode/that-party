@@ -16,7 +16,7 @@ const { contact } = storeToRefs(partyStore)
         type="email"
         name="email"
         id="email"
-        placeholder="Email"
+        placeholder="Email *"
         required
         v-model="contact.email"
       />

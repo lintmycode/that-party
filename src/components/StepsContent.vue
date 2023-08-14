@@ -16,6 +16,12 @@ const setActiveStep = (index) => {
   console.log(index)
   activeIndex.value = index
 }
+
+// submit
+const emit = defineEmits(['submit'])
+const submit = () => {
+  emit('submit')
+}
 </script>
 
 <template>
@@ -44,6 +50,7 @@ const setActiveStep = (index) => {
         @click="setActiveStep(activeIndex + 1)"
         >{{ nav[activeIndex + 1].nav }} &gt;</BigYellowButton
       >
+      <BigYellowButton v-if="nav[activeIndex].submit" @click="submit">Enviar &gt;</BigYellowButton>
     </nav>
   </div>
 </template>

@@ -1,7 +1,9 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
+import { supabase } from '@/lib/supabaseClient.js'
 
 export const usePartyStore = defineStore('party', () => {
+  const loading = ref(false)
   const attendees = ref([{ name: '', isChild: false }])
   const contributions = ref([])
   const contact = ref({ email: '', message: '' })
@@ -15,58 +17,96 @@ export const usePartyStore = defineStore('party', () => {
   }
 
   async function getAvailableContributions() {
-    return [
-      {
-        id: 1,
-        name: 'Para a grelha',
-        items: [
-          { name: 'Frango', qty: 10 },
-          { name: 'Costelinha', qty: 20 },
-          { name: 'Hamburgeres', qty: 10 },
-          { name: 'Chouriço', qty: 20 },
-          { name: 'Toscanas', qty: 20 }
-        ]
-      },
-      {
-        id: 2,
-        name: 'Sobremesas',
-        items: [
-          { name: 'Aletria', qty: 10 },
-          { name: 'Bolo de noiva', qty: 10 }
-        ]
-      },
-      {
-        id: 3,
-        name: 'Bebidas alcoólicas',
-        items: [
-          { name: 'Vinho branco', qty: 10 },
-          { name: 'Vinho alvarinho', qty: 10 },
-          { name: 'Vinho rosé', qty: 10 },
-          { name: 'Gin + tónica (pack 6)', qty: 10 },
-          { name: 'Cerveja (pack 6)', qty: 10 }
-        ]
-      },
-      {
-        id: 4,
-        name: 'Bebidas não-alcoólicas',
-        items: [
-          { name: 'Água das Pedras (pack 6)', qty: 20 },
-          { name: 'Coca-cola (1.5l)', qty: 10 },
-          { name: 'Seven-up (1.5l)', qty: 10 },
-          { name: 'Ice Tea (1.5l)', qty: 10 },
-          { name: 'Fanta / Sumol (1.5l)', qty: 10 },
-          { name: 'Sumos de fruta (1l)', qty: 10 }
-        ]
+    loading.value = true
+    
+    let availableContributions = []
+    const { data, error } = await supabase
+      .from('categories')
+      .select(`
+        id,
+        name,
+        contributions (
+          id,
+          name,
+          qty
+        )
+      `);
+
+    if (error) {
+      console.error("Error fetching data:", error);
+    } else {
+      availableContributions = data
+    }
+
+    console.log('availableContributions', availableContributions)
+    loading.value = false
+    return availableContributions
+  }
+
+  async function submit() {
+    loading.value = true
+    let updatedContributions = []
+
+    try {
+      // refresh available contributions quantities from db
+      const { data: currentContributions, error } = await supabase
+        .from('contributions')
+        .select('*');
+  
+      if (error) throw error
+  
+      // update available contributions quantities
+      for (let contribution of contributions.value) {
+        // find the matching contribution from the fetched data
+        const currentContribution = currentContributions.find(c => c.id === contribution.id);
+        
+        if (currentContribution) {
+          currentContribution.qty -= contribution.qty;
+        }
+
+        updatedContributions.push(currentContribution)
       }
-    ]
+
+    } catch (error) {
+      console.error("Error updating contributions:", error);
+      loading.value = false;
+      return false;
+    }
+
+    // begin transaction
+    try {
+      const { data, error } = await supabase.rpc('save_data', {
+        attendees_data: {
+          name: attendees.value[0].name,
+          guests: attendees.value,
+          email: contact.value.email, 
+          message: contact.value.message,
+          contributions: contributions.value
+        },
+        contributions_data: updatedContributions
+      });
+
+      if (error) throw error;
+
+    } catch (error) {
+      console.error("Transaction failed:", error);
+      loading.value = false;
+      return false;
+    }
+    // end transaction
+
+    loading.value = false
+    return true
   }
 
   return {
+    loading,
     attendees,
     contributions,
     contact,
     attendeesOk,
     contactOk,
-    getAvailableContributions
+    getAvailableContributions,
+    submit,
   }
 })
