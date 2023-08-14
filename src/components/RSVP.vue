@@ -12,9 +12,10 @@ import ContentSection from './layout/ContentSection.vue'
 import BigYellowButton from './ui/BigYellowButton.vue'
 
 // open form to start registration process
-const showForm = ref(false)
+// form is either closed (0), opened (1) or submitted (2)
+const formStatus = ref(0)
 const openForm = () => {
-  showForm.value = true
+  formStatus.value = 1
 }
 
 // get party store
@@ -24,6 +25,7 @@ const { contributions } = storeToRefs(partyStore)
 const submit = async () => {
   console.log('submit')
   await partyStore.submit()
+  formStatus.value = 2
 }
 
 // steps nav items
@@ -54,8 +56,14 @@ const nav = computed(() => [
 
 <template>
   <ContentSection>
-    <template v-if="showForm">
-      <StepsContent :nav="nav" :active-step="1" @submit="submit">
+
+    <template v-if="formStatus === 0">
+      <SectionTitle>RSVP</SectionTitle>
+      <BigYellowButton @click="openForm">Marcar Presença!</BigYellowButton>
+    </template>
+
+    <template v-if="formStatus === 1">
+      <StepsContent :nav="nav" :active-step="0" @submit="submit">
         <template #step-0>
           <RSVPForm />
         </template>
@@ -71,9 +79,15 @@ const nav = computed(() => [
       </StepsContent>
     </template>
 
-    <template v-else>
-      <SectionTitle>RSVP</SectionTitle>
-      <BigYellowButton @click="openForm">Marcar Presença!</BigYellowButton>
+    <template v-if="formStatus === 2">
+      <SectionTitle>Obrigado!</SectionTitle>
+      <p>* Até lá *</p>
     </template>
   </ContentSection>
 </template>
+
+<style lang="scss" scoped>
+p {
+  font-size: 3rem;
+}
+</style>
