@@ -1,6 +1,7 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import { supabase } from '@/lib/supabaseClient.js'
+import emailjs from '@emailjs/browser';
 
 export const usePartyStore = defineStore('party', () => {
   const loading = ref(false)
@@ -94,9 +95,34 @@ export const usePartyStore = defineStore('party', () => {
       return false;
     }
     // end transaction
-
+    let message = `
+      <b>Quem Vai</b><br>
+      ${attendees.value.map(a => '- ' + a.name + (a.isChild ? ' (criança)' : '')).join('<br>')}
+      <br><br>
+      <b>O Que Levo</b><br>
+      ${contributions.value.map(c => '- ' + c.name + (c.qty > 1 ? ' (x' + c.qty + ')' : '')).join('<br>')}
+      <br><br>
+      <b>Contacto</b><br>
+      ${'- ' + contact.value.email + '<br>- ' + contact.value.message}
+    `;
+    sendEmail(contact.value.email, attendees.value[0].name, message)
     loading.value = false
     return true
+  }
+
+  async function sendEmail(toEmail, toName, message) {
+    try {
+      emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID, 
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        { to_email: toEmail, to_name: toName, message: message },
+        import.meta.env.VITE_EMAILJS_KEY)
+        .then((result) => {}, (error) => {});
+    } catch (error) {
+      console.error("Email failed:", error);
+      return false;
+    }
+    return true;
   }
 
   return {
@@ -108,5 +134,6 @@ export const usePartyStore = defineStore('party', () => {
     contactOk,
     getAvailableContributions,
     submit,
+    sendEmail,
   }
 })
