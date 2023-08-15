@@ -1,7 +1,10 @@
-<script setup>
+<script setup>import { useScroll } from '@/lib/useScroll';
 import SectionTitle from './atoms/SectionTitle.vue'
 import UnorderedList from './atoms/UnorderedList.vue'
 import ContentSection from './layout/ContentSection.vue'
+import BigYellowButton from './ui/BigYellowButton.vue';
+
+const { scrollToElementById } = useScroll();
 </script>
 
 <template>
@@ -40,6 +43,8 @@ import ContentSection from './layout/ContentSection.vue'
         <p>Tranquilo, só contamos com quem preencheu a ficha de inscrição acima.</p>
       </li>
     </UnorderedList>
+
+    <BigYellowButton @click="scrollToElementById('rsvp')">Regista-te Aqui &#x25BC;</BigYellowButton>
   </ContentSection>
 </template>
 

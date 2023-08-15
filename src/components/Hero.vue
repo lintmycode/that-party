@@ -1,9 +1,11 @@
 <script setup>
 import { ref, onMounted } from 'vue'
+import { useScroll } from '@/lib/useScroll';
 import BigYellowButton from './ui/BigYellowButton.vue'
 import ContentSection from './layout/ContentSection.vue';
 
-const debug = ref(true)
+const debug = ref(false)
+const { scrollToElementById } = useScroll();
 
 onMounted(() => {
   window.scrollTo(0, 0)
@@ -32,7 +34,7 @@ const getThisPartyStarted = () => {
 
 <template>
   <transition name="fade" mode="in-out">
-    <ContentSection v-if="isPartyStarted">
+    <ContentSection v-if="!isPartyStarted">
       <h1>já aqui estás?</h1>
       <BigYellowButton @click="getThisPartyStarted">Entra</BigYellowButton>
     </ContentSection>
@@ -42,7 +44,7 @@ const getThisPartyStarted = () => {
         <p class="who">-&gt; Filipa &amp; Nuno convidam para &lt;-</p>
         <h1>Aquela Festa</h1>
         <p class="when">16 Setembro - Afife</p>
-        <BigYellowButton>O Quê ??!</BigYellowButton>
+        <BigYellowButton @click="scrollToElementById('header')">O Quê ??!</BigYellowButton>
       </div>
 
       <video playsinline autoplay muted loop id="bgVideo" v-if="!debug">
@@ -53,6 +55,21 @@ const getThisPartyStarted = () => {
 </template>
 
 <style lang="scss" scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 3s;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.fade-enter-to,
+.fade-leave-from {
+  opacity: 1;
+}
+
 section {
   background: radial-gradient(at left top, #010101, #743c9a);
   background-size: cover;

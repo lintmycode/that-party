@@ -9,12 +9,12 @@ import RSVP from '../components/RSVP.vue'
 
 <template>
   <main>
-    <Hero />
-    <Header />
-    <Location />
-    <RSVP />
-    <FAQs />
-    <Footer />
+    <Hero id="hero" />
+    <Header id="header" />
+    <FAQs id="faqs" />
+    <RSVP id="rsvp" />
+    <Location id="location" />
+    <Footer id="footer" />
   </main>
 </template>
 

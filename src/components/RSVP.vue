@@ -2,6 +2,7 @@
 import { ref, computed } from 'vue'
 import { storeToRefs } from 'pinia'
 import { usePartyStore } from '@/stores/partyStore.js'
+import { useScroll } from '@/lib/useScroll';
 import StepsContent from '../components/StepsContent.vue'
 import RSVPSummary from '../components/RSVPSummary.vue'
 import RSVPForm from '../components/forms/RSVPForm.vue'
@@ -10,6 +11,8 @@ import ContactForm from '../components/forms/ContactForm.vue'
 import SectionTitle from './atoms/SectionTitle.vue'
 import ContentSection from './layout/ContentSection.vue'
 import BigYellowButton from './ui/BigYellowButton.vue'
+
+const { scrollToElementById } = useScroll();
 
 // open form to start registration process
 // form is either closed (0), opened (1) or submitted (2)
@@ -82,6 +85,8 @@ const nav = computed(() => [
     <template v-if="formStatus === 2">
       <SectionTitle>Obrigado!</SectionTitle>
       <p>* Até lá *</p>
+      <BigYellowButton @click="scrollToElementById('location')">Lá onde?</BigYellowButton>
+      
     </template>
   </ContentSection>
 </template>

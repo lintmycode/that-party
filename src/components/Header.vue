@@ -1,7 +1,11 @@
 <script setup>
+import { useScroll } from '@/lib/useScroll';
 import SectionTitle from './atoms/SectionTitle.vue'
 import UnorderedList from './atoms/UnorderedList.vue'
 import ContentSection from './layout/ContentSection.vue'
+import BigYellowButton from './ui/BigYellowButton.vue';
+
+const { scrollToElementById } = useScroll();
 </script>
 
 <template>
@@ -17,9 +21,10 @@ import ContentSection from './layout/ContentSection.vue'
       <li>Vestuário informal; traz o que já tens.</li>
       <li>Não queremos presentes, já temos tudo. Mas aceitamos contributos para a festa.</li>
       <li>
-        O essêncial é registares-te, dizeres quem vem e o que vais trazer. <a href="#">AQUI</a>
+        O essêncial é registares-te, dizeres quem vem e o que vais trazer. 
       </li>
     </UnorderedList>
+    <BigYellowButton @click="scrollToElementById('faqs')">Aínda tens dúvidas?</BigYellowButton>
 
     <!-- <blockquote>
       <p>Finalmente.</p>
