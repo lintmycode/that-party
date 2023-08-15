@@ -21,10 +21,10 @@ import ContentSection from './layout/ContentSection.vue'
       </li>
     </UnorderedList>
 
-    <blockquote>
+    <!-- <blockquote>
       <p>Finalmente.</p>
       <cite>- toda a gente</cite>
-    </blockquote>
+    </blockquote> -->
   </ContentSection>
 </template>
 

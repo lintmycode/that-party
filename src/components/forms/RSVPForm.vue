@@ -39,7 +39,6 @@ const focusLastName = () => {
 </script>
 
 <template>
-  <!-- <p>Adiciona o nome de todos os que vão contigo</p> -->
   <form>
     <div class="form-item" v-for="(attendee, index) in attendees" :key="index">
       <input

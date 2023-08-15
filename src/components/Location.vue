@@ -92,6 +92,19 @@ section {
     z-index: 1;
     box-shadow: 1rem 1rem 0 0 var(--color-primary);
 
+    @media (max-width: 1200px) {
+      top: 80%;
+    }
+
+    @media (max-width: 768px) {
+      top: auto;
+      left: 0;
+      bottom: 0;
+      transform: none;
+      width: 100%;
+      box-shadow: 0 1rem 0 0 var(--color-primary);
+    }
+
     h2 {
       font-size: 3rem;
       font-weight: 700;

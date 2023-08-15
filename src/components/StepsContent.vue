@@ -73,5 +73,13 @@ nav {
   gap: 2rem;
   justify-content: center;
   margin-top: 6rem;
+
+  @media (max-width: 600px) {
+    gap: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+  }
 }
 </style>

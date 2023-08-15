@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import BigYellowButton from './ui/BigYellowButton.vue'
+import ContentSection from './layout/ContentSection.vue';
 
 const debug = ref(true)
 
@@ -18,6 +19,7 @@ if (!debug.value) {
 } else {
   isPartyStarted.value = false
 }
+
 const getThisPartyStarted = () => {
   isPartyStarted.value = true
   console.log('comanchero')
@@ -30,10 +32,10 @@ const getThisPartyStarted = () => {
 
 <template>
   <transition name="fade" mode="in-out">
-    <section v-if="!isPartyStarted">
+    <ContentSection v-if="isPartyStarted">
       <h1>já aqui estás?</h1>
       <BigYellowButton @click="getThisPartyStarted">Entra</BigYellowButton>
-    </section>
+    </ContentSection>
 
     <section v-else>
       <div class="content">
@@ -51,21 +53,6 @@ const getThisPartyStarted = () => {
 </template>
 
 <style lang="scss" scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 3s;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-
-.fade-enter-to,
-.fade-leave-from {
-  opacity: 1;
-}
-
 section {
   background: radial-gradient(at left top, #010101, #743c9a);
   background-size: cover;
@@ -122,6 +109,15 @@ section {
     font-family: HiguenSerif;
     font-size: 18rem;
     line-height: 1.2;
+    text-align: center;
+
+    @media (max-width: 1200px) {
+      font-size: 12rem;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 8rem;
+    }
   }
 
   video {

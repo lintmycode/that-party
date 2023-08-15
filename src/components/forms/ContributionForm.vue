@@ -69,12 +69,12 @@ const removeItem = (item) => {
           :class="['category', openCategory === catIndex ? 'active' : '']"
         >
           <button type="button" @click="toggleCategory(catIndex)">{{ cat.name }}</button>
-          <ul>
+          <ul v-if="openCategory === catIndex">
             <template
               v-for="(item, itemIndex) in cat.contributions"
               :key="'cat-' + catIndex + '-' + itemIndex"
             >
-              <li v-if="openCategory === catIndex && item.qty > 0" class="item">
+              <li v-if="item.qty > 0" class="item">
                 <button type="button" @click="add(catIndex, itemIndex)">+ {{ item.name }}</button>
                 ({{ item.qty }})
               </li>
@@ -83,7 +83,7 @@ const removeItem = (item) => {
         </li>
       </template>
     </ul>
-
+    
     <div class="my-contribution" v-if="contributions.length > 0">
       Vou levar
       <template v-for="(item, index) in contributions" :key="'item-' + index">
@@ -96,7 +96,7 @@ const removeItem = (item) => {
       </template>
     </div>
   </template>
-
+  
   <template v-else>
     a pensar....
   </template>
@@ -109,19 +109,35 @@ ul {
   flex-direction: column;
   gap: 2rem;
 
+  @media (max-width: 1200px) {
+    width: 70vw;
+  }
+
+  @media (max-width: 768px) {
+    width: 90vw;
+  }
+
   .category {
     display: flex;
     width: 100%;
     gap: 1rem;
 
+    @media (max-width: 1024px) {
+      flex-direction: column;
+    }
+
     &.active {
       & > button {
         background-color: var(--color-primary);
       }
+
+      @media (max-width: 1024px) {
+        margin-bottom: 2rem;
+      }
     }
 
     & > button {
-      flex: 1 1 60rem;
+      flex: 0 0 40rem;
       text-align: left;
       border: 0;
       font-size: 2rem;
@@ -129,6 +145,10 @@ ul {
       background-color: var(--color-background-soft);
       position: relative;
       transition: 100ms all;
+
+      @media (max-width: 1024px) {
+        flex-basis: auto;
+      }
 
       &:after {
         content: '>';
@@ -164,6 +184,8 @@ ul {
 }
 
 .my-contribution {
+  font-size: 1.8rem;
+  
   button {
     background-color: transparent;
     border: 0;
