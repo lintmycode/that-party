@@ -1,18 +1,11 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 import { useScroll } from '@/lib/useScroll';
 import BigYellowButton from './ui/BigYellowButton.vue'
 import ContentSection from './layout/ContentSection.vue';
 
 const debug = ref(false)
 const { scrollToElementById } = useScroll();
-
-onMounted(() => {
-  window.scrollTo(0, 0)
-  if (!debug.value) {
-    document.body.classList.add('no-scroll')
-  }
-})
 
 const isPartyStarted = ref(false)
 let audio = null
@@ -22,13 +15,14 @@ if (!debug.value) {
   isPartyStarted.value = false
 }
 
+const emit = defineEmits(['entered'])
 const getThisPartyStarted = () => {
   isPartyStarted.value = true
   console.log('comanchero')
+  emit('entered')
   if (!debug.value) {
     audio.play()
   }
-  document.body.classList.remove('no-scroll')
 }
 </script>
 
