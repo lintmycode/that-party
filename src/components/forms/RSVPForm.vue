@@ -21,6 +21,11 @@ const plusOne = () => {
   }
 }
 
+// rm a guest
+const removeAttendee = (index) => {
+  attendees.value.splice(index, 1);
+}
+
 // rm error if name is valid
 const nameEdited = (e) => {
   if (e.target.value.trim().length > 0) {
@@ -51,16 +56,35 @@ onMounted(() => {
       />
       <template v-if="index > 0">
         <label>Criança?</label>
-        <input type="checkbox" :name="'is-child-' + index" v-model="attendee.isChild" />
+        <input type="checkbox" :name="'is-child-' + index" v-model="attendee.isChild"/>
+        <button @click.prevent="removeAttendee(index)" class="remove" title="Remover">&#x26CC;</button>
       </template>
     </div>
     <div class="form-item message" v-if="message" v-html="message"></div>
-    <SecondaryButton @click="plusOne">+ acompanhante</SecondaryButton>
+    <SecondaryButton @click="plusOne" class="add">+ acompanhante</SecondaryButton>
   </form>
 </template>
 
 <style lang="scss" scoped>
 button {
-  margin: 2rem 0 0 auto;
+  &.add {
+    margin: 2rem auto 0 ;
+  }
+
+  &.remove {
+    background-color: transparent;
+    color: var(--c-red);
+    border: 0;
+    font-size: 2rem;
+    cursor: pointer;
+  }
+}
+
+.form-item {
+  &:hover {
+    .remove {
+      display: block;
+    }
+  }
 }
 </style>
