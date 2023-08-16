@@ -15,11 +15,14 @@ console.log("Are you a former coworker or Dan looking in the console for bugs? H
 <template>
   <main>
     <Hero id="hero" @entered="loaded = true" />
-    <Header id="header" v-if="loaded" />
-    <FAQs id="faqs" v-if="loaded" />
-    <RSVP id="rsvp" v-if="loaded" />
-    <Location id="location" v-if="loaded" />
-    <Footer id="footer" v-if="loaded" />
+    
+    <template v-if="loaded">
+      <Header id="header"/>
+      <FAQs id="faqs"/>
+      <RSVP id="rsvp"/>
+      <Location id="location"/>
+      <Footer id="footer"/>
+    </template>
   </main>
 </template>
 

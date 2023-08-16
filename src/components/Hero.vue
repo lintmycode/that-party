@@ -15,6 +15,8 @@ if (!debug.value) {
   isPartyStarted.value = false
 }
 
+// display video and start the music
+const isPlaying = ref(false);
 const emit = defineEmits(['entered'])
 const getThisPartyStarted = () => {
   isPartyStarted.value = true
@@ -22,8 +24,19 @@ const getThisPartyStarted = () => {
   emit('entered')
   if (!debug.value) {
     audio.play()
+    isPlaying.value = true
   }
 }
+
+// pause/play music
+const toggleAudio = () => {
+  if (isPlaying.value) {
+    audio.pause();
+  } else {
+    audio.play();
+  }
+  isPlaying.value = !isPlaying.value;
+};
 </script>
 
 <template>
@@ -38,8 +51,12 @@ const getThisPartyStarted = () => {
         <p class="who">-&gt; Filipa &amp; Nuno convidam para &lt;-</p>
         <h1>Aquela Festa</h1>
         <p class="when">16 Setembro - Afife</p>
-        <BigYellowButton @click="scrollToElementById('header')">O Quê ??!</BigYellowButton>
+        <BigYellowButton @click="scrollToElementById('header')">O Quê ??!</BigYellowButton>  
       </div>
+      
+      <button @click="toggleAudio" class="audio-toggle" :title="isPlaying ? 'Pause' : 'Play' ">
+        {{ isPlaying ? '⏸' : '▶' }}
+      </button>
 
       <video playsinline autoplay muted loop id="bgVideo" v-if="!debug">
         <source src="/video/aquela-festa.mp4" type="video/mp4" />
@@ -129,6 +146,17 @@ section {
     @media (max-width: 768px) {
       font-size: 8rem;
     }
+  }
+
+  .audio-toggle {
+    position: absolute;
+    z-index: 1;
+    bottom: 2rem;
+    right: 2rem;
+    background-color: transparent;
+    border: 0;
+    color: var(--color-primary);
+    font-size: 4rem;
   }
 
   video {
