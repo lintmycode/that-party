@@ -76,7 +76,7 @@ const removeItem = (item) => {
             >
               <li v-if="item.availableQty > 0" class="item">
                 <button type="button" @click="add(catIndex, itemIndex)">+ {{ item.name }}</button>
-                ({{ item.availableQty }})
+                <span class="qty">({{ item.availableQty }} disponíveis)</span>
               </li>
             </template>
           </ul>
@@ -84,15 +84,17 @@ const removeItem = (item) => {
       </template>
     </ul>
     
-    <div class="my-contribution" v-if="contributions.length > 0">
-      Vou levar
-      <template v-for="(item, index) in contributions" :key="'item-' + index">
-        <strong>
-          {{ item.name }}
-          {{ item.qty > 1 ? ' x' + item.qty + ' ' : ' ' }}
-        </strong>
-        <button type="button" @click="removeItem(item)">(remover)</button>
-        <template v-if="index !== contributions.length - 1">, </template>
+    <div class="my-contribution">
+      <template v-if="contributions.length > 0">        
+        Vou levar
+        <template v-for="(item, index) in contributions" :key="'item-' + index">
+          <strong>
+            {{ item.name }}
+            {{ item.qty > 1 ? ' x' + item.qty + ' ' : ' ' }}
+          </strong>
+          <button type="button" @click="removeItem(item)">(remover)</button>
+          <template v-if="index !== contributions.length - 1">, </template>
+        </template>
       </template>
     </div>
   </template>
@@ -104,7 +106,7 @@ const removeItem = (item) => {
 
 <style lang="scss" scoped>
 ul {
-  width: 50vw;
+  width: 60vw;
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -137,7 +139,7 @@ ul {
     }
 
     & > button {
-      flex: 0 0 40rem;
+      flex: 0 0 50%;
       text-align: left;
       border: 0;
       font-size: 2rem;
@@ -162,6 +164,17 @@ ul {
 
     ul {
       .item {
+        &:hover {
+          .qty {
+            display: inline;
+            margin-left: 1rem;
+            
+            @media (max-width: 480px) {
+              display: block;
+              margin-left: 0;
+            }
+          }
+        }
         button {
           border: 0;
           background-color: transparent;
@@ -178,6 +191,10 @@ ul {
             background-color: var(--color-secondary);
           }
         }
+
+        .qty {
+          display: none;
+        }
       }
     }
   }
@@ -185,6 +202,8 @@ ul {
 
 .my-contribution {
   font-size: 1.8rem;
+  min-height: 3rem;
+  margin-top: -3rem;
   
   button {
     background-color: transparent;
