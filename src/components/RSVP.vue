@@ -34,22 +34,26 @@ const submit = async () => {
 const nav = computed(() => [
   {
     name: 'Quem Vai?',
-    nav: 'Quem Vai?',
+    next: 'Quem Vai?',
+    prev: 'Quem Vai?',
     condition: true
   },
   {
     name: 'O Que Vou Levar',
-    nav: 'O Que Vou Levar',
+    next: 'O Que Vou Levar',
+    prev: 'O Que Vou Levar',
     condition: partyStore.attendeesOk()
   },
   {
     name: 'Contacto',
-    nav: contributions.value.length === 0 ? 'Nada!' : 'Já chega',
+    next: contributions.value.length === 0 ? 'Nada!' : 'Já chega',
+    prev: 'Contacto',
     condition: true
   },
   {
     name: 'Resumo',
-    nav: 'Resumo',
+    next: 'Resumo',
+    prev: 'Resumo',
     condition: partyStore.contactOk(),
     submit: true
   }

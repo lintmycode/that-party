@@ -44,13 +44,13 @@ const submit = () => {
 
     <nav>
       <BigYellowButton v-if="activeIndex > 0" @click="setActiveStep(activeIndex - 1)"
-        >&lt; {{ nav[activeIndex - 1].nav }}</BigYellowButton
+        >&lt; {{ nav[activeIndex - 1].prev }}</BigYellowButton
       >
       <BigYellowButton
         v-if="activeIndex < nav.length - 1"
         :disabled="!nav[activeIndex + 1].condition"
         @click="setActiveStep(activeIndex + 1)"
-        >{{ nav[activeIndex + 1].nav }} &gt;</BigYellowButton
+        >{{ nav[activeIndex + 1].next }} &gt;</BigYellowButton
       >
       <BigYellowButton v-if="nav[activeIndex].submit" @click="submit">Enviar &gt;</BigYellowButton>
     </nav>
