@@ -2,7 +2,7 @@
   <footer>
     <p>
       Ainda tens dúvidas? Sugestões? Escreve para
-      <a href="mailto:aquelafesta@gmail.com">aquelafesta@gmail.com</a>
+      <a href="mailto:aquelafesta@nitida.pt">aquelafesta@nitida.pt</a>
     </p>
     <p>//</p>
     <p>Nítida &copy; 2023</p>
