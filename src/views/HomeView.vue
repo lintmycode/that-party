@@ -8,6 +8,8 @@ import Footer from '../components/Footer.vue'
 import RSVP from '../components/RSVP.vue'
 
 const loaded = ref(false)
+
+console.log("Are you a former coworker or Dan looking in the console for bugs? Here's a bug for you 🖕")
 </script>
 
 <template>
