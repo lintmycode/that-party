@@ -2,6 +2,7 @@
 import { storeToRefs } from 'pinia'
 import { ref, onMounted } from 'vue'
 import { usePartyStore } from '@/stores/partyStore.js'
+import Loading from '../ui/Loading.vue';
 
 const partyStore = usePartyStore()
 const { contributions, loading } = storeToRefs(partyStore)
@@ -97,7 +98,7 @@ const removeItem = (item) => {
   </template>
   
   <template v-else>
-    a pensar....
+    <Loading>a pensar...</Loading>
   </template>
 </template>
 
