@@ -13,7 +13,6 @@ const props = defineProps({
 
 const activeIndex = ref(props.activeStep)
 const setActiveStep = (index) => {
-  console.log(index)
   activeIndex.value = index
 }
 
@@ -22,6 +21,7 @@ const emit = defineEmits(['submit'])
 const submit = () => {
   emit('submit')
 }
+
 </script>
 
 <template>
@@ -34,9 +34,11 @@ const submit = () => {
     </ul> -->
 
     <ul>
-      <li v-for="(item, index) in nav" :key="index" :hidden="activeIndex !== index">
-        <SectionTitle>{{ item.name }}</SectionTitle>
-        <slot :name="'step-' + index" />
+      <li v-for="(item, index) in nav" :key="index" >
+        <template v-if="activeIndex === index">
+          <SectionTitle>{{ item.name }}</SectionTitle>
+          <slot :name="'step-' + index" />
+        </template>
       </li>
     </ul>
 

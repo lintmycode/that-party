@@ -6,7 +6,7 @@ import { usePartyStore } from '@/stores/partyStore.js'
 const partyStore = usePartyStore()
 const { contributions, loading } = storeToRefs(partyStore)
 
-// get available contributions
+// get available contributions by category
 const categories = ref([])
 onMounted(async () => {
   categories.value = await partyStore.getAvailableContributions()
@@ -15,13 +15,12 @@ onMounted(async () => {
 // toggle visible category
 const openCategory = ref(-1)
 const toggleCategory = (index) => {
-  // if its opened already close; otherwise open
   openCategory.value = openCategory.value === index ? -1 : index
 }
 
 // add an item to the contributions array
 const add = (catIndex, itemIndex) => {
-  categories.value[catIndex].contributions[itemIndex].qty--
+  categories.value[catIndex].contributions[itemIndex].availableQty--
 
   // add item to contributions array
   const item = categories.value[catIndex].contributions[itemIndex]
@@ -45,7 +44,7 @@ const removeItem = (item) => {
   )
 
   // increment the quantity of the item in available contributions
-  categories.value[catIndex].contributions[itemIndex].qty++
+  categories.value[catIndex].contributions[itemIndex].availableQty++
 
   // remove or decrease the quantity of the item in contributions
   const itemName = categories.value[catIndex].contributions[itemIndex].name
@@ -65,7 +64,7 @@ const removeItem = (item) => {
     <ul>
       <template v-for="(cat, catIndex) in categories" :key="'cat-' + catIndex">
         <li
-          v-if="cat.contributions.some((i) => i.qty > 0)"
+          v-if="cat.contributions.some((i) => i.availableQty > 0)"
           :class="['category', openCategory === catIndex ? 'active' : '']"
         >
           <button type="button" @click="toggleCategory(catIndex)">{{ cat.name }}</button>
@@ -74,9 +73,9 @@ const removeItem = (item) => {
               v-for="(item, itemIndex) in cat.contributions"
               :key="'cat-' + catIndex + '-' + itemIndex"
             >
-              <li v-if="item.qty > 0" class="item">
+              <li v-if="item.availableQty > 0" class="item">
                 <button type="button" @click="add(catIndex, itemIndex)">+ {{ item.name }}</button>
-                ({{ item.qty }})
+                ({{ item.availableQty }})
               </li>
             </template>
           </ul>

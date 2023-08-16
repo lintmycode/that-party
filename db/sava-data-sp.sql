@@ -34,11 +34,7 @@ BEGIN
   -- Insert/Update attendee contributions
   FOREACH contribution_record IN ARRAY contributions_data
   LOOP
-    -- Update the qty in the contributions table
-    UPDATE contributions 
-    SET qty = (contribution_record->>'qty')::integer
-    WHERE id = (contribution_record->>'id')::integer;
-
+    
     -- Link the attendee to their contribution
     INSERT INTO attendee_contributions(name, attendee_id, contribution_id) 
     VALUES (

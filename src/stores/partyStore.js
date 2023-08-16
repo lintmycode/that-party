@@ -8,18 +8,31 @@ export const usePartyStore = defineStore('party', () => {
   const attendees = ref([{ name: '', isChild: false }])
   const contributions = ref([])
   const contact = ref({ email: '', message: '' })
+  const guests = ref({total: 0, adults: 0, children: 0})
 
+  /**
+   * attendees array is ok if all entries have a name
+   */
   function attendeesOk() {
     return attendees.value.every((a) => a.name.trim().length > 0)
   }
 
+  /**
+   * contact object is ok if email is valid
+   */
   function contactOk() {
     return /\S+@\S+\.\S+/.test(contact.value.email)
   }
 
+  /** 
+   * get available contributions and the necessary qty for each, 
+   * by merging the number of registered attendees with the current attendees list, 
+   * and subtracting the already added contribution items
+   */
   async function getAvailableContributions() {
     loading.value = true
     
+    // get available contributions
     let availableContributions = []
     const { data, error } = await supabase
       .from('categories')
@@ -29,7 +42,8 @@ export const usePartyStore = defineStore('party', () => {
         contributions (
           id,
           name,
-          qty
+          qtyper10adults,
+          qtyper10children
         )
       `);
 
@@ -37,13 +51,40 @@ export const usePartyStore = defineStore('party', () => {
       console.error("Error fetching data:", error);
     } else {
       availableContributions = data
+
+      // get already added contributions
+      const { data: attendeeContributions } = await supabase.from('attendee_contributions').select('*');
+
+      // get and merge existing guests with current attendees list
+      guests.value = await getMergedAttendeesCount()
+      
+      // for each category contributions, calculate the necessary quantity
+      availableContributions.forEach(category => {
+        category.contributions.forEach(contribution => {        
+          const totalQtyRequired = Math.ceil(
+            guests.value.adults / 10 * contribution.qtyper10adults + 
+            guests.value.children / 10 * contribution.qtyper10children
+          );
+
+          // subtract already selected quantities for this contribution
+          const existingQty = 
+            attendeeContributions.filter(ac => ac.contribution_id === contribution.id).length;
+          
+          // save qty to make the item available in the form 
+          contribution.availableQty = totalQtyRequired - existingQty;
+        })
+      })
     }
 
-    console.log('availableContributions', availableContributions)
+    // console.log('availableContributions', availableContributions)
+    // console.log('guests', guests.value)
     loading.value = false
     return availableContributions
   }
 
+  /**
+   * submit form and send confirmation email
+   */
   async function submit() {
     loading.value = true
     let updatedContributions = []
@@ -94,6 +135,8 @@ export const usePartyStore = defineStore('party', () => {
       return false;
     }
     // end transaction
+
+    // build and send confirmation email
     let message = `
       <b>Quem Vai</b><br>
       ${attendees.value.map(a => '- ' + a.name + (a.isChild ? ' (criança)' : '')).join('<br>')}
@@ -102,13 +145,16 @@ export const usePartyStore = defineStore('party', () => {
       ${contributions.value.map(c => '- ' + c.name + (c.qty > 1 ? ' (x' + c.qty + ')' : '')).join('<br>')}
       <br><br>
       <b>Contacto</b><br>
-      ${'- ' + contact.value.email + '<br>- ' + contact.value.message}
+      ${'- ' + contact.value.email + (contact.value.message.trim.length > 0 ? '<br>- ' + contact.value.message : '')}
     `;
     sendEmail(contact.value.email, attendees.value[0].name, message)
     loading.value = false
     return true
   }
 
+  /**
+   * send email aux function
+   */
   async function sendEmail(toEmail, toName, message) {
     try {
       emailjs.send(
@@ -122,6 +168,40 @@ export const usePartyStore = defineStore('party', () => {
       return false;
     }
     return true;
+  }
+
+  /**
+   * fetch all the guests from db and filter by adult and children
+   */
+  async function fetchAttendeesCount() {
+    const { data, error } = await supabase.from('guests').select('*');
+
+    if (!error) {
+      const total = data.length;
+      const adults = data.filter(guest => !guest.isChild).length;
+      const children = data.filter(guest => guest.isChild).length;
+    
+      return { total, adults, children };
+    } else {
+      console.error("Error fetching guests:", error);
+    }
+  }
+
+  /**
+   * merge guests from db with current attendees list
+   */
+  async function getMergedAttendeesCount() {
+    const attendeesCount = await fetchAttendeesCount();
+    if (!attendeesCount) return null;
+  
+    const currentAdults = attendees.value.filter(a => !a.isChild).length;
+    const currentChildren = attendees.value.filter(a => a.isChild).length;
+  
+    return {
+      total: attendeesCount.total + attendees.value.length,
+      adults: attendeesCount.adults + currentAdults,
+      children: attendeesCount.children + currentChildren
+    };
   }
 
   return {

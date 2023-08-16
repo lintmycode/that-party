@@ -26,7 +26,6 @@ const partyStore = usePartyStore()
 const { contributions } = storeToRefs(partyStore)
 
 const submit = async () => {
-  console.log('submit')
   await partyStore.submit()
   formStatus.value = 2
 }

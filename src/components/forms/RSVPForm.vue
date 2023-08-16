@@ -2,11 +2,12 @@
 import { ref, onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import { usePartyStore } from '@/stores/partyStore.js'
-import SecondaryButton from '../ui/SecondaryButton.vue'
+import SecondaryButton from '../ui/SecondaryButton.vue';
 
 const partyStore = usePartyStore()
 const { attendees } = storeToRefs(partyStore)
 
+// add a guest if the guest array is ok
 const message = ref('')
 const plusOne = () => {
   if (partyStore.attendeesOk()) {
@@ -20,7 +21,7 @@ const plusOne = () => {
   }
 }
 
-//
+// rm error if name is valid
 const nameEdited = (e) => {
   if (e.target.value.trim().length > 0) {
     message.value = ''
@@ -28,14 +29,14 @@ const nameEdited = (e) => {
   }
 }
 
-//
-onMounted(() => {
-  focusLastName()
-})
-
+// autofocus name input
 const focusLastName = () => {
   document.getElementsByName('name-' + (attendees.value.length - 1))[0].focus()
 }
+
+onMounted(() => {
+  focusLastName()
+})
 </script>
 
 <template>
@@ -48,8 +49,10 @@ const focusLastName = () => {
         placeholder="Nome *"
         @keyup="nameEdited"
       />
-      <label>Criança?</label>
-      <input type="checkbox" :name="'is-child-' + index" v-model="attendee.isChild" />
+      <template v-if="index > 0">
+        <label>Criança?</label>
+        <input type="checkbox" :name="'is-child-' + index" v-model="attendee.isChild" />
+      </template>
     </div>
     <div class="form-item message" v-if="message" v-html="message"></div>
     <SecondaryButton @click="plusOne">+ acompanhante</SecondaryButton>

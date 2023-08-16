@@ -22,7 +22,8 @@ create table
     id SERIAL primary key,
     category_id integer references categories (id),
     name varchar(255) not null,
-    qty integer not null
+    qtyPer10Adults integer not null,
+    qtyPer10Children integer not null
   );
 
 -- Create the Attendees table
