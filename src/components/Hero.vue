@@ -4,7 +4,7 @@ import { useScroll } from '@/lib/useScroll';
 import BigYellowButton from './ui/BigYellowButton.vue'
 import ContentSection from './layout/ContentSection.vue';
 
-const debug = ref(true)
+const debug = ref(import.meta.env.VITE_DEBUG === "true" ? true : false)
 const { scrollToElementById } = useScroll();
 
 const isPartyStarted = ref(false)
