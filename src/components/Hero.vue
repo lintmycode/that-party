@@ -4,7 +4,7 @@ import { useScroll } from '@/lib/useScroll';
 import BigYellowButton from './ui/BigYellowButton.vue'
 import ContentSection from './layout/ContentSection.vue';
 
-const debug = ref(false)
+const debug = ref(true)
 const { scrollToElementById } = useScroll();
 
 const isPartyStarted = ref(false)
@@ -13,6 +13,7 @@ if (!debug.value) {
   audio = new Audio('/mp3/comanchero.mp3')
 } else {
   isPartyStarted.value = false
+  emit('entered')
 }
 
 // display video and start the music

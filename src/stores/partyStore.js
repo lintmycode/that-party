@@ -77,13 +77,12 @@ export const usePartyStore = defineStore('party', () => {
     // begin transaction
     try {
       const { data, error } = await supabase.rpc('save_data', {
-        attendees_data: {
+        attendee_data: {
           name: attendees.value[0].name,
-          guests: attendees.value,
           email: contact.value.email, 
           message: contact.value.message,
-          contributions: contributions.value
         },
+        guests_data: attendees.value,
         contributions_data: updatedContributions
       });
 

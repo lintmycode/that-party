@@ -2,8 +2,14 @@
 -- Always verify the output before executing
 
 -- Create the Categories table
+/*
+drop table attendee_contributions; 
 drop table contributions;
 drop table categories;
+drop table guests;
+drop table attendees;
+*/
+
 create table
   categories (
     id SERIAL primary key,
@@ -14,18 +20,34 @@ create table
 create table
   contributions (
     id SERIAL primary key,
-    category_id INTEGER REFERENCES Categories(id),
+    category_id integer references categories (id),
     name varchar(255) not null,
     qty integer not null
   );
 
 -- Create the Attendees table
-drop table attendees;
 create table
   attendees (
     id SERIAL primary key,
     name varchar(255) not null,
     email varchar(255) not null,
-    guests text[], -- Array to store names of both children and adults added by the main attendee
-    contributions text[] -- Array to store names of contributions chosen by the attendee
+    message text
+  );
+
+-- Create the Guests table
+create table
+  guests (
+    id SERIAL primary key,
+    name varchar(255) not null,
+    isChild boolean not null,
+    attendee_id integer references attendees (id)
+  );
+
+-- Create the Attendee Contributions table
+create table
+  attendee_contributions (
+    id SERIAL primary key,
+    name varchar(255) not null,
+    attendee_id integer references attendees (id),
+    contribution_id integer references contributions (id)
   );
