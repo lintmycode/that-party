@@ -57,7 +57,7 @@ onMounted(async () => {
         target="_blank"
         ><i>Como chegar</i> -&gt;</a
       >
-      <br />
+      <br>
       <a
         href="https://www.booking.com/searchresults.pt-pt.html?ss=Afife%2C+Regi%C3%A3o+do+Norte%2C+Portugal&label=pt-pt-booking-desktop-dI1M0QVmAjqhgb5bsivrqAS652828998886%3Apl%3Ata%3Ap1%3Ap2%3Aac%3Aap%3Aneg%3Afi%3Atikwd-1427534005%3Alp1011709%3Ali%3Adec%3Adm&aid=2311236&lang=pt-pt&sb=1&src_elem=sb&src=index&dest_id=-2157112&dest_type=city&ac_position=0&ac_click_type=b&ac_langcode=pt&ac_suggestion_list_length=5&search_selected=true&search_pageview_id=c55a6c879b64010f&ac_meta=GhBjNTVhNmM4NzliNjQwMTBmIAAoATICcHQ6BWFmaWZlQABKAFAA&checkin=2023-09-16&checkout=2023-09-17&group_adults=2&no_rooms=1&group_children=0&sb_travel_purpose=leisure"
         target="_blank"
