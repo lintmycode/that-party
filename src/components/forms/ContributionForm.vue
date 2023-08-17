@@ -145,6 +145,7 @@ ul {
       font-size: 2rem;
       padding: 1rem 2rem;
       background-color: var(--color-background-soft);
+      color: var(--color-text);
       position: relative;
       transition: 100ms all;
 

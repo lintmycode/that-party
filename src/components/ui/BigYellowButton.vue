@@ -6,50 +6,25 @@
 
 <style lang="scss" scoped>
 button {
-  padding: 1.6rem 2rem;
+  padding: .8rem 3rem;
   color: var(--color-text);
   background-color: var(--color-primary);
-  border-radius: 0.5rem;
+  border-radius: 0;
   text-align: center;
   min-width: 22rem;
   font-weight: 600;
-  font-size: 2rem;
+  font-size: 1.8rem;
   text-transform: uppercase;
   font-family: AnonymousPro;
   border: 0;
   cursor: pointer;
   z-index: 1;
-  transition: 100ms all ease-in;
-
-  &:before,
-  &:after {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    background-color: var(--color-secondary);
-    border-radius: 0.5rem;
-    z-index: -1;
-  }
-
-  &:before {
-    background-color: var(--color-primary);
-    width: 100%;
-  }
-
-  &:after {
-    width: 0;
-    transition: 200ms all ease-in;
-  }
+  transition: 50ms all ease-in;
 
   &:hover,
   &:focus {
     color: var(--color-background);
-
-    &:after {
-      width: 100%;
-    }
+    background-color: var(--color-secondary);
   }
 
   &[disabled] {

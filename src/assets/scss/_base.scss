@@ -11,8 +11,8 @@
   --c-red: #dd2038;
 
   /* these will be overriden in the theme.config.js */
-  --c-primary: #e0fa08;
-  --c-secondary: #ef05d2;
+  --c-primary: #e0fa06;
+  --c-secondary: #ef06d1;
 }
 
 /* semantic color variables for this project */
@@ -116,4 +116,10 @@ hr {
 
 .error {
   color: var(--c-red);
+}
+
+button {
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  appearance: none;
 }

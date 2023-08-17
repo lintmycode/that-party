@@ -10,10 +10,6 @@ const { scrollToElementById } = useScroll();
 
 <template>
   <ContentSection>
-    <!-- Header: This is where you can briefly explain the plan for the day and your concept of the celebration. 
-      Make it welcoming and personal. It's also a good place to clarify the informal dress code and mention 
-      that it's a "bring your own" food and drink event. -->
-
     <SectionTitle>Vem Celebrar</SectionTitle>
 
     <UnorderedList>
@@ -24,7 +20,7 @@ const { scrollToElementById } = useScroll();
         O essêncial é registares-te, dizeres quem vem e o que vais trazer. 
       </li>
     </UnorderedList>
-    <BigYellowButton @click="scrollToElementById('faqs')">Aínda tens dúvidas?</BigYellowButton>
+    <BigYellowButton @click="scrollToElementById('faqs')">&#x25BC; Ainda tens dúvidas? &#x25BC;</BigYellowButton>
 
     <!-- <blockquote>
       <p>Finalmente.</p>

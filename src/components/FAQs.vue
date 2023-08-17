@@ -44,7 +44,7 @@ const { scrollToElementById } = useScroll();
       </li>
     </UnorderedList>
 
-    <BigYellowButton @click="scrollToElementById('rsvp')">Regista-te Aqui &#x25BC;</BigYellowButton>
+    <BigYellowButton @click="scrollToElementById('rsvp')">&#x25BC; Regista-te Aqui &#x25BC;</BigYellowButton>
   </ContentSection>
 </template>
 

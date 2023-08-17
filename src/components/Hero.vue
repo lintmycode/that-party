@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useScroll } from '@/lib/useScroll';
-import BigYellowButton from './ui/BigYellowButton.vue'
+import PrimaryButton from './ui/PrimaryButton.vue'
 import ContentSection from './layout/ContentSection.vue';
 
 const debug = ref(import.meta.env.VITE_DEBUG === "true" ? true : false)
@@ -11,6 +11,19 @@ const isPartyStarted = ref(false)
 let audio = null
 if (!debug.value) {
   audio = new Audio('/mp3/comanchero.mp3')
+
+  // preload media
+  document.addEventListener("DOMContentLoaded", function() {
+    audio.preload = "auto";
+    audio.load();
+
+    var video = document.createElement("video");
+    if (video.canPlayType("video/mp4")) {
+      video.src = "/video/aquela-festa.mp4";
+    }
+    video.preload = "auto";
+    video.load();
+  });
 } else {
   isPartyStarted.value = false
   emit('entered')
@@ -38,13 +51,16 @@ const toggleAudio = () => {
   }
   isPlaying.value = !isPlaying.value;
 };
+
+
+
 </script>
 
 <template>
   <transition name="fade" mode="in-out">
     <ContentSection v-if="!isPartyStarted">
-      <h1>já aqui estás?</h1>
-      <BigYellowButton @click="getThisPartyStarted">Entra</BigYellowButton>
+      <p class="who">-&gt; Preparado? &lt;-</p>
+      <PrimaryButton class="pink" @click="getThisPartyStarted">Acho que sim!</PrimaryButton>
     </ContentSection>
 
     <section v-else>
@@ -52,11 +68,11 @@ const toggleAudio = () => {
         <p class="who">-&gt; Filipa &amp; Nuno convidam para &lt;-</p>
         <h1>Aquela Festa</h1>
         <p class="when">16 Setembro - Afife</p>
-        <BigYellowButton @click="scrollToElementById('header')">O Quê ??!</BigYellowButton>  
+        <PrimaryButton @click="scrollToElementById('header')">&#x25BC; Quero Saber Tudo &#x25BC;</PrimaryButton>  
       </div>
       
       <button @click="toggleAudio" class="audio-toggle" :title="isPlaying ? 'Pause' : 'Play' ">
-        {{ isPlaying ? '⏸' : '▶' }}
+        {{ isPlaying ? '&#x2759;&#x2759;' : '&#x276F;' }}
       </button>
 
       <video playsinline autoplay muted loop id="bgVideo" v-if="!debug">
@@ -83,7 +99,7 @@ const toggleAudio = () => {
 }
 
 section {
-  background: radial-gradient(at left top, #010101, #743c9a);
+  background-color: #1B0630;
   background-size: cover;
   background-repeat: no-repeat;
 
@@ -94,6 +110,22 @@ section {
   align-items: center;
   justify-content: center;
   gap: 8rem;
+
+  p {
+    text-transform: uppercase;
+    letter-spacing: 0.3rem;
+    color: var(--color-primary);
+
+    &.who {
+      font-family: AnonymousPro;
+      font-size: 2.3rem;
+    }
+
+    &.when {
+      font-family: CormorantGaramond;
+      font-size: 2.4rem;
+    }
+  }
 
   .content {
     text-align: center;
@@ -110,26 +142,18 @@ section {
       position: relative;
       display: flex;
       margin: 0 auto 6rem;
-    }
 
-    p {
-      text-transform: uppercase;
-      letter-spacing: 0.3rem;
-      color: var(--color-primary);
-
-      &.who {
-        font-family: AnonymousPro;
-        font-size: 2.3rem;
-      }
-
-      &.when {
-        font-family: CormorantGaramond;
-        font-size: 2.4rem;
-      }
+      @media (max-width: 480px) {
+        margin: 0 auto 3rem;
+      } 
     }
 
     button {
       margin-top: 10rem;
+
+      @media (max-width: 480px) {
+        margin-top: 4rem;
+      }      
     }
   }
 
@@ -157,7 +181,13 @@ section {
     background-color: transparent;
     border: 0;
     color: var(--color-primary);
-    font-size: 4rem;
+    font-size: 2.6rem;
+    letter-spacing: -.5rem;
+
+    @media (max-width: 480px) {
+      bottom: 1rem;
+      right: 1rem;
+    }
   }
 
   video {

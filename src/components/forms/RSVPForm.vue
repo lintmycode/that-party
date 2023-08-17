@@ -57,7 +57,7 @@ onMounted(() => {
       <template v-if="index > 0">
         <label>Criança?</label>
         <input type="checkbox" :name="'is-child-' + index" v-model="attendee.isChild"/>
-        <button @click.prevent="removeAttendee(index)" class="remove" title="Remover">&#x26CC;</button>
+        <button @click.prevent="removeAttendee(index)" class="remove" title="Remover">&#x2715;</button>
       </template>
     </div>
     <div class="form-item message" v-if="message" v-html="message"></div>
