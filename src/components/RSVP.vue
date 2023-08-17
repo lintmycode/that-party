@@ -103,4 +103,11 @@ const nav = computed(() => [
 p {
   font-size: 2.4rem;
 }
+
+:deep(h2) {
+  font-size: 5rem;
+  text-transform: uppercase;
+  font-family: 'AnonymousPro';
+  font-weight: 700;
+}
 </style>

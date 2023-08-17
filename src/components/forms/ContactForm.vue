@@ -10,7 +10,7 @@ const { contact } = storeToRefs(partyStore)
   <form>
     <div class="form-item v-flex">
       <label for="email"
-        >Deixa-nos o teu email para que possamos comunicar qualquer alteração.</label
+        >Deixa-nos o teu email para receberes notícias da Festa.</label
       >
       <input
         type="email"

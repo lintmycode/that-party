@@ -14,7 +14,7 @@ const { scrollToElementById } = useScroll();
     <template #content>
       <SectionTitle>Óptimo! Vamos a pormenores:</SectionTitle>      
       <UnorderedList>
-        <li>Data <strong>16 DE SETEMBRO DE 2023</strong></li>
+        <li>Data <strong>SÁBADO, 16 DE SETEMBRO DE 2023</strong></li>
         <li>HORÁRIO <strong>16h - 23h (o casamento é às 17h)</strong></li>
         <li>LOCAL <strong>Monte de Santo António - Afife - 
             <ExternalLink href="https://goo.gl/maps/TToH2fmqaeEq3knx6" target="_blank" ><i>ver no mapa</i> -&gt;</ExternalLink></strong></li>
