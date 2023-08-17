@@ -30,6 +30,11 @@ const submit = async () => {
   formStatus.value = 2
 }
 
+// scroll up on nav
+const navHappened = () => {
+  scrollToElementById('rsvp')
+}
+
 // steps nav items
 const nav = computed(() => [
   {
@@ -69,7 +74,7 @@ const nav = computed(() => [
     </template>
 
     <template v-if="formStatus === 1">
-      <StepsContent :nav="nav" :active-step="0" @submit="submit">
+      <StepsContent :nav="nav" :active-step="0" @submit="submit" @nav="navHappened">
         <template #step-0>
           <RSVPForm />
         </template>
@@ -88,7 +93,7 @@ const nav = computed(() => [
     <template v-if="formStatus === 2">
       <SectionTitle>Obrigado!</SectionTitle>
       <p>* Até lá *</p>
-      <BigYellowButton @click="scrollToElementById('location')">Lá onde?</BigYellowButton>
+      <BigYellowButton @click="scrollToElementById('location')">&#x25BC; Lá onde? &#x25BC;</BigYellowButton>
       
     </template>
   </ContentSection>

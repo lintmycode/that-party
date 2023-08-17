@@ -14,14 +14,14 @@ const props = defineProps({
 const activeIndex = ref(props.activeStep)
 const setActiveStep = (index) => {
   activeIndex.value = index
+  emit('nav')
 }
 
 // submit
-const emit = defineEmits(['submit'])
+const emit = defineEmits(['submit', 'nav'])
 const submit = () => {
   emit('submit')
 }
-
 </script>
 
 <template>
