@@ -33,6 +33,10 @@ const { attendees, contributions, contact } = storeToRefs(partyStore)
 h3 {
   font-weight: 700;
   font-size: 3rem;
+
+  @media (max-width: 768px) {
+    font-size: 2.6rem;
+  }
 }
 
 ul {

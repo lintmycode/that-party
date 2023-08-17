@@ -10,7 +10,7 @@ import ContributionForm from '../components/forms/ContributionForm.vue'
 import ContactForm from '../components/forms/ContactForm.vue'
 import SectionTitle from './atoms/SectionTitle.vue'
 import ContentSection from './layout/ContentSection.vue'
-import BigYellowButton from './ui/BigYellowButton.vue'
+import PrimaryButton from './ui/PrimaryButton.vue'
 
 const { scrollToElementById } = useScroll();
 
@@ -70,7 +70,7 @@ const nav = computed(() => [
 
     <template v-if="formStatus === 0">
       <SectionTitle>RSVP</SectionTitle>
-      <BigYellowButton @click="openForm">Marcar Presença!</BigYellowButton>
+      <PrimaryButton @click="openForm">Marcar Presença!</PrimaryButton>
     </template>
 
     <template v-if="formStatus === 1">
@@ -93,7 +93,7 @@ const nav = computed(() => [
     <template v-if="formStatus === 2">
       <SectionTitle>Obrigado!</SectionTitle>
       <p>* Até lá *</p>
-      <BigYellowButton @click="scrollToElementById('location')">&#x25BC; Lá onde? &#x25BC;</BigYellowButton>
+      <PrimaryButton @click="scrollToElementById('location')">&#x25BC; Lá onde? &#x25BC;</PrimaryButton>
       
     </template>
   </ContentSection>
@@ -101,6 +101,6 @@ const nav = computed(() => [
 
 <style lang="scss" scoped>
 p {
-  font-size: 3rem;
+  font-size: 2.4rem;
 }
 </style>

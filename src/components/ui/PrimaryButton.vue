@@ -6,9 +6,9 @@
 
 <style lang="scss" scoped>
 button {
-  padding: .8rem 3rem;
-  color: var(--color-text);
-  background-color: var(--color-primary);
+  padding: .8rem 6rem;
+  color: var(--color-background);
+  background-color: var(--color-secondary);
   border-radius: 0;
   text-align: center;
   min-width: 22rem;
@@ -23,8 +23,8 @@ button {
 
   &:hover,
   &:focus {
-    color: var(--color-background);
-    background-color: var(--color-secondary);
+    color: var(--color-text);
+    background-color: var(--color-primary);
   }
 
   &[disabled] {

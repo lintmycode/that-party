@@ -1,3 +1,7 @@
+form {
+  width: 100%;
+}
+
 .form-item {
   @extend .h-flex;
   // gap: 0;
@@ -27,30 +31,16 @@
     }
   }
 
+  input:not([type='checkbox']),
+  select,
   textarea {
     padding: 1rem;
-
-    &:focus {
-      background-color: var(--color-primary);
-    }
+    background-color: transparent;
+    width: 100%;
   }
 
   input:not([type='checkbox']),
-  select {
-    padding: 1rem;
-    background-color: transparent;
-    width: 40vw;
-
-    @media (max-width: 1200px) {
-      width: 60vw;
-    }
-
-    @media (max-width: 768px) {
-      width: 50vw;
-    }
-  }
-
-  input:not([type='checkbox']) {
+  textarea {
     vertical-align: middle;
 
     &:focus {

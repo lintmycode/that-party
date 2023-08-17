@@ -7,16 +7,16 @@
 <style lang="scss" scoped>
 h2 {
   font-family: HiguenSerif;
-  font-size: 10rem;
-  line-height: 1.2;
-  text-align: center;
+  font-size: 8rem;
+  line-height: 1;
+  text-align: left;
 
   @media (max-width: 1200px) {
-    font-size: 8rem;
+    font-size: 6rem;
   }
 
   @media (max-width: 768px) {
-    font-size: 6rem;
+    font-size: 4rem;
   }
 }
 </style>

@@ -77,6 +77,7 @@ button {
     border: 0;
     font-size: 2rem;
     cursor: pointer;
+    padding: 0;
   }
 }
 
@@ -84,6 +85,12 @@ button {
   &:hover {
     .remove {
       display: block;
+    }
+  }
+
+  input {
+    &[type=text] {
+      flex: 1 0 60%;
     }
   }
 }

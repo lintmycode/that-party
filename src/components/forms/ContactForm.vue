@@ -33,12 +33,3 @@ const { contact } = storeToRefs(partyStore)
     </div>
   </form>
 </template>
-
-<style lang="scss" scoped>
-.form-item {
-  input,
-  textarea {
-    width: 100%;
-  }
-}
-</style>

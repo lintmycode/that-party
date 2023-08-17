@@ -23,12 +23,5 @@ button {
   &:focus {
     color: var(--color-primary);
   }
-
-  &.pink {
-    background-color: var(--color-secondary);
-    text-transform: uppercase;
-    font-weight: 700;
-    padding: .8rem 4rem;
-  }
 }
 </style>

@@ -6,6 +6,7 @@ import Location from '../components/Location.vue'
 import FAQs from '../components/FAQs.vue'
 import Footer from '../components/Footer.vue'
 import RSVP from '../components/RSVP.vue'
+import Intro from '../components/Intro.vue'
 
 const loaded = ref(false)
 
@@ -18,6 +19,7 @@ console.log("Are you a former coworker or Dan looking in the console for bugs? H
     
     <template v-if="loaded">
       <Header id="header"/>
+      <Intro id="intro"/>
       <FAQs id="faqs"/>
       <RSVP id="rsvp"/>
       <Location id="location"/>

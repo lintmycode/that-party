@@ -13,6 +13,7 @@
   /* these will be overriden in the theme.config.js */
   --c-primary: #e0fa06;
   --c-secondary: #ef06d1;
+  --c-terciary: #1B0630;
 }
 
 /* semantic color variables for this project */
@@ -73,12 +74,12 @@ body {
 
 a {
   color: var(--color-secondary);
-  font-style: italic;
+  // font-style: italic;
   font-weight: 700;
   text-decoration: none;
   transition: 100ms all ease-in-out;
   text-decoration: underline;
-  text-decoration-thickness: 0.4rem;
+  //text-decoration-thickness: 0.4rem;
   text-underline-position: under;
 
   &:hover {
@@ -92,8 +93,12 @@ strong {
 
 .h-flex {
   display: flex;
-  gap: 1rem;
+  gap: 2rem;
   align-items: center;
+  
+  @media (max-width: 768px) {
+    gap: 1rem;
+  }
 
   // & > * {
   //   flex: 1 1 0;

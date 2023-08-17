@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
+import ExternalLink from './ui/ExternalLink.vue';
 
 const scriptLoaded = ref(false)
 const destination = { lat: 41.781351, lng: -8.8617906 }
@@ -52,17 +53,15 @@ onMounted(async () => {
       <h2>Monte de Santo António</h2>
       <p>Estrada de Santo António 160, 4900-012 Afife</p>
       <p>GPS: {{ destination.lat }}, {{ destination.lng }}</p>
-      <a
+      <ExternalLink
         :href="`https://www.google.com/maps/dir/?api=1&destination=${destination.lat},${destination.lng}`"
         target="_blank"
-        ><i>Como chegar</i> -&gt;</a
-      >
+        ><i>Como chegar</i> -&gt;</ExternalLink>
       <br>
-      <a
+      <ExternalLink
         href="https://www.booking.com/searchresults.pt-pt.html?ss=Afife%2C+Regi%C3%A3o+do+Norte%2C+Portugal&label=pt-pt-booking-desktop-dI1M0QVmAjqhgb5bsivrqAS652828998886%3Apl%3Ata%3Ap1%3Ap2%3Aac%3Aap%3Aneg%3Afi%3Atikwd-1427534005%3Alp1011709%3Ali%3Adec%3Adm&aid=2311236&lang=pt-pt&sb=1&src_elem=sb&src=index&dest_id=-2157112&dest_type=city&ac_position=0&ac_click_type=b&ac_langcode=pt&ac_suggestion_list_length=5&search_selected=true&search_pageview_id=c55a6c879b64010f&ac_meta=GhBjNTVhNmM4NzliNjQwMTBmIAAoATICcHQ6BWFmaWZlQABKAFAA&checkin=2023-09-16&checkout=2023-09-17&group_adults=2&no_rooms=1&group_children=0&sb_travel_purpose=leisure"
         target="_blank"
-        ><i>Onde ficar</i> -&gt;</a
-      >
+        ><i>Onde ficar</i> -&gt;</ExternalLink>
     </div>
     <!-- Map and Location Details: Embed a Google Maps (or any map service) location of the park and provide any necessary details for finding the specific spot within the park. Also, include information about parking and public transportation options if available. -->
   </section>
@@ -113,16 +112,6 @@ section {
     p,
     a {
       font-size: 2rem;
-    }
-
-    a {
-      text-decoration: none;
-
-      i {
-        text-decoration: underline;
-        text-decoration-thickness: 0.4rem;
-        font-weight: 700;
-      }
     }
   }
 }

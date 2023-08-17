@@ -51,24 +51,21 @@ const toggleAudio = () => {
   }
   isPlaying.value = !isPlaying.value;
 };
-
-
-
 </script>
 
 <template>
   <transition name="fade" mode="in-out">
-    <ContentSection v-if="!isPartyStarted">
+    <section v-if="isPartyStarted">
       <p class="who">-&gt; Preparado? &lt;-</p>
       <PrimaryButton class="pink" @click="getThisPartyStarted">Acho que sim!</PrimaryButton>
-    </ContentSection>
+    </section>
 
     <section v-else>
       <div class="content">
         <p class="who">-&gt; Filipa &amp; Nuno convidam para &lt;-</p>
         <h1>Aquela Festa</h1>
         <p class="when">16 Setembro - Afife</p>
-        <PrimaryButton @click="scrollToElementById('header')">&#x25BC; Quero Saber Tudo &#x25BC;</PrimaryButton>  
+        <PrimaryButton @click="scrollToElementById('header')">Quero Saber Tudo &#x25BC;</PrimaryButton>  
       </div>
       
       <button @click="toggleAudio" class="audio-toggle" :title="isPlaying ? 'Pause' : 'Play' ">
@@ -83,6 +80,8 @@ const toggleAudio = () => {
 </template>
 
 <style lang="scss" scoped>
+@import '@/assets/scss/mixins/padding.scss';
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 3s;
@@ -99,7 +98,8 @@ const toggleAudio = () => {
 }
 
 section {
-  background-color: #1B0630;
+  @include padding-section;
+  background-color: var(--c-terciary);
   background-size: cover;
   background-repeat: no-repeat;
 
@@ -110,6 +110,7 @@ section {
   align-items: center;
   justify-content: center;
   gap: 8rem;
+  padding: 4rem;
 
   p {
     text-transform: uppercase;
@@ -153,6 +154,7 @@ section {
 
       @media (max-width: 480px) {
         margin-top: 4rem;
+        width: 100%;
       }      
     }
   }

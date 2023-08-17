@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import SectionTitle from './atoms/SectionTitle.vue'
-import BigYellowButton from './ui/BigYellowButton.vue'
+import PrimaryButton from './ui/PrimaryButton.vue'
 
 const props = defineProps({
   nav: Array,
@@ -25,14 +25,7 @@ const submit = () => {
 </script>
 
 <template>
-  <div>
-    <!-- <ul>
-      <li v-for="(item, index) in nav" :key="index" :class="{ active: activeIndex === index }">
-        <button @click="setActiveStep(index)" v-if="index < activeIndex">{{ item }}</button>
-        <span v-else>{{ item }}</span>
-      </li>
-    </ul> -->
-
+  <section>
     <ul>
       <li v-for="(item, index) in nav" :key="index" >
         <template v-if="activeIndex === index">
@@ -43,45 +36,60 @@ const submit = () => {
     </ul>
 
     <nav>
-      <BigYellowButton v-if="activeIndex > 0" @click="setActiveStep(activeIndex - 1)"
-        >&lt; {{ nav[activeIndex - 1].prev }}</BigYellowButton
+      <PrimaryButton v-if="activeIndex > 0" @click="setActiveStep(activeIndex - 1)"
+        >&lt; {{ nav[activeIndex - 1].prev }}</PrimaryButton
       >
-      <BigYellowButton
+      <PrimaryButton
         v-if="activeIndex < nav.length - 1"
         :disabled="!nav[activeIndex + 1].condition"
         @click="setActiveStep(activeIndex + 1)"
-        >{{ nav[activeIndex + 1].next }} &gt;</BigYellowButton
+        >{{ nav[activeIndex + 1].next }} &gt;</PrimaryButton
       >
-      <BigYellowButton v-if="nav[activeIndex].submit" @click="submit">Enviar &gt;</BigYellowButton>
+      <PrimaryButton v-if="nav[activeIndex].submit" @click="submit">Enviar &gt;</PrimaryButton>
     </nav>
-  </div>
+  </section>
 </template>
 
 <style lang="scss" scoped>
-ul {
-  li {
-    &:not([hidden]) {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 8rem;
+section {
+  width: 80vw;
+  max-width: 70rem;
+
+  @media (max-width: 768px) {
+    width: 90vw;
+  }
+
+  ul {
+    width: 100%;
+
+    li {
+      &:not([hidden]) {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 8rem;
+
+        @media (max-width: 768px) {
+          gap: 4rem;
+        }
+      }
     }
   }
-}
 
-nav {
-  display: flex;
-  gap: 2rem;
-  justify-content: center;
-  margin-top: 6rem;
+  nav {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    margin-top: 6rem;
 
-  @media (max-width: 600px) {
-    gap: 1rem;
-  }
+    @media (max-width: 600px) {
+      gap: 1rem;
+    }
 
-  @media (max-width: 480px) {
-    flex-direction: column;
+    @media (max-width: 480px) {
+      flex-direction: column;
+    }
   }
 }
 </style>
