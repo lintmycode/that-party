@@ -6,14 +6,9 @@
 
 <style lang="scss" scoped>
 ul {
-  //margin: 0 auto;
-  list-style-type: disc;
+  list-style-type: none;
   font-size: 2.4rem;
-  margin-left: 2.4rem;
-
-  @media (max-width: 1200px) {
-    // font-size: 2.2rem;
-  }
+  margin-left: 0;
 
   @media (max-width: 768px) {
     font-size: 2rem;

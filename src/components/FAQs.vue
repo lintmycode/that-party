@@ -10,7 +10,7 @@ const { scrollToElementById } = useScroll();
 <template>
   <ContentSection type="dark">
     <template #content>
-      <SectionTitle>Algumas Questões</SectionTitle>
+      <SectionTitle>Algumas questões</SectionTitle>
       <UnorderedList>
         <li>
           <h3>Casamento? Vocês já não eram casados?</h3>
@@ -53,6 +53,10 @@ const { scrollToElementById } = useScroll();
 
 <style lang="scss" scoped>
 h3 {
+  color: var(--color-secondary);
+}
+
+p {
   font-weight: 700;
 }
 </style>

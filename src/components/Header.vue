@@ -22,7 +22,7 @@ const { scrollToElementById } = useScroll();
       </p>
       <p>
         <footer>
-          (NA REALfooterDADE TUDO COMEÇOU PORQUE O NUNO QUERIA 15 DIAS EXTRA DE FÉRIAS... :)
+          (NA REALIDADE TUDO COMEÇOU PORQUE O NUNO QUERIA 15 DIAS EXTRA DE FÉRIAS... :)
         </footer>
       </p>
     </template>
