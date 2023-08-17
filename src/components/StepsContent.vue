@@ -74,6 +74,13 @@ section {
           gap: 4rem;
         }
       }
+
+      h2 {
+        font-size: 5rem;
+        text-transform: uppercase;
+        font-family: 'AnonymousPro';
+        font-weight: 700;
+      }
     }
   }
 
