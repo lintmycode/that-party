@@ -55,7 +55,7 @@ const toggleAudio = () => {
 
 <template>
   <transition name="fade" mode="in-out">
-    <section v-if="isPartyStarted">
+    <section v-if="!isPartyStarted">
       <p class="who">-&gt; Preparado? &lt;-</p>
       <PrimaryButton class="pink" @click="getThisPartyStarted">Acho que sim!</PrimaryButton>
     </section>
