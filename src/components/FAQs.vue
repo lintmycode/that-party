@@ -38,7 +38,7 @@ const { scrollToElementById } = useScroll();
           <p>Decidimos reinventar o conceito do Copo d’água tradicional. Haverão algumas mesas e bancos mas sem lugares 
             sentados previamente atribuídos (dar prioridade aos mais séniores é de bom tom!) 
             <br>Existe um pequeno edifício no local onde poderão deixar as vossas ofertas (Bar, Grelha, Tábua ou Doce) e 
-            onde estarão pessoas dedicadas a organiza-las para depois servir. Ter em atenção que será uma celebração 
+            onde estarão pessoas dedicadas a organizá-las para depois servir. Ter em atenção que será uma celebração 
             totalmente ao ar livre (trazer agasalhos para o final do dia é imprescindível!). Uma manta, kispo, albernó, 
             lenço ou xaile é boa ideia.</p>
         </li>
@@ -56,20 +56,20 @@ const { scrollToElementById } = useScroll();
             não precisas de trazer “de tudo”. No formulário de registo, onde confirmarás a tua participação, vais ser totalmente 
             orientado para os itens que podes trazer e respectivas quantidades. Além destas, ofereceremos o Caldo Verde, o Pão 
             e a Broa!
-            <br><br><strong>BAR</strong> - Podes optar por trazer o clássico gin ou porto tónico ou trazer os ingredientes 
+            <br><br><span class="highlight">BAR</span> - Podes optar por trazer o clássico gin ou porto tónico ou trazer os ingredientes 
             necessários para fazer o tradicional Champarrião. Também podes optar pelos variados tipos de vinho: rosé, espumante, 
             branco, tinto ou alvarinho e cerveja. Para as crianças, e para quem vai conduzir, podes trazer: água das pedras, 
             coca-cola, 7up, Fanta, ice tea e sumos. Há uma fonte de água potável no local. Além disso, será oferecido um copo 
             no pedido da primeira bebida onde será escrito o teu nome. Esse copo deve ser mantido até ao fim, haverá um 
             “lava-copos” no local, onde poderás lavar o copo antes da bebida seguinte. MUITO IMPORTANTE: mantermos o Monte 
             limpo e não produzir excesso de lixo.
-            <br><br><strong>GRELHA</strong> - vai haver um grelhador grande com uma pessoa responsável por cozinhar tudo o 
+            <br><br><span class="highlight">GRELHA</span> - vai haver um grelhador grande com uma pessoa responsável por cozinhar tudo o 
             que trouxerem, idealmente temperado (não tens tempo para isso, sem stress, traz só o bicho!). Podes trazer 
             hambúrgueres, frango, costelinhas, febras, chouriço ou salsichas. Também poderão ser grelhados legumes ou 
-            hamburgers vegetarianos para quem não come carne.
-            <br><br><strong>TÁBUA</strong> - enchidos, queijos, tostas, crakers, grissinos, batatas fritas, frutos secos, 
+            hambúrgueres vegetarianos para quem não come carne.
+            <br><br><span class="highlight">TÁBUA</span> - enchidos, queijos, tostas, crakers, grissinos, batatas fritas, frutos secos, 
             uvas, figos, frutos silvestres, maça, mel, húmus, tomates cereja, azeitonas, cenouras e pepinos. 
-            <br><br><strong>DOCE</strong> - pode ser qualquer bolo, tarte, torta, biscoitos, bolachas, queques ou sobremesa, 
+            <br><br><span class="highlight">DOCE</span> - pode ser qualquer bolo, tarte, torta, biscoitos, bolachas, queques ou sobremesa, 
             desde que não necessite de “frio”, não temos mega frigoríficos no local e serão privilegiadas as bebidas frescas.</p>
         </li>
 
@@ -123,7 +123,8 @@ const { scrollToElementById } = useScroll();
         <li>
           <h3>Há algum “tema” nesta festa?</h3>
           <p>Gostamos de imaginar que o tema “Neon” vai estar presente na festa, mas podemos chegar a ter só uma party-lamp 
-            a rodar, ... As pessoas, na sua autenticidade, farão AQUELA FESTA!</p>
+            a rodar, ... As pessoas, na sua autenticidade, farão AQUELA FESTA! Pelo sim pelo não, traz daquelas pulseiras que 
+            brilham no escuro; parece-nos boa ideia!</p>
         </li>
 
         <li>
@@ -136,7 +137,8 @@ const { scrollToElementById } = useScroll();
           <h3>E as crianças?</h3>
           <p>As crianças são super bem-vindas mas estarão à total responsabilidade dos pais. Pretendemos montar um trampolim 
             e uma tenda com algumas almofadas para as crianças usufruirem. É boa ideia as crianças trazerem lanternas e/ou 
-            frontais pois além de ser diversão garantida conseguimos sempre perceber “por onde andam”.</p>
+            frontais pois além de ser diversão garantida conseguimos sempre perceber “por onde andam”. Mais uma vez, as pulseiras 
+            neon que brilham no escuro são uma boa ideia.</p>
         </li>
 
         <li>
@@ -152,7 +154,8 @@ const { scrollToElementById } = useScroll();
           <h3>E locais para dormir? Recomendam alguma coisa?</h3>
           <p>Em Afife existem alguns alojamentos locais e turismos rurais; se preferes um hotel ou maior oferta de alojamentos,
             o melhor é procurar em Vila Praia de Âncora, Viana do Castelo ou Caminha. Também existe o Parque de Campismo "Sereia da Gelfa"
-            com algumas opções.</p>
+            com algumas opções. Não marcaste dormida a tempo? Sem stress, os parques de estacionamento da praia da Arda permitem pernoita 
+            em carro ou auto-caravana, com direito a chuveiro e wc.</p>
         </li>
 
         <li>
@@ -180,7 +183,7 @@ const { scrollToElementById } = useScroll();
           <h3>SUPER ATENÇÃO please</h3>
           <p>É muito importante o registo de cada pessoa que pretende celebrar connosco este dia, para gerir a comida e a bebida, Queremos que "não vos falte nada"! Pf faz o teu registo logo que possível.
             <br><br>Quem por qualquer razão não consiga estar presente, apenas não faz registo de presença. Se sentir que quer dizer alguma coisa pode escrever para o email <ExternalLink href="mailto:aquelafesta@nitida.pt"><i>aquelafesta@nitida.pt</i>-&gt;</ExternalLink>.
-            <br><br>Qualquer uma destas informações está sujeita a ser alterada até à data da “AQUELA FESTA”, por questões práticas/logísticas que entretanto possam surgir, pelo que aconselhamos a que revejam mais perto do evento esta página das “Questões”. Um email será também enviado quando se tratarem de alterações importantes.</p>
+            <br><br><span class="highlight">Qualquer uma destas informações está sujeita a ser alterada até à data da “AQUELA FESTA”, por questões práticas/logísticas que entretanto possam surgir, pelo que aconselhamos a que revejam mais perto do evento esta página das “Questões”. Um email será também enviado quando se tratarem de alterações importantes.</span></p>
         </li>
       </UnorderedList>
     </template>
@@ -197,7 +200,7 @@ h3 {
 }
 
 p {
-  font-size: 2rem;
+  font-size: 1.8rem;
   color: var(--color-background);
 }
 </style>

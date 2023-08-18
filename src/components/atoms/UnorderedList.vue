@@ -7,7 +7,7 @@
 <style lang="scss" scoped>
 ul {
   list-style-type: none;
-  font-size: 2.4rem;
+  font-size: 2.2rem;
   margin-left: 0;
 
   @media (max-width: 768px) {
@@ -18,6 +18,10 @@ ul {
   :slotted(li) {
     & + li {
       margin-top: 2rem;
+    }
+
+    .highlight {
+      color: var(--color-secondary);
     }
   }
 }

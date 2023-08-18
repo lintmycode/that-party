@@ -7,7 +7,7 @@
 <style lang="scss" scoped>
 h2 {
   font-family: HiguenSerif;
-  font-size: 8rem;
+  font-size: 7rem;
   line-height: 1;
   text-align: left;
 

@@ -14,20 +14,14 @@ import PrimaryButton from './ui/PrimaryButton.vue'
 
 const { scrollToElementById } = useScroll();
 
-// open form to start registration process
-// form is either closed (0), opened (1) or submitted (2)
-const formStatus = ref(0)
-const openForm = () => {
-  formStatus.value = 1
-}
+const formSubmitted = ref(false)
 
 // get party store
 const partyStore = usePartyStore()
 const { contributions } = storeToRefs(partyStore)
 
 const submit = async () => {
-  await partyStore.submit()
-  formStatus.value = 2
+  formSubmitted.value = await partyStore.submit()
 }
 
 // scroll up on nav
@@ -68,12 +62,7 @@ const nav = computed(() => [
 <template>
   <ContentSection>
 
-    <template v-if="formStatus === 0">
-      <SectionTitle>RSVP</SectionTitle>
-      <PrimaryButton @click="openForm">Marcar Presença!</PrimaryButton>
-    </template>
-
-    <template v-if="formStatus === 1">
+    <template v-if="!formSubmitted">
       <StepsContent :nav="nav" :active-step="0" @submit="submit" @nav="navHappened">
         <template #step-0>
           <RSVPForm />
@@ -90,7 +79,7 @@ const nav = computed(() => [
       </StepsContent>
     </template>
 
-    <template v-if="formStatus === 2">
+    <template v-else>
       <SectionTitle>Obrigado!</SectionTitle>
       <p>* Até lá *</p>
       <PrimaryButton @click="scrollToElementById('location')">&#x25BC; Lá onde? &#x25BC;</PrimaryButton>

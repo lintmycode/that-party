@@ -39,9 +39,9 @@ const focusLastName = () => {
   document.getElementsByName('name-' + (attendees.value.length - 1))[0].focus()
 }
 
-onMounted(() => {
-  focusLastName()
-})
+// onMounted(() => {
+//   focusLastName()
+// })
 </script>
 
 <template>

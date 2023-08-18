@@ -48,7 +48,7 @@ defineProps({
     color: var(--color-primary);
 
     :slotted(p) {
-      i {
+      footer {
         color: var(--color-secondary);
       }
     }
@@ -82,7 +82,7 @@ defineProps({
     }
 
     :slotted(p) {
-      font-size: 2.4rem;
+      font-size: 2.2rem;
 
       @media (max-width: 768px) {
         font-size: 2rem;
@@ -98,7 +98,7 @@ defineProps({
         display: inline-block;
         font-weight: 700;
         letter-spacing: .2rem;
-      }  
+      } 
     }
   }
 
