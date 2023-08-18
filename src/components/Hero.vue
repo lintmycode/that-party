@@ -11,7 +11,7 @@ const isPartyStarted = ref(false)
 let audio = null
 if (!debug.value) {
   audio = new Audio('/mp3/comanchero.mp3')
-
+  
   // preload media
   document.addEventListener("DOMContentLoaded", function() {
     audio.preload = "auto";
@@ -35,26 +35,26 @@ const emit = defineEmits(['entered'])
 const getThisPartyStarted = () => {
   isPartyStarted.value = true
   setTimeout(() => {
-
     content.value.classList.remove('hidden')
   }, 6000)
  
   emit('entered')
   if (!debug.value) {
     audio.play()
+    audio.loop = true
     isPlaying.value = true
   }
 }
 
 // audio player
-const stopAudio = (e) => {
-  audio.pause();
-  isPlaying.value = false;
+// const stopAudio = (e) => {
+//   audio.pause();
+//   isPlaying.value = false;
 
-  for (let el of document.getElementsByClassName('play')) {
-    el.classList.remove('active');
-  }
-};
+//   for (let el of document.getElementsByClassName('play')) {
+//     el.classList.remove('active');
+//   }
+// };
 
 // const playAudio = (e, file) => {
 //   stopAudio()
@@ -68,39 +68,52 @@ const stopAudio = (e) => {
 //   e.target.classList.add('active')
 // };
 
-const playRandom = (e) => {
-  const songs = ['comanchero', 'caravan-of-love', 'where-is-my-mind']
-  audio.pause()
-  audio = new Audio('/mp3/' + songs[Math.floor(Math.random() * songs.length)] + '.mp3')
-  audio.play()
-  isPlaying.value = true;
-  e.target.classList.add('active')
+// const playRandom = (e) => {
+//   const songs = ['comanchero', 'caravan-of-love', 'where-is-my-mind']
+//   audio.pause()
+//   audio = new Audio('/mp3/' + songs[Math.floor(Math.random() * songs.length)] + '.mp3')
+//   audio.play()
+//   isPlaying.value = true;
+//   e.target.classList.add('active')
+// }
+
+// pause/play music
+const toggleAudio = () => {
+  if (isPlaying.value) {
+    audio.pause();
+  } else {
+    audio.play();
+  }
+  isPlaying.value = !isPlaying.value
 }
 </script>
 
 <template>
-  
-    <section v-if="!isPartyStarted">
-      <p class="who">-&gt; Preparado? &lt;-</p>
-      <PrimaryButton class="pink" @click="getThisPartyStarted">Claro!</PrimaryButton>
-    </section>
+  <section v-if="!isPartyStarted">
+    <p class="who">-&gt; Preparado? &lt;-</p>
+    <PrimaryButton class="pink" @click="getThisPartyStarted">Claro!</PrimaryButton>
+  </section>
 
-    <section v-else>
-      <div class="content hidden" ref="content">
-        <p class="who">-&gt; Filipa &amp; Nuno convidam para &lt;-</p>
-        <h1>Aquela Festa</h1>
-        <p class="when">16 Setembro - Afife</p>
-        <div class="player">
-          <button @click="stopAudio($event)" class="stop" title="Stop!">&#9724;</button>
-          <button @click="playRandom($event)" class="play active" title="Comanchero">&#x25BC;</button>
-        </div>
-        <PrimaryButton @click="scrollToElementById('header')">Quero Saber Tudo &#x25BC;</PrimaryButton>  
-      </div>
-      
-      <video playsinline autoplay muted loop id="bgVideo" v-if="!debug">
-        <source src="/video/aquela-festa.mp4" type="video/mp4" />
-      </video>
-    </section>
+  <section v-else>
+    <div class="content hidden" ref="content">
+      <p class="who">-&gt; Filipa &amp; Nuno convidam para &lt;-</p>
+      <h1>Aquela Festa</h1>
+      <p class="when">16 Setembro - Afife</p>
+      <!-- <div class="player">
+        <button @click="stopAudio($event)" class="stop" title="Stop!">&#9724;</button>
+        <button @click="playRandom($event)" class="play active" title="Comanchero">&#x25BC;</button>
+      </div> -->
+      <PrimaryButton @click="scrollToElementById('header')">Quero Saber Tudo &#x25BC;</PrimaryButton>  
+    </div>
+    
+    <video playsinline autoplay muted loop id="bgVideo" v-if="!debug">
+      <source src="/video/aquela-festa.mp4" type="video/mp4" />
+    </video>
+
+    <teleport to="#app">
+      <button :class="['audio-toggle', isPlaying ? 'pause' : 'play']" @click="toggleAudio" />
+    </teleport>
+  </section>
 </template>
 
 <style lang="scss" scoped>
@@ -164,7 +177,15 @@ section {
       } 
     }
 
-    //.audio-toggle {
+    button {
+      margin-top: 10rem;
+
+      @media (max-width: 768px) {
+        margin-top: 6rem;
+      }
+    }
+
+    /*
     .player {
       display: flex;
       margin: 5rem auto;
@@ -198,8 +219,9 @@ section {
 
         &.play {
         }
-      }
+      }  
     }
+    */
   }
 
   h1 {
@@ -228,6 +250,46 @@ section {
     height: auto;
     z-index: 0;
     transform: translateX(-50%) translateY(-50%);
+  }
+}
+
+.audio-toggle {
+  position: fixed;
+  z-index: 1;
+  bottom: 3rem;
+  right: 3rem;
+  background-color: transparent;
+  border: 0;
+  width: 4rem;
+  height: 4rem;
+  background-color: var(--color-primary);
+  border-radius: 2rem;
+  background-repeat: no-repeat;
+  background-size: 1.4rem;
+  transition: 100ms all;
+
+  &:active {
+    background-color: var(--color-secondary);
+  }
+
+  @media (max-width: 768px) {
+    bottom: 2rem;
+    right: 2rem;
+  }
+
+  @media (max-width: 480px) {
+    bottom: 1rem;
+    right: 1rem;
+  }
+
+  &.pause {
+    background-image: url(/icons/pause.svg);
+    background-position: 50%;
+  }
+
+  &.play {
+    background-image: url(/icons/play.svg);
+    background-position: 55% 50%;
   }
 }
 </style>

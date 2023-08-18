@@ -47,18 +47,18 @@ const { scrollToElementById } = useScroll();
           <h3>Há Lista de Casamento? </h3>
           <p>Não! Lembra-te, a ideia é celebrar! Pedimos apenas que tragas uma oferta “comestível”. Pode ser Bar, Grelha, 
             Tábua ou Doce - no formulário de registo, onde confirmarás a tua participação, vais ser totalmente orientado 
-            para os itens que podes trazer e respectivas quantidades. </p>
+            para os itens que podes trazer. </p>
         </li>
 
         <li>
           <h3>“Bar, Grelha, Tábua ou Doce” - Expliquem melhor pf!</h3>
           <p>Estas serão as vossas ofertas para esta nossa/vossa celebração, além da vossa presença imprescindível. Obviamente 
             não precisas de trazer “de tudo”. No formulário de registo, onde confirmarás a tua participação, vais ser totalmente 
-            orientado para os itens que podes trazer e respectivas quantidades. Além destas, ofereceremos o Caldo Verde, o Pão 
+            orientado para os itens que podes trazer. Além destas, ofereceremos o Caldo Verde, o Pão 
             e a Broa!
             <br><br><span class="highlight">BAR</span> - Podes optar por trazer o clássico gin ou porto tónico ou trazer os ingredientes 
             necessários para fazer o tradicional Champarrião. Também podes optar pelos variados tipos de vinho: rosé, espumante, 
-            branco, tinto ou alvarinho e cerveja. Para as crianças, e para quem vai conduzir, podes trazer: água das pedras, 
+            branco, tinto ou alvarinho. Para as crianças, e para quem vai conduzir, podes trazer: água das pedras, 
             coca-cola, 7up, Fanta, ice tea e sumos. Há uma fonte de água potável no local. Além disso, será oferecido um copo 
             no pedido da primeira bebida onde será escrito o teu nome. Esse copo deve ser mantido até ao fim, haverá um 
             “lava-copos” no local, onde poderás lavar o copo antes da bebida seguinte. MUITO IMPORTANTE: mantermos o Monte 
@@ -188,7 +188,7 @@ const { scrollToElementById } = useScroll();
       </UnorderedList>
     </template>
     <template #cta>
-      <PrimaryButton @click="scrollToElementById('rsvp')">Regista-te Aqui &#x25BC;</PrimaryButton>
+      <PrimaryButton @click="scrollToElementById('rsvp')">Quero Registar-me &#x25BC;</PrimaryButton>
     </template>
   </ContentSection>
 </template>

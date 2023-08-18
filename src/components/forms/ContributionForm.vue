@@ -62,7 +62,7 @@ const removeItem = (item) => {
 
 <template>
   <template v-if="!loading">
-    <ul>
+    <ul class="categories">
       <template v-for="(cat, catIndex) in categories" :key="'cat-' + catIndex">
         <li
           v-if="cat.contributions.some((i) => i.availableQty > 0)"
@@ -76,7 +76,7 @@ const removeItem = (item) => {
             >
               <li v-if="item.availableQty > 0" class="item">
                 <button type="button" @click="add(catIndex, itemIndex)">+ {{ item.name }}</button>
-                <span class="qty">({{ item.availableQty }} disponíveis)</span>
+                <!-- <span class="qty">({{ item.availableQty }} disponíveis)</span> -->
               </li>
             </template>
           </ul>
@@ -106,17 +106,19 @@ const removeItem = (item) => {
 
 <style lang="scss" scoped>
 ul {
-  width: 60vw;
   display: flex;
   flex-direction: column;
   gap: 2rem;
 
-  @media (max-width: 1200px) {
-    width: 70vw;
-  }
+  &.categories {
+    width: 100rem;
+    left: -15rem;
 
-  @media (max-width: 768px) {
-    width: 90vw;
+    @media (max-width: 1024px) {
+      width: 100%;
+      left: 0;
+    }
+  
   }
 
   .category {
@@ -144,10 +146,11 @@ ul {
       border: 0;
       font-size: 2rem;
       padding: 1rem 2rem;
-      background-color: var(--color-background-soft);
+      background-color: var(--color-background);
       color: var(--color-text);
       position: relative;
       transition: 100ms all;
+      cursor: pointer;
 
       @media (max-width: 1024px) {
         flex-basis: auto;
@@ -165,6 +168,7 @@ ul {
 
     ul {
       .item {
+        /*
         &:hover {
           .qty {
             display: inline;
@@ -176,6 +180,8 @@ ul {
             }
           }
         }
+        */
+        
         button {
           border: 0;
           background-color: transparent;
@@ -183,6 +189,7 @@ ul {
           font-size: 2rem;
           transition: 100ms all;
           cursor: pointer;
+          text-align: left;
 
           &:hover {
             background-color: var(--color-primary);
@@ -204,7 +211,7 @@ ul {
 .my-contribution {
   font-size: 1.8rem;
   min-height: 3rem;
-  margin-top: -3rem;
+  margin-top: 3rem;
   
   button {
     background-color: transparent;

@@ -42,9 +42,10 @@ form {
   input:not([type='checkbox']),
   textarea {
     vertical-align: middle;
+    background-color: var(--color-background);
 
     &:focus {
-      background-color: var(--color-primary);
+      //background-color: var(--color-primary);
     }
   }
 

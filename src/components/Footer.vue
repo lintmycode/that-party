@@ -10,10 +10,8 @@
 </template>
 
 <style lang="scss" scoped>
-@import '@/assets/scss/mixins/padding.scss';
-
 footer {
-  @include padding-section;
+  padding: 4rem 2rem;
   background-color: var(--color-text);
   text-align: center;
 

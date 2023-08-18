@@ -68,7 +68,7 @@ const focusLastName = () => {
 <style lang="scss" scoped>
 button {
   &.add {
-    margin: 2rem auto 0 ;
+    margin-top: 2rem ;
   }
 
   &.remove {

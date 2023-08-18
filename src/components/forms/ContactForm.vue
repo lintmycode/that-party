@@ -10,8 +10,7 @@ const { contact } = storeToRefs(partyStore)
   <form>
     <div class="form-item v-flex">
       <label for="email"
-        >Deixa-nos o teu email para receberes notícias da Festa.</label
-      >
+        >Email</label>
       <input
         type="email"
         name="email"
@@ -22,7 +21,7 @@ const { contact } = storeToRefs(partyStore)
       />
     </div>
     <div class="form-item v-flex">
-      <label for="message">Se quiseres podes também deixar-nos uma mensagem.</label>
+      <label for="message">Mensagem (opcional)</label>
       <textarea
         name="message"
         id="message"
@@ -33,3 +32,9 @@ const { contact } = storeToRefs(partyStore)
     </div>
   </form>
 </template>
+
+<style lang="scss" scoped>
+.form-item {
+  align-items: start;
+}
+</style>

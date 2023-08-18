@@ -30,6 +30,7 @@ defineProps({
   justify-content: center;
   align-items: center;
   gap: 8rem;
+  background-color: var(--color-background-soft);
 
   @media (max-width: 1200px) {
     gap: 6rem;

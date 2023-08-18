@@ -30,13 +30,14 @@ const submit = () => {
       <li v-for="(item, index) in nav" :key="index" >
         <template v-if="activeIndex === index">
           <SectionTitle>{{ item.name }}</SectionTitle>
+          <p v-if="item.note" class="note">{{ item.note }}</p>
           <slot :name="'step-' + index" />
         </template>
       </li>
     </ul>
 
     <nav>
-      <PrimaryButton v-if="activeIndex > 0" @click="setActiveStep(activeIndex - 1)"
+      <PrimaryButton v-if="activeIndex > 0" @click="setActiveStep(activeIndex - 1)" class="prev"
         >&lt; {{ nav[activeIndex - 1].prev }}</PrimaryButton
       >
       <PrimaryButton
@@ -57,6 +58,7 @@ section {
 
   @media (max-width: 768px) {
     width: 90vw;
+    max-width: 100vw;
   }
 
   ul {
@@ -67,19 +69,26 @@ section {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: center;
-        gap: 8rem;
-
-        @media (max-width: 768px) {
-          gap: 4rem;
-        }
+        align-items: start;
       }
 
       h2 {
-        font-size: 5rem;
+        font-size: 6rem;
         text-transform: uppercase;
         font-family: 'AnonymousPro';
+        font-weight: 600;
+        letter-spacing: .6rem;
+      }
+
+      .note {
+        font-size: 1.6rem;
+        line-height: 1.2;
+        display: inline-block;
         font-weight: 700;
+        letter-spacing: .2rem;
+        text-transform: uppercase;
+        margin-top: 2rem;
+        margin-bottom: 6rem;
       }
     }
   }
@@ -96,6 +105,20 @@ section {
 
     @media (max-width: 480px) {
       flex-direction: column;
+    }
+
+    button {
+      flex: 1 1 0;
+      max-width: 34rem;
+
+      @media (max-width: 480px) {
+        max-width: 100%;
+      }
+
+      &.prev {
+        background-color: #fff;
+        color: var(--color-secondary);
+      }
     }
   }
 }

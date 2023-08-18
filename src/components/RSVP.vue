@@ -32,27 +32,31 @@ const navHappened = () => {
 // steps nav items
 const nav = computed(() => [
   {
-    name: 'Quem Vai?',
-    next: 'Quem Vai?',
-    prev: 'Quem Vai?',
+    name: 'Quem vai?',
+    next: 'Quem vai?',
+    prev: 'Quem vai?',
+    note: 'Regista o teu nome e de quem vai contigo',
     condition: true
   },
   {
-    name: 'O Que Vou Levar',
-    next: 'O Que Vou Levar',
-    prev: 'O Que Vou Levar',
+    name: 'O que vou levar',
+    next: 'O que vou levar',
+    prev: 'O que vou levar',
+    note: 'Clica nas categorias para escolheres o que queres levar',
     condition: partyStore.attendeesOk()
   },
   {
     name: 'Contacto',
-    next: contributions.value.length === 0 ? 'Nada!' : 'Já chega',
+    next: contributions.value.length === 0 ? 'Não levo nada!' : 'Já chega',
     prev: 'Contacto',
+    note: 'Adiciona o teu email para podermos entrar em contacto, se necessário',
     condition: true
   },
   {
     name: 'Resumo',
     next: 'Resumo',
     prev: 'Resumo',
+    note: 'Obrigado! Aqui está o resumo do teu registo. Confirma e clica ENVIAR. Até já!',
     condition: partyStore.contactOk(),
     submit: true
   }
@@ -60,7 +64,10 @@ const nav = computed(() => [
 </script>
 
 <template>
-  <ContentSection>
+  
+  <ContentSection type="">
+    <h2>-&gt; Formulário de Registo &lt;-</h2>
+
 
     <template v-if="!formSubmitted">
       <StepsContent :nav="nav" :active-step="0" @submit="submit" @nav="navHappened">
@@ -89,6 +96,14 @@ const nav = computed(() => [
 </template>
 
 <style lang="scss" scoped>
+h2 {
+  text-transform: uppercase;
+  letter-spacing: 0.3rem;
+  font-family: AnonymousPro;
+  font-size: 2.3rem;
+  color: var(--color-text);
+}
+
 p {
   font-size: 2.4rem;
 }

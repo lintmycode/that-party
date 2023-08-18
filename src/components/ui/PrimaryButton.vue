@@ -1,5 +1,12 @@
+<script setup>
+const clicked = (e) => {
+  // blur after click because styles
+  e.target.blur();
+}
+</script>
+
 <template>
-  <button type="button">
+  <button type="button" @click="clicked($event)">
     <slot />
   </button>
 </template>
@@ -21,13 +28,10 @@ button {
   z-index: 1;
   transition: 50ms all ease-in;
 
-  &:hover {
+  &:hover,
+  &:focus {
     color: var(--color-text);
     background-color: var(--color-primary);
-  }
-  
-  &:focus {
-    color: var(--color-primary);
   }
 
   &[disabled] {
