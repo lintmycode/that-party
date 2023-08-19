@@ -10,8 +10,8 @@ INSERT INTO Categories (id, name) VALUES
 INSERT INTO Contributions (category_id, name, qtyPer10Adults, qtyPer10Children) VALUES 
 (1, 'Frango', 3, 3),
 (1, 'Costelinha', 3, 3),
-(1, 'Hamburgeres', 4, 4),
-(1, 'Fêveras', 3, 3),
+(1, 'Hambúrgeres', 4, 4),
+(1, 'Febras', 3, 3),
 (1, 'Chouriço', 4, 2),
 (1, 'Salsichas', 4, 5),
 

@@ -68,6 +68,10 @@ defineProps({
       max-width: 80vw;
     }
 
+    @media (max-width: 480px) {
+      max-width: 100%;
+    }
+
     &:before {
       content: '';
       position: absolute;
@@ -79,6 +83,10 @@ defineProps({
 
       @media (max-width: 800px) {
         left: -3rem;
+      }
+
+      @media (max-width: 480px) {
+        left: -1rem;
       }     
     }
 

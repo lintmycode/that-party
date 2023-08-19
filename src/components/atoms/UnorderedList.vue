@@ -12,7 +12,7 @@ ul {
 
   @media (max-width: 768px) {
     font-size: 2rem;
-    margin-left: 2rem;
+    margin-left: 0rem;
   }
 
   :slotted(li) {

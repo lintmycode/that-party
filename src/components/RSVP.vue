@@ -102,6 +102,7 @@ h2 {
   font-family: AnonymousPro;
   font-size: 2.3rem;
   color: var(--color-text);
+  padding: 0 1rem;
 }
 
 p {

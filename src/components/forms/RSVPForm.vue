@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { usePartyStore } from '@/stores/partyStore.js'
 import SecondaryButton from '../ui/SecondaryButton.vue';
@@ -38,10 +38,6 @@ const nameEdited = (e) => {
 const focusLastName = () => {
   document.getElementsByName('name-' + (attendees.value.length - 1))[0].focus()
 }
-
-// onMounted(() => {
-//   focusLastName()
-// })
 </script>
 
 <template>
@@ -78,8 +74,9 @@ button {
     font-size: 2rem;
     cursor: pointer;
     padding: 0;
+    flex: 0 0 1.2rem;
   }
-}
+} 
 
 .form-item {
   &:hover {
@@ -90,7 +87,7 @@ button {
 
   input {
     &[type=text] {
-      flex: 1 0 60%;
+      flex: 1 0 50%;
     }
   }
 }

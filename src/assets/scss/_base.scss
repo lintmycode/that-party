@@ -99,6 +99,10 @@ strong {
   @media (max-width: 768px) {
     gap: 1rem;
   }
+  
+  @media (max-width: 480px) {
+    gap: .6rem;
+  }
 
   // & > * {
   //   flex: 1 1 0;

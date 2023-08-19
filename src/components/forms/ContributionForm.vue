@@ -190,6 +190,7 @@ ul {
           transition: 100ms all;
           cursor: pointer;
           text-align: left;
+          color: var(--color-text);
 
           &:hover {
             background-color: var(--color-primary);
