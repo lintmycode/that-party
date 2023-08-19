@@ -161,7 +161,8 @@ const { scrollToElementById } = useScroll();
         <li>
           <h3>E para comer, perto da festa...?</h3>
           <p><strong>Café de Cabanas</strong> - comida orgânica proveniente da Quinta de Cabanas - sitio mágico (Afife)
-            <br><strong>Restaurante Mariana</strong> - um clássico, robalo cozido ao vapor em sargaço com feijão verde e maionese caseira - imperdível (Afife)
+            <br><strong>Restaurante Mariana</strong> - um clássico, robalo cozido ao vapor em sargaço com feijão verde e maionese caseira - 
+            imperdível (Afife)
             <br><strong>Restaurante Sr. Bacalhau</strong> - o mais trend de Afife, ambiente moderno, comida boa - nada económico
             <br><strong>Taberna da Estação</strong> - tapas e petiscos, cervejas boas (Afife)
             <br><strong>Moodz café</strong> - café típico, tem de tudo um pouco, revistas, gelados da Olá e tabaco incluído
@@ -181,11 +182,18 @@ const { scrollToElementById } = useScroll();
 
         <li>
           <h3>SUPER ATENÇÃO please</h3>
-          <p>É muito importante o registo de cada pessoa que pretende celebrar connosco este dia, para gerir a comida e a bebida, Queremos que "não vos falte nada"! Pf faz o teu registo logo que possível.
-            <br><br>Quem por qualquer razão não consiga estar presente, apenas não faz registo de presença. Se sentir que quer dizer alguma coisa pode escrever para o email <ExternalLink href="mailto:aquelafesta@nitida.pt"><i>aquelafesta@nitida.pt</i>-&gt;</ExternalLink>.
-            <br><br><span class="highlight">Qualquer uma destas informações está sujeita a ser alterada até à data da “AQUELA FESTA”, por questões práticas/logísticas que entretanto possam surgir, pelo que aconselhamos a que revejam mais perto do evento esta página das “Questões”. Um email será também enviado quando se tratarem de alterações importantes.</span></p>
+          <p>É muito importante o registo de cada pessoa que pretende celebrar connosco este dia, para gerir a comida e a bebida, Queremos que 
+            "não vos falte nada"! Pf faz o teu registo logo que possível.
+            <br><br>Quem por qualquer razão não consiga estar presente, apenas não faz registo de presença. Se sentir que quer 
+            dizer alguma coisa pode escrever para o email 
+            <ExternalLink href="mailto:aquelafesta@nitida.pt"><i>aquelafesta@nitida.pt</i>-&gt;</ExternalLink>.</p>
         </li>
       </UnorderedList>
+      <footer>
+        Qualquer uma destas informações está sujeita a ser alterada até à data da “AQUELA FESTA”, por questões práticas/logísticas 
+        que entretanto possam surgir, pelo que aconselhamos a que revejam mais perto do evento esta página das “Questões”. 
+        Um email será também enviado quando se tratarem de alterações importantes.
+      </footer>
     </template>
     <template #cta>
       <PrimaryButton @click="scrollToElementById('rsvp')">Quero Registar-me &#x25BC;</PrimaryButton>
@@ -197,6 +205,7 @@ const { scrollToElementById } = useScroll();
 h3 {
   color: var(--color-secondary);
   margin-bottom: 1rem;
+  line-height: 1.4;
 }
 
 p {

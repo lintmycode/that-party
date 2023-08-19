@@ -48,10 +48,8 @@ defineProps({
     background-color: var(--c-terciary);
     color: var(--color-primary);
 
-    :slotted(p) {
-      footer {
-        color: var(--color-secondary);
-      }
+    :slotted(footer) {
+      color: var(--color-secondary);
     }
   }
 
@@ -100,14 +98,15 @@ defineProps({
       strong {
         font-weight: 700;
       }
-      
-      footer {
-        font-size: 1.6rem;
-        line-height: 1.2;
-        display: inline-block;
-        font-weight: 700;
-        letter-spacing: .2rem;
-      } 
+    }
+
+    :slotted(footer) {
+      font-size: 1.6rem;
+      line-height: 1.2;
+      display: inline-block;
+      font-weight: 700;
+      letter-spacing: .2rem;
+      text-transform: uppercase;
     }
   }
 

@@ -21,11 +21,9 @@ const { scrollToElementById } = useScroll();
         <li>DRESS CODE <strong>Veste igual a ti -> traz o que já tens</strong></li>
         <li>OFERTAS <strong>Bar, Grelha, Tábua ou Doce -> A música vai ser por nossa conta</strong></li>
       </UnorderedList>
-      <p>
-        <footer>
-          RSVP: É IMPORTANTE O REGISTO DE CADA PESSOA QUE IRÁ MARCAR PRESENÇA NA FESTA, PARA GERIR A COMIDA E A BEBIDA DE FORMA A QUE "NÃO VOS FALTE NADA"!
-        </footer>
-      </p>
+      <footer>
+        RSVP: É IMPORTANTE O REGISTO DE CADA PESSOA QUE IRÁ MARCAR PRESENÇA NA FESTA, PARA GERIR A COMIDA E A BEBIDA DE FORMA A QUE "NÃO VOS FALTE NADA"!
+      </footer>
     </template>
     <template #cta>
     <PrimaryButton @click="scrollToElementById('faqs')">Ainda tenho algumas questões &#x25BC;</PrimaryButton>

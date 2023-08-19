@@ -20,11 +20,9 @@ const { scrollToElementById } = useScroll();
           o seu mar, a sua montanha e a doçura da água que a percorre. Queremos celebrar, acima de tudo, a VIDA! Vamos juntos?
         </strong>
       </p>
-      <p>
-        <footer>
-          (NA REALIDADE TUDO COMEÇOU PORQUE O NUNO QUERIA 15 DIAS EXTRA DE FÉRIAS... :)
-        </footer>
-      </p>
+      <footer>
+        (NA REALIDADE TUDO COMEÇOU PORQUE O NUNO QUERIA 15 DIAS EXTRA DE FÉRIAS... :)
+      </footer>
     </template>
     <template #cta>
     <PrimaryButton @click="scrollToElementById('intro')">Já só quero celebrar &#x25BC;</PrimaryButton>
