@@ -7,7 +7,6 @@ import FAQs from '../components/FAQs.vue'
 import Footer from '../components/Footer.vue'
 import RSVP from '../components/RSVP.vue'
 import Intro from '../components/Intro.vue'
-import ExtraFAQs from '../components/ExtraFAQs.vue'
 
 const loaded = ref(false)
 
@@ -24,7 +23,6 @@ console.log("Are you a former coworker or Dan looking in the console for bugs? H
       <FAQs id="faqs"/>
       <RSVP id="rsvp"/>
       <Location id="location"/>
-      <ExtraFAQs id="extra-faqs"/>
       <Footer id="footer"/>
     </template>
   </main>

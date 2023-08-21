@@ -37,6 +37,11 @@ const { scrollToElementById } = useScroll();
         </li>
 
         <li>
+          <h3>Vai haver música para dançar?</h3>
+          <p>Sim, fazemos questão de manter a reputação de mais de uma dezena de anos de festas de enorme sucesso! :) :) :)</p>
+        </li>
+
+        <li>
           <h3>É permitido fumar/foguear no local?</h3>
           <p>Estamos ao ar livre e por isso é permitido fumar, desde que te certifiques que apagas o teu cigarro nos recipientes
              com areia que estarão disponíveis para esse efeito no local. Tanto pela questão de risco de incêndio como pela 

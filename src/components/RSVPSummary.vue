@@ -18,7 +18,7 @@ const { attendees, contributions, contact } = storeToRefs(partyStore)
     <h3>Vou levar</h3>
     <ul v-if="contributions.length > 0">
       <li v-for="(contribution, index) in contributions" :key="'contribution-' + index">
-        {{ contribution.name + ' (' + contribution.qty + ')' }}
+        {{ contribution.name }}
       </li>
     </ul>
     <p v-else>Nada</p>

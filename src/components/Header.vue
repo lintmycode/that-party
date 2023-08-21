@@ -13,9 +13,9 @@ const { scrollToElementById } = useScroll();
       <SectionTitle>Vamos casar,</SectionTitle>      
       <p>
         <strong>
-          mas, acima de tudo, queremos CE-LE-BRA-R! Celebrar a vida. Celebrar a família que nos gerou e a 
-          que nos acompanha desde que nascemos (ou até antes!), a família que a vida nos trouxe e (a)escolhemos, 
-          a família que entretanto geramos. Celebrar os amigos de sempre, os mais "recentes", os novos e os que 
+          Mas, acima de tudo, queremos CE-LE-BRAR! Celebrar a vida. Celebrar a família que nos gerou e a 
+          que nos acompanha desde que nascemos (ou até antes!), a família que a vida nos trouxe e escolhemos, 
+          a família que entretanto geramos. Celebrar os amigos de sempre, os mais recentes, os novos e os que 
           ainda virão a ser maiores. Celebrar esta terra que decidimos agora chamar nossa, as suas gentes e costumes, 
           o seu mar, a sua montanha e a doçura da água que a percorre. Queremos celebrar, acima de tudo, a VIDA! Vamos juntos?
         </strong>
@@ -25,7 +25,7 @@ const { scrollToElementById } = useScroll();
       </footer>
     </template>
     <template #cta>
-    <PrimaryButton @click="scrollToElementById('intro')">Já só quero celebrar &#x25BC;</PrimaryButton>
+    <PrimaryButton @click="scrollToElementById('intro')">Já só quero celebrar! &#x25BC;</PrimaryButton>
     </template>
   </ContentSection>
 </template>

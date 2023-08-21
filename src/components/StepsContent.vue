@@ -86,14 +86,14 @@ section {
       }
 
       .note {
-        font-size: 1.6rem;
+        font-size: 1.8rem;
         line-height: 1.2;
         display: inline-block;
         font-weight: 700;
         letter-spacing: .2rem;
         text-transform: uppercase;
         margin-top: 2rem;
-        margin-bottom: 6rem;
+        margin-bottom: 4rem;
       }
     }
   }
@@ -115,6 +115,8 @@ section {
     button {
       flex: 1 1 0;
       max-width: 34rem;
+      padding-left: 2rem;
+      padding-right: 2rem;
 
       @media (max-width: 480px) {
         max-width: 100%;

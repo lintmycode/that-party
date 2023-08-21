@@ -83,5 +83,9 @@ form {
         font-size: 4rem;
       }
     }
+
+    & + label {
+      cursor: pointer;
+    }
   }
 }

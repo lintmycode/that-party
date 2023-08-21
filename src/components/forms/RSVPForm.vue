@@ -50,15 +50,15 @@ const focusLastName = () => {
         placeholder="Nome *"
         @keyup="nameEdited"
       />
-      <template v-if="index > 0">
-        <!-- <label>Criança?</label> -->
-        <!-- <input type="checkbox" :name="'is-child-' + index" v-model="attendee.isChild"/> -->
-        <span class="age">
-          <input type="radio" v-model="attendee.isChild" name="is-child" :value="false" id="adult"><label for="adult">Adulto</label>
-          <input type="radio" v-model="attendee.isChild" name="is-child" :value="true" id="child"><label for="child">Criança</label>
-        </span>
-        <button @click.prevent="removeAttendee(index)" class="remove" title="Remover">&#x2715;</button>
-      </template>
+    
+      <span class="age">
+        <input type="radio" v-model="attendee.isChild" :value="false" :id="'adult-' + index"><label :for="'adult-' + index">Adulto</label>
+        <input type="radio" v-model="attendee.isChild" :value="true" :id="'child-' + index"><label :for="'child-' + index">Criança</label>
+      </span>
+      <button @click.prevent="removeAttendee(index)" class="remove" title="Remover" :disabled="index === 0">&#x2715;</button>
+
+      <!-- <template v-if="index > 0">
+      </template> -->
     </div>
     <div class="form-item message" v-if="message" v-html="message"></div>
     <SecondaryButton @click="plusOne" class="add">+ adicionar acompanhante</SecondaryButton>
@@ -79,6 +79,10 @@ button {
     cursor: pointer;
     padding: 0;
     flex: 0 0 1.2rem;
+
+    &:disabled {
+      visibility: hidden;
+    }
   }
 } 
 

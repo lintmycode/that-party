@@ -20,8 +20,7 @@ const { scrollToElementById } = useScroll();
 
         <li>
           <h3>Só por curiosidade, porque é que chamaram a este casamento “AQUELA FESTA”?</h3>
-          <p>Porque o Adolfo, desde o início, teve dificuldade em memorizar a palavra “Casamento”, referindo-se sempre ao 
-            mesmo como AQUELA FESTA. Achamos piada. É nosso filho. Assumimos o nome.</p>
+          <p>Porque o Adolfo teve dificuldade em memorizar a palavra “Casamento”, referindo-se sempre como AQUELA FESTA. Achamos piada. É nosso filho. Assumimos o nome.</p>
         </li>
 
         <li>
@@ -37,9 +36,9 @@ const { scrollToElementById } = useScroll();
 
         <li>
           <h3>E o Copo-d’água?</h3>
-          <p>Contamos com o teu contributo na forma de comida e bebida para partilhar. Podem trazer carne (há um chef na 
-            grelha), queijos e enchidos, doces e bebidas.
-            No formulário de registo, a seguir, encontrarás uma lista de contributos possíveis, onde podes seleccionar o que queres levar.
+          <p>Contamos com o teu contributo na forma de comida e bebida para partilhar. 
+            Podes trazer carne para a grelha, queijos e enchidos, doces e bebidas.
+            No formulário de registo, mais abaixo, encontrarás uma lista de contributos possíveis onde podes seleccionar o que queres levar.
           </p>
         </li>
 
@@ -60,25 +59,12 @@ const { scrollToElementById } = useScroll();
           <p>Não! Lembra-te, a ideia é celebrar! Pedimos apenas que tragas um contributo "comestível", conforme descrito acima.</p>
         </li>
 
-
-        <!-- <li>****
-          <h3>O que é isso do “formulário de registo”?</h3>
-          <p>Para não haver litros e litros de álcool para três febras na grelha, lembramo-nos de criar um formulário que 
-            contabiliza o número de pessoas e o que se comprometem a trazer. É essencial que cumpram com o vosso compromisso, 
-            caso contrário, corremos o risco de ter litros e litros de álcool para três febras na grelha, como falamos há 
-            bocado...</p>
-        </li> -->
-
         <li>
           <h3>Quem devo registar no formulário?</h3>
           <p>Registas-te a ti e quem vem contigo; família, filhos, companheira/o... </p>
         </li>
 
-        <li>
-          <h3>Vai haver música para dançar?</h3>
-          <p>Sim, fazemos questão de manter a reputação de mais de uma dezena de anos de festas de enorme sucesso! :) :) :)</p>
-        </li>
-
+       
         <li>
           <h3>E as crianças?</h3>
           <p>As crianças são super bem-vindas mas estarão à total responsabilidade dos pais. É boa ideia as crianças trazerem lanternas e/ou 
@@ -88,14 +74,12 @@ const { scrollToElementById } = useScroll();
         
         <li>
           <h3>Não vou. Tenho de fazer alguma coisa?</h3>
-          <p>Tranquilo, só contabilizamos quem preencher o formulário de registo. Se sentires que quer 
-            dizer alguma coisa pode escrever para o email 
+          <p>Tranquilo, só contabilizamos quem preencher o formulário de registo. Se sentires que queres 
+            dizer alguma coisa podes escrever para o email 
             <ExternalLink href="mailto:aquelafesta@nitida.pt"><i>aquelafesta@nitida.pt</i>-&gt;</ExternalLink>.</p>
         </li>
       </UnorderedList>
-      <footer>
-        É muito importante o registo de todos os que pretendem celebrar connosco este dia, para que "não vos falte nada"! Pf faz o teu registo no formulário abaixo.
-      </footer>
+      
     </template>
     <template #cta>
       <PrimaryButton @click="scrollToElementById('rsvp')">Quero Registar-me &#x25BC;</PrimaryButton>

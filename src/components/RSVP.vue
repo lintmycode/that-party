@@ -8,13 +8,13 @@ import RSVPSummary from '../components/RSVPSummary.vue'
 import RSVPForm from '../components/forms/RSVPForm.vue'
 import ContributionForm from '../components/forms/ContributionForm.vue'
 import ContactForm from '../components/forms/ContactForm.vue'
-import SectionTitle from './atoms/SectionTitle.vue'
 import ContentSection from './layout/ContentSection.vue'
 import PrimaryButton from './ui/PrimaryButton.vue'
 
 const { scrollToElementById } = useScroll();
 
 const formSubmitted = ref(false)
+const contentSectionType = ref('')
 
 // get party store
 const partyStore = usePartyStore()
@@ -22,41 +22,46 @@ const { contributions } = storeToRefs(partyStore)
 
 const submit = async () => {
   formSubmitted.value = await partyStore.submit()
+  if (formSubmitted.value) {
+    contentSectionType.value = 'light'
+    scrollToElementById('rsvp', { behavior: 'instant' })
+  }
 }
 
 // scroll up on nav
 const navHappened = () => {
-  scrollToElementById('rsvp')
+  scrollToElementById('rsvp', { behavior: 'instant' })
 }
 
 // steps nav items
 const nav = computed(() => [
   {
     name: 'Quem vai?',
-    next: 'Quem vai?',
-    prev: 'Quem vai?',
+    next: 'Voltar a Quem Vai',
+    prev: 'Voltar a quem vai',
     note: 'Regista o teu nome e de quem vai contigo',
     condition: true
   },
   {
     name: 'O que vou levar',
-    next: 'O que vou levar',
-    prev: 'O que vou levar',
-    note: 'Clica nas categorias para escolheres o que queres levar',
+    next: 'Avançar',
+    prev: 'Voltar a contributos',
+    note: 'Escolhe o que queres levar',
     condition: partyStore.attendeesOk()
   },
   {
-    name: 'Contacto',
-    next: contributions.value.length === 0 ? 'Não levo nada!' : 'Já chega',
-    prev: 'Contacto',
-    note: 'Adiciona o teu email para podermos entrar em contacto, se necessário',
+    name: 'Está quase...',
+    // next: contributions.value.length === 0 ? 'Não levo nada!' : 'Já chega',
+    next: 'Avançar',
+    prev: 'Voltar',
+    note: 'Adiciona o teu email',
     condition: true
   },
   {
     name: 'Resumo',
-    next: 'Resumo',
+    next: 'Avançar',
     prev: 'Resumo',
-    note: 'Obrigado! Aqui está o resumo do teu registo. Confirma e clica ENVIAR. Até já!',
+    note: 'Obrigado! Aqui está o resumo do teu registo. Confirma e clica ENVIAR.',
     condition: partyStore.contactOk(),
     submit: true
   }
@@ -65,11 +70,9 @@ const nav = computed(() => [
 
 <template>
   
-  <ContentSection type="">
-    <h2>-&gt; Formulário de Registo &lt;-</h2>
-
-
+  <ContentSection :type="contentSectionType">
     <template v-if="!formSubmitted">
+      <h2>-&gt; Formulário de Registo &lt;-</h2>
       <StepsContent :nav="nav" :active-step="0" @submit="submit" @nav="navHappened">
         <template #step-0>
           <RSVPForm />
@@ -87,9 +90,9 @@ const nav = computed(() => [
     </template>
 
     <template v-else>
-      <SectionTitle>Obrigado!</SectionTitle>
-      <p>* Até lá *</p>
-      <PrimaryButton @click="scrollToElementById('location')">&#x25BC; Lá onde? &#x25BC;</PrimaryButton>
+      <h2>-&gt; Obrigado &lt;-</h2>
+      <p>* Até já! Vêmo-nos n'AQUELA FESTA! *</p>
+      <PrimaryButton @click="scrollToElementById('location')"> Mapa &#x25BC;</PrimaryButton>
       
     </template>
   </ContentSection>
