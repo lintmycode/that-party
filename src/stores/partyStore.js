@@ -147,6 +147,7 @@ export const usePartyStore = defineStore('party', () => {
       <b>Contacto</b><br>
       ${'- ' + contact.value.email + (contact.value.message.trim().length > 0 ? '<br>- ' + contact.value.message : '')}
     `;
+    
     sendEmail(contact.value.email, attendees.value[0].name, message)
     loading.value = false
     return true
