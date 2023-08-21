@@ -14,7 +14,7 @@ const { scrollToElementById } = useScroll();
       <SectionTitle>Algumas questões</SectionTitle>
       <UnorderedList>
         <li>
-          <h3>Casamento!? Já não eram casados? ...</h3>
+          <h3>Casamento!? Já não eram casados?...</h3>
           <p>Não, nunca calhou. 13 anos, 4 casas e filhos depois, achamos que era boa ideia.</p>
         </li>
 

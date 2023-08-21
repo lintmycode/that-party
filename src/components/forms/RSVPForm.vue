@@ -56,9 +56,7 @@ const focusLastName = () => {
         <input type="radio" v-model="attendee.isChild" :value="true" :id="'child-' + index"><label :for="'child-' + index">Criança</label>
       </span>
       <button @click.prevent="removeAttendee(index)" class="remove" title="Remover" :disabled="index === 0">&#x2715;</button>
-
-      <!-- <template v-if="index > 0">
-      </template> -->
+      
     </div>
     <div class="form-item message" v-if="message" v-html="message"></div>
     <SecondaryButton @click="plusOne" class="add">+ adicionar acompanhante</SecondaryButton>
