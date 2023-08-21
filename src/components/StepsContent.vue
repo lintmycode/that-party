@@ -78,6 +78,11 @@ section {
         font-family: 'AnonymousPro';
         font-weight: 600;
         letter-spacing: .6rem;
+        
+        @media (max-width: 480px) {
+          font-size: 4rem;
+          letter-spacing: 0;
+        }
       }
 
       .note {

@@ -20,6 +20,12 @@ ul {
       margin-top: 2rem;
     }
 
+    h3 {
+      color: var(--color-secondary);
+      margin-bottom: 1rem;
+      line-height: 1.4;
+    }    
+
     .highlight {
       color: var(--color-secondary);
     }

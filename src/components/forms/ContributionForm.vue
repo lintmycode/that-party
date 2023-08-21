@@ -62,6 +62,20 @@ const removeItem = (item) => {
 
 <template>
   <template v-if="!loading">
+    <div class="my-contribution">
+      <template v-if="contributions.length > 0">        
+        *** Vou levar
+        <template v-for="(item, index) in contributions" :key="'item-' + index">
+          <strong>
+            {{ item.name }}
+            {{ item.qty > 1 ? ' x' + item.qty + ' ' : ' ' }}
+          </strong>
+          <button type="button" @click="removeItem(item)">(cancelar)</button>
+          <template v-if="index !== contributions.length - 1">, </template>
+        </template>
+      </template>
+    </div>
+
     <ul class="categories">
       <template v-for="(cat, catIndex) in categories" :key="'cat-' + catIndex">
         <li
@@ -84,19 +98,7 @@ const removeItem = (item) => {
       </template>
     </ul>
     
-    <div class="my-contribution">
-      <template v-if="contributions.length > 0">        
-        Vou levar
-        <template v-for="(item, index) in contributions" :key="'item-' + index">
-          <strong>
-            {{ item.name }}
-            {{ item.qty > 1 ? ' x' + item.qty + ' ' : ' ' }}
-          </strong>
-          <button type="button" @click="removeItem(item)">(remover)</button>
-          <template v-if="index !== contributions.length - 1">, </template>
-        </template>
-      </template>
-    </div>
+    
   </template>
   
   <template v-else>
@@ -111,14 +113,13 @@ ul {
   gap: 2rem;
 
   &.categories {
-    width: 100rem;
-    left: -15rem;
+    // width: 100rem;
+    // left: -15rem;
 
-    @media (max-width: 1024px) {
+    //@media (max-width: 1024px) {
       width: 100%;
       left: 0;
-    }
-  
+    //}
   }
 
   .category {
@@ -126,18 +127,18 @@ ul {
     width: 100%;
     gap: 1rem;
 
-    @media (max-width: 1024px) {
+    //@media (max-width: 1024px) {
       flex-direction: column;
-    }
+    //}
 
     &.active {
       & > button {
         background-color: var(--color-primary);
       }
 
-      @media (max-width: 1024px) {
+      //@media (max-width: 1024px) {
         margin-bottom: 2rem;
-      }
+      //}
     }
 
     & > button {
@@ -151,10 +152,11 @@ ul {
       position: relative;
       transition: 100ms all;
       cursor: pointer;
+      font-weight: 700;
 
-      @media (max-width: 1024px) {
+      //@media (max-width: 1024px) {
         flex-basis: auto;
-      }
+      //}
 
       &:after {
         content: '>';
@@ -167,6 +169,7 @@ ul {
     }
 
     ul {
+      margin: 0 1rem;
       .item {
         /*
         &:hover {
@@ -212,8 +215,16 @@ ul {
 .my-contribution {
   font-size: 1.8rem;
   min-height: 3rem;
-  margin-top: 3rem;
-  
+  margin-top: -4rem;
+  margin-bottom: 3rem;
+  /*
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: var(--color-background);
+  */
+
   button {
     background-color: transparent;
     border: 0;

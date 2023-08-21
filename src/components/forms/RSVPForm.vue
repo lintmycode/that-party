@@ -51,20 +51,24 @@ const focusLastName = () => {
         @keyup="nameEdited"
       />
       <template v-if="index > 0">
-        <label>Criança?</label>
-        <input type="checkbox" :name="'is-child-' + index" v-model="attendee.isChild"/>
+        <!-- <label>Criança?</label> -->
+        <!-- <input type="checkbox" :name="'is-child-' + index" v-model="attendee.isChild"/> -->
+        <span class="age">
+          <input type="radio" v-model="attendee.isChild" name="is-child" :value="false" id="adult"><label for="adult">Adulto</label>
+          <input type="radio" v-model="attendee.isChild" name="is-child" :value="true" id="child"><label for="child">Criança</label>
+        </span>
         <button @click.prevent="removeAttendee(index)" class="remove" title="Remover">&#x2715;</button>
       </template>
     </div>
     <div class="form-item message" v-if="message" v-html="message"></div>
-    <SecondaryButton @click="plusOne" class="add">+ acompanhante</SecondaryButton>
+    <SecondaryButton @click="plusOne" class="add">+ adicionar acompanhante</SecondaryButton>
   </form>
 </template>
 
 <style lang="scss" scoped>
 button {
   &.add {
-    margin-top: 2rem ;
+    margin-top: 2rem;
   }
 
   &.remove {
@@ -77,6 +81,56 @@ button {
     flex: 0 0 1.2rem;
   }
 } 
+
+.age {
+  display: flex;
+  height: 40px;
+
+  input {
+    display: none;
+
+    &:checked {
+      & + label {
+        background-color: var(--color-secondary);
+        color: var(--color-background);
+        opacity: 1;
+        font-weight: 700;
+      }
+    }
+
+    & + label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--color-text);
+      padding: 0 1rem;
+      color: var(--color-text-soft);
+      opacity: .5;
+      cursor: pointer;
+      transition: 100ms all;
+      text-transform: uppercase;
+      font-size: 1.6rem;
+
+      @media (max-width: 480px) {
+        font-size: 1.4rem;
+        padding: 0 .5rem;
+      }
+    }
+
+    &:first-of-type {
+      & + label {
+        border-radius: .5rem 0 0 .5rem;
+      }
+    }
+    
+    &:last-of-type {
+      & + label {
+        border-radius: 0 .5rem .5rem 0;
+        margin-left: -1px;
+      }
+    }
+  }
+}
 
 .form-item {
   &:hover {
