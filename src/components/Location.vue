@@ -5,9 +5,12 @@ import ExternalLink from './ui/ExternalLink.vue';
 const scriptLoaded = ref(false)
 const destination = { lat: 41.781351, lng: -8.8617906 }
 
+const center = window.innerWidth >= 768 ? 
+{ lat: 41.781351, lng: -8.845 } : { lat: 41.77, lng: -8.860 }
+
 const initMap = () => {
   const map = new window.google.maps.Map(document.getElementById('map'), {
-    center: { lat: 41.781351, lng: -8.845 },
+    center: center,
     zoom: 14,
     mapTypeControl: false,
     mapId: import.meta.env.VITE_API_GMAPID
@@ -54,7 +57,7 @@ onMounted(async () => {
       <p>Estrada de Santo António 160, 4900-012 Afife</p>
       <p>GPS: {{ destination.lat }}, {{ destination.lng }}</p>
       <ExternalLink
-        :href="`https://www.google.com/maps/dir/?api=1&destination=${destination.lat},${destination.lng}`"
+        :href="`https://www.google.com/maps/dir/?q=${destination.lat},${destination.lng}`"
         target="_blank"
         ><i>Como chegar</i> -&gt;</ExternalLink>
       <br>

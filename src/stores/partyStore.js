@@ -145,7 +145,7 @@ export const usePartyStore = defineStore('party', () => {
       ${contributions.value.map(c => '- ' + c.name + (c.qty > 1 ? ' (x' + c.qty + ')' : '')).join('<br>')}
       <br><br>
       <b>Contacto</b><br>
-      ${'- ' + contact.value.email + (contact.value.message.trim.length > 0 ? '<br>- ' + contact.value.message : '')}
+      ${'- ' + contact.value.email + (contact.value.message.trim().length > 0 ? '<br>- ' + contact.value.message : '')}
     `;
     sendEmail(contact.value.email, attendees.value[0].name, message)
     loading.value = false

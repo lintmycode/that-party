@@ -26,7 +26,7 @@ const { scrollToElementById } = useScroll();
         <li>
           <h3>Monte de Santo António? Não conheço essa quinta...</h3>
           <p>O Monte é um local público em Afife, gentilmente cedido para o evento pela Junta de Freguesia. 
-            A festa vai ser totalmente ao ar livre e é essencial trazares um agasalho para o final do dia.</p>
+            A festa vai ser totalmente ao ar livre e é essencial trazeres um agasalho para o final do dia.</p>
         </li>
         
         <li>
@@ -50,8 +50,8 @@ const { scrollToElementById } = useScroll();
 
         <li>
           <h3>Posso oferecer um “bolo de noivos”?</h3>
-          <p>Claro! Adoramos que te inspires em nós para personalizares um dos bolos da nossa celebração! Prepara-te é que 
-            pode haver mais do que um bolo de noivos! E na realidade, gostamos da ideia!</p>
+          <p>Claro! Adoramos que te inspires em nós para personalizares um dos bolos da nossa celebração! Prepara-te 
+            é para a possibilidade de haver mais do que um bolo de noivos! E na realidade, gostamos da ideia!</p>
         </li>
 
         <li>
@@ -67,7 +67,7 @@ const { scrollToElementById } = useScroll();
         <li>
           <h3>E as crianças?</h3>
           <p>As crianças são super bem-vindas mas estarão à total responsabilidade dos pais. É boa ideia as crianças trazerem lanternas e/ou 
-            frontais pois além de ser diversão garantida conseguimos sempre perceber “por onde andam”. As pulseiras 
+            frontais pois, além de ser diversão garantida, conseguimos sempre perceber “por onde andam”. As pulseiras 
             neon que brilham no escuro também são boa ideia.</p>
         </li>
         

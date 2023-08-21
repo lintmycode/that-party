@@ -25,7 +25,7 @@ INSERT INTO Contributions (category_id, name, qtyPer10Adults, qtyPer10Children) 
 (2, 'Tomates cereja / Cenouras / Pepinos', 2, 2),
 
 (3, 'Bolo de noivos', 1, 1),
-(3, 'Sobremesa', 2, 2),
+(3, 'Sobremesa (que não precise de frio)', 2, 2),
 (3, 'Torta / Tarte', 1, 1),
 (3, 'Biscoitos / Bolachas / Queques (1emb)', 2, 2),
 
@@ -37,7 +37,7 @@ INSERT INTO Contributions (category_id, name, qtyPer10Adults, qtyPer10Children) 
 (4, 'Gin + Tónica (1un)', 2, 0),
 (4, 'Porto + Tónica (1un)', 2, 0),
 (4, 'Vodka (1un)', 1, 0),
-(4, 'Champarrião (cerveja (1l) + vinho branco (1un) + gasosa (1un))', 3, 0),
+(4, 'Champarrião (cerveja + vinho branco + gasosa)', 3, 0),
 
 (5, 'Água das Pedras (2un)', 2, 1),
 (5, 'Coca-cola (2un)', 1, 1),
