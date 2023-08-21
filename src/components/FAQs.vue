@@ -11,7 +11,7 @@ const { scrollToElementById } = useScroll();
 <template>
   <ContentSection type="dark">
     <template #content>
-      <SectionTitle>Algumas questões</SectionTitle>
+      <SectionTitle>Vamos a pormenores</SectionTitle>
       <UnorderedList>
         <li>
           <h3>Casamento!? Já não eram casados?...</h3>
@@ -61,10 +61,9 @@ const { scrollToElementById } = useScroll();
 
         <li>
           <h3>Quem devo registar no formulário?</h3>
-          <p>Registas-te a ti e quem vem contigo; família, filhos, companheira/o... </p>
+          <p>Todos os convidados devem ser registados. Inscreve-te a ti e quem vem contigo. </p>
         </li>
-
-       
+   
         <li>
           <h3>E as crianças?</h3>
           <p>As crianças são super bem-vindas mas estarão à total responsabilidade dos pais. É boa ideia as crianças trazerem lanternas e/ou 

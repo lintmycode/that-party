@@ -12,7 +12,7 @@ const { scrollToElementById } = useScroll();
 <template>
   <ContentSection type="dark">
     <template #content>
-      <SectionTitle>Óptimo! Vamos a pormenores:</SectionTitle>      
+      <SectionTitle>Convite</SectionTitle>      
       <UnorderedList>
         <li>DATA - <strong>SÁBADO, 16 DE SETEMBRO DE 2023</strong></li>
         <li>HORÁRIO - <strong>Das 16h às 23h</strong></li>
@@ -25,7 +25,7 @@ const { scrollToElementById } = useScroll();
       <footer>Para outras ofertas contacta-nos pf.</footer>
     </template>
     <template #cta>
-    <PrimaryButton @click="scrollToElementById('faqs')">Algumas questões &#x25BC;</PrimaryButton>
+    <PrimaryButton @click="scrollToElementById('faqs')">Mais pormenores &#x25BC;</PrimaryButton>
     </template>
   </ContentSection>
 </template>

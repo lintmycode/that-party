@@ -10,7 +10,7 @@ const { scrollToElementById } = useScroll();
 <template>
   <ContentSection type="light">
     <template #content>
-      <SectionTitle>Vamos casar,</SectionTitle>      
+      <SectionTitle>Vamos casar,</SectionTitle> 
       <p>
         <strong>
           Mas, acima de tudo, queremos CE-LE-BRAR! Celebrar a vida. Celebrar a família que nos gerou e a 
