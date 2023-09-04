@@ -23,6 +23,8 @@ INSERT INTO Contributions (category_id, name, qtyPer10Adults, qtyPer10Children) 
 (2, 'Uvas / Maçãs', 3, 3),
 (2, 'Mel / Húmus (1un)', 1, 1),
 (2, 'Tomates cereja / Cenouras / Pepinos', 2, 2),
+(2, 'Batatas fritas (1emb)', 3, 2),
+(2, 'Salada (1emb)', 3, 2),
 
 (3, 'Bolo de noivos', 1, 1),
 (3, 'Sobremesa (que não precise de frio)', 2, 2),
