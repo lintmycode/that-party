@@ -14,28 +14,14 @@ console.log("Are you a former coworker or Dan looking in the console for bugs? H
 </script>
 
 <template>
-  <main>
-    <Hero id="hero" @entered="loaded = true" />
-    
-    <template v-if="loaded">
-      <Header id="header"/>
-      <Intro id="intro"/>
-      <FAQs id="faqs"/>
-      <RSVP id="rsvp"/>
-      <Location id="location"/>
-      <Footer id="footer"/>
-    </template>
-  </main>
+  <Hero id="hero" @entered="loaded = true" />
+  
+  <template v-if="loaded">
+    <Header id="header"/>
+    <Intro id="intro"/>
+    <FAQs id="faqs"/>
+    <RSVP id="rsvp"/>
+    <Location id="location"/>
+    <Footer id="footer"/>
+  </template>
 </template>
-
-<style lang="scss">
-@import '@/assets/scss/mixins/padding.scss';
-
-main {
-  & > section {
-    @include padding-section;
-    background-color: var(--color-background);
-    min-height: 100vh;
-  }
-}
-</style>

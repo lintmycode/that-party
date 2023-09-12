@@ -16,10 +16,10 @@ onMounted(async () => {
 })
 
 // toggle visible category
-const openCategory = ref(-1)
-const toggleCategory = (index) => {
-  openCategory.value = openCategory.value === index ? -1 : index
-}
+// const openCategory = ref(-1)
+// const toggleCategory = (index) => {
+//   openCategory.value = openCategory.value === index ? -1 : index
+// }
 
 // move local contributions to store
 watch(myContributions, (val) => {

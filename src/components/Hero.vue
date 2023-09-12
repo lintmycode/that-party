@@ -46,37 +46,6 @@ const getThisPartyStarted = () => {
   }
 }
 
-// audio player
-// const stopAudio = (e) => {
-//   audio.pause();
-//   isPlaying.value = false;
-
-//   for (let el of document.getElementsByClassName('play')) {
-//     el.classList.remove('active');
-//   }
-// };
-
-// const playAudio = (e, file) => {
-//   stopAudio()
-//   audio = new Audio('/mp3/' + file + '.mp3')
-//   audio.play()
-//   isPlaying.value = true;
-
-//   for (let el of document.getElementsByClassName('play')) {
-//     el.classList.remove('active');
-//   }
-//   e.target.classList.add('active')
-// };
-
-// const playRandom = (e) => {
-//   const songs = ['comanchero', 'caravan-of-love', 'where-is-my-mind']
-//   audio.pause()
-//   audio = new Audio('/mp3/' + songs[Math.floor(Math.random() * songs.length)] + '.mp3')
-//   audio.play()
-//   isPlaying.value = true;
-//   e.target.classList.add('active')
-// }
-
 // pause/play music
 const toggleAudio = () => {
   if (isPlaying.value) {
@@ -99,10 +68,6 @@ const toggleAudio = () => {
       <p class="who">-&gt; Filipa &amp; Nuno convidam para &lt;-</p>
       <h1>Aquela Festa</h1>
       <p class="when">16 Setembro - Afife</p>
-      <!-- <div class="player">
-        <button @click="stopAudio($event)" class="stop" title="Stop!">&#9724;</button>
-        <button @click="playRandom($event)" class="play active" title="Comanchero">&#x25BC;</button>
-      </div> -->
       <PrimaryButton @click="scrollToElementById('header')">Quero Saber Tudo &#x25BC;</PrimaryButton>  
     </div>
     
