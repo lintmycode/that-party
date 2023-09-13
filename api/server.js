@@ -1,8 +1,16 @@
+require('dotenv').config({ path: '.env' });
 const express = require('express');
 const multer = require('multer');
 const path = require('path');
 const cors = require('cors');
+const { createClient } = require('@supabase/supabase-js');
 
+// initialize Supabase client
+const supabaseUrl = process.env.VITE_SUPABASE_URL;
+const supabaseServiceRoleKey = process.env.VITE_SUPABASE_KEY;
+const supabase = createClient(supabaseUrl, supabaseServiceRoleKey);
+
+// init app
 const app = express();
 const port = 3000;
 
@@ -30,7 +38,7 @@ app.use(cors(corsOptions));
 // Configuring multer storage options
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, '../uploads/');
+    cb(null, 'uploads/');
   },
   filename: function (req, file, cb) {
     cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
@@ -46,13 +54,31 @@ const upload = multer({
 });
 
 // Handling uploads
-app.post('/upload', upload.array('files'), (req, res) => {
+app.post('/upload', upload.array('files'), async (req, res) => {
   const { files } = req;
   const { email } = req.body;
 
+  // Save to Supabase
+  try {
+    const { data, error } = await supabase
+      .from('media')
+      .insert(files.map(file => ({
+        email,
+        file_name: file.filename,
+        file_type: file.mimetype,
+      })));
+
+    if (error) throw error;
+
+    res.status(200).json({ message: 'Upload and database insert successful', data });
+  } catch (error) {
+    console.error('Error inserting into Supabase:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+
   // Here you could do something with the uploaded files and email
   // For now, let's just send a success message back
-  res.status(200).send('Upload successful');
+  // res.status(200).send('Upload successful');
 });
 
 // Start the server

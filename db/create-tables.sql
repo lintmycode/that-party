@@ -52,3 +52,10 @@ create table
     attendee_id integer references attendees (id),
     contribution_id integer references contributions (id)
   );
+
+CREATE TABLE media (
+  id SERIAL PRIMARY KEY,                  -- Auto-incremental ID
+  email VARCHAR(255) NOT NULL,            -- Email column
+  file_name VARCHAR(255) NOT NULL,        -- File name column
+  file_type VARCHAR(50) NOT NULL          -- File type column
+);

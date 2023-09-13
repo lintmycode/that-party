@@ -2,12 +2,16 @@
 import { ref } from 'vue';
 import axios from 'axios';
 import PrimaryButton from './PrimaryButton.vue';
-import SecondaryButton from './SecondaryButton.vue';
+import SectionTitle from '../atoms/SectionTitle.vue';
+import emailjs from '@emailjs/browser';
+import Loading from './Loading.vue';
 
 const email = ref("");
 const emailRef = ref("");
+const message = ref("")
 const files = ref([]);
-const message = ref('')
+const uploaded = ref(false)
+const loading = ref(false)
 
 const handleFiles = (event) => {
   const selectedFiles = event.target.files;
@@ -34,31 +38,49 @@ const triggerFileInput = () => {
   fileInput.value.click();
 };
 
-
 // upload
 const uploadFiles = async () => {
+  message.value = '';
+
   if (!email.value) {
     message.value = 'O email é obrigatório para receberes o link para o album'
     emailRef.value.focus()
     return;
   }
 
+  loading.value = true 
+
   const formData = new FormData();
   files.value.forEach((fileObj) => {
     formData.append('files', fileObj.data);
   });
-  formData.append('name', name.value);
+  formData.append('email', email.value);
 
   try {
-    // Assuming your Node.js server is running on http://localhost:3000
-    await axios.post('http://localhost:3000/upload', formData, {
+    await axios.post(import.meta.env.VITE_SERVER_URL, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
     });
-    alert('Upload successful');
+
+    // send email
+    try {
+      emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID, 
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ALBUM_ID,
+        { to_email: email.value, album_link: import.meta.env.VITE_BASE_URL + 'album' },
+        import.meta.env.VITE_EMAILJS_KEY)
+        .then((result) => {
+          uploaded.value = true
+          loading.value = false 
+        }, (error) => {});
+    } catch (error) {
+      console.error("Email failed:", error);
+      throw error
+    }
   } catch (err) {
-    alert('Upload failed');
+    loading.value = false 
+    message.value = 'Ocorreu um erro... tenta outra vez.'
   }
 };
 
@@ -66,33 +88,45 @@ const uploadFiles = async () => {
 
 <template>
   <div class="wrapper">
-    <div class="form-item">
-      <input type="email" v-model="email" ref="emailRef" placeholder="Email *" />
-    </div>
-    <div class="form-item message" v-if="message" v-html="message"></div>
+    <template v-if="!uploaded">
+      <SectionTitle>Carrega aqui as tuas fotos e videos</SectionTitle>
+      <div class="form-item">
+        <form>
+          <input type="email" v-model="email" ref="emailRef" name="email" placeholder="Email *">
+        </form>
+      </div>
+      <div class="form-item message" v-if="message" v-html="message"></div>
 
-    <div class="form-item">
-      <PrimaryButton @click="triggerFileInput">Escolher fotos</PrimaryButton>
-      <input type="file" @change="handleFiles" ref="fileInput" multiple accept="image/*,video/*" hidden/>
-    </div>
+      <div class="form-item">
+        <PrimaryButton @click="triggerFileInput">Escolher fotos</PrimaryButton>
+        <input type="file" @change="handleFiles" ref="fileInput" multiple accept="image/*,video/*" hidden>
+      </div>
 
-    <!-- Preview Area -->
-    <div class="form-item gallery">
-      <ul>
-        <li v-for="file in files" :key="file.name" class="preview">
-          <img v-if="file.type.includes('image')" :src="file.preview" />
-          <video v-if="file.type.includes('video')" controls>
-            <source :src="file.preview" :type="file.type">
-          </video>
-        </li>
-      </ul>
-    </div>
+      <!-- Preview Area -->
+      <div class="form-item gallery">
+        <ul>
+          <li v-for="file in files" :key="file.name" class="preview">
+            <img v-if="file.type.includes('image')" :src="file.preview" />
+            <video v-if="file.type.includes('video')" controls>
+              <source :src="file.preview" :type="file.type">
+            </video>
+          </li>
+        </ul>
+      </div>
 
-    <div class="form-item">
-      <PrimaryButton @click="uploadFiles" :hidden="files.length === 0">Enviar -&gt;</PrimaryButton>
-    </div>
-    
-    
+      <div class="form-item">
+        <PrimaryButton @click="uploadFiles" :hidden="files.length === 0" :disabled="loading">Enviar -&gt;</PrimaryButton>
+      </div>
+      <div class="form-item" v-if="loading">
+        <Loading>a enviar...</Loading>
+      </div>
+    </template>
+
+    <template v-else>
+      <SectionTitle>Obrigado!</SectionTitle>
+      <p>Irás receber um link para o álbum no email indicado.</p>
+      <a href="/">Voltar</a>
+    </template>
   </div>
 </template>
 
