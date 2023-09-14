@@ -57,7 +57,7 @@ const uploadFiles = async () => {
   formData.append('email', email.value);
 
   try {
-    await axios.post(import.meta.env.VITE_SERVER_URL, formData, {
+    await axios.post(import.meta.env.VITE_SERVER_URL + 'upload', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
