@@ -9,7 +9,6 @@ import RSVP from '../components/RSVP.vue'
 import Intro from '../components/Intro.vue'
 
 const loaded = ref(false)
-
 console.log("Are you a former coworker or Dan looking in the console for bugs? Here's a bug for you 🖕")
 </script>
 

@@ -11,6 +11,9 @@ import ContactForm from '../components/forms/ContactForm.vue'
 import ContentSection from './layout/ContentSection.vue'
 import PrimaryButton from './ui/PrimaryButton.vue'
 
+
+const formOpen = ref(import.meta.env.VITE_FORM_OPEN === "true" ? true : false)
+
 const { scrollToElementById } = useScroll();
 
 const formSubmitted = ref(false)
@@ -69,8 +72,7 @@ const nav = computed(() => [
 </script>
 
 <template>
-  
-  <ContentSection :type="contentSectionType">
+  <ContentSection :type="contentSectionType" v-if="formOpen">
     <template v-if="!formSubmitted">
       <h2>-&gt; Formulário de Registo &lt;-</h2>
       <StepsContent :nav="nav" :active-step="0" @submit="submit" @nav="navHappened">
