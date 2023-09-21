@@ -90,8 +90,7 @@ const toggleAudio = () => {
 
 <template>
   <section v-if="!isPartyStarted">
-    <p class="who">-&gt; Preparado? &lt;-</p>
-    <PrimaryButton class="pink" @click="getThisPartyStarted">Claro!</PrimaryButton>
+    <img src="/images/under-construction.gif" alt="em manutenção">
   </section>
 
   <section v-else>
