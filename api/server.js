@@ -1,10 +1,12 @@
 require('dotenv').config({ path: '.env' });
+
 const express = require('express');
 const multer = require('multer');
 const fs = require('fs');
 const path = require('path');
 const cors = require('cors');
 const { createClient } = require('@supabase/supabase-js');
+const crypto = require('crypto');
 
 // initialize supabase client
 const supabaseUrl = process.env.VITE_SUPABASE_URL;
@@ -18,7 +20,8 @@ const uploadsDir = process.env.UPLOADS_DIR
 
 // cors options
 const corsOptions = {
-  origin: 'http://127.0.0.1:5173',
+  origin: '*',
+  // origin: 'http://127.0.0.1:5173',
   optionsSuccessStatus: 204,
   methods: 'POST, GET, PUT, DELETE, OPTIONS',
   allowedHeaders: 'Content-Type, Authorization'
@@ -42,8 +45,13 @@ const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, uploadsDir);
   },
-  filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+  filename:  function (req, file, cb) {
+    // generate a random string of 16 characters
+    const randomString = crypto.randomBytes(8).toString('hex');
+
+    // combine the random string, timestamp, and the file extension
+    const newName = `${randomString}-${Date.now()}${path.extname(file.originalname)}`;  
+    cb(null, newName);
   }
 });
 
@@ -80,8 +88,12 @@ app.post('/upload', upload.array('files'), async (req, res) => {
 });
 
 // get files
-app.get('/getFiles', (req, res) => {
+app.get('/get-files', (req, res) => {
   const directoryPath = path.join(__dirname, '../' + uploadsDir);
+
+   // page and limit parameters
+   const limit = parseInt(req.query.limit) || 20; // Default limit to 20, change as needed
+   const page = parseInt(req.query.page) || 1;
   
   // read directory and send array of filenames
   fs.readdir(directoryPath, function (err, files) {
@@ -89,32 +101,33 @@ app.get('/getFiles', (req, res) => {
       return res.status(500).send('Unable to scan directory: ' + directoryPath + err);
     } 
 
-    const filesWithTypes = files.map((file) => {
+    let filesWithTypes = files.filter((file) => {
       const extension = path.extname(file).toLowerCase();
-      let type = 'image';
+      return ['.jpg', '.jpeg', '.png', '.gif'].includes(extension);
+    })
 
-      // let type = 'unknown';
-      // if (['.jpg', '.jpeg', '.png', '.gif'].includes(extension)) {
-      //   type = 'image';
-      // } else if (['.mp4', '.webm', '.ogg'].includes(extension)) {
-      //   type = 'video';
-      // }
-
-      return { filename: file, type: type, extension: file.split('.').pop() };
+    const totalFiles = filesWithTypes.length;
+    filesWithTypes = filesWithTypes.slice((page - 1) * limit, page * limit);
+    filesWithTypes = filesWithTypes.map((file) => {
+      return { filename: file, type: 'image', extension: file.split('.').pop() };
     });
 
-    res.status(200).json(filesWithTypes);
+    res.status(200).json({
+      files: filesWithTypes,
+      totalPages: Math.ceil(totalFiles / limit),
+      totalFiles: totalFiles,
+    });
   });
 });
 
 // get file
 app.get('/media/:filename', async (req, res) => {
-  // todo: ermission checks
+  // todo: permission checks
   
   const filename = req.params.filename;
   const filePath = path.join(__dirname, '../' + uploadsDir, filename);
   if (fs.existsSync(filePath)) {
-    
+
     // determine content type
     const ext = path.extname(filename).toLowerCase();
     let contentType = 'application/octet-stream';  // default to binary stream

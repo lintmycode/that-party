@@ -83,19 +83,12 @@ const uploadFiles = async () => {
     message.value = 'Ocorreu um erro... tenta outra vez.'
   }
 };
-
-const router = useRouter();
-
-const viewMedia = (filename) => {
-  router.push({ name: 'media', params: { filename: filename } });
-};
-
 </script>
 
 <template>
   <div class="wrapper">
     <template v-if="!uploaded">
-      <SectionTitle>Carrega aqui as tuas fotos e videos</SectionTitle>
+      <SectionTitle>Carrega aqui as tuas fotos</SectionTitle>
       <div class="form-item">
         <form>
           <input type="email" v-model="email" ref="emailRef" name="email" placeholder="Email *">

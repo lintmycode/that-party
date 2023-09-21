@@ -18,15 +18,15 @@ const router = createRouter({
     },
     {
       path: '/album',
-      name: 'album',
-      component: AlbumView
+      name: 'album-landing',
+      redirect: '/album/1'
     },
     {
-      path: '/album/:filename',
-      name: 'album detail',
+      path: '/album/:page/:filename?',
+      name: 'album',
       component: AlbumView,
       props: true
-    }
+    },
   ]
 })
 

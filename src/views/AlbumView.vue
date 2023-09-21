@@ -1,35 +1,107 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue';
+import { useRoute } from 'vue-router';
 import axios from 'axios';
 import ContentSection from '../components/layout/ContentSection.vue';
 import Loading from '../components/ui/Loading.vue';
+import Modal from '../components/ui/Modal.vue';
 
-const files = ref([])
+defineProps({
+  page: {
+    type: [String, Number],
+    default: 1
+  },
+  filename: {
+    type: String,
+    default: ''
+  }
+})
+
 const isLoading = ref(true);
 const mediaUrl = ref(import.meta.env.VITE_SERVER_URL + 'media/')
 const showModal = ref(false)
 const openedFile = ref('')
 const index = ref(0)
+const loadingMedia = ref(false)
 
+// route parameters
+const route = useRoute();
+
+const files = ref([])
+const limit = 30;
+let page = parseInt(route.params.page) || 1;
+let totalPages = 0
+let totalFiles = 0
+
+// lifecycle hooks to manage event listener
 onMounted(async () => {
   try {
-    const { data } = await axios.get(import.meta.env.VITE_SERVER_URL + 'getFiles');
-    files.value = data;
+    for (let i = 1; i <= page; i++) {
+      await loadMedia(i)
+    }
+    if (route.params.filename) {      
+      openModal(files.value.find(f => f.filename.split('.').slice(0, -1).join('.') === route.params.filename))
+    }
   } catch (error) {
     console.error('An error occurred while fetching data:', error);
   }
+  window.addEventListener('keydown', handleEscapePress);
+  window.addEventListener('scroll', handleScroll);
   isLoading.value = false;
 });
 
+onBeforeUnmount(() => {
+  window.removeEventListener('keydown', handleEscapePress);
+  window.removeEventListener('scroll', handleScroll);
+});
+
+// load media
+const loadMedia = async (currentPage) => {
+  const { data } = await axios.get(import.meta.env.VITE_SERVER_URL + 'get-files?page=' + currentPage + '&limit=' + limit)
+  files.value = [].concat(files.value, data.files)
+  totalPages = data.totalPages
+  totalFiles = data.totalFiles
+
+  // Update URL without navigating
+  // router.replace('/album/' + page.value);
+  history.pushState({}, '', '/album/' + currentPage)
+}
+
+// lazy load on scroll
+async function handleScroll() {
+  const nearBottom = (window.innerHeight + window.scrollY) >= document.body.offsetHeight - 1;
+  
+  if (nearBottom && page < totalPages && !loadMedia.value) {
+    // load next page
+    loadingMedia.value = true
+    page++;
+    await loadMedia(page)
+    setTimeout(() => {
+      loadingMedia.value = false
+    }, 100)
+  }
+}
+
 // modal nav
-const openModal = (i) => {
+const openModal = (file) => {
   showModal.value = true
-  index.value = i
-  openedFile.value = files.value[index.value]
+  // index.value = i
+  index.value = files.value.indexOf(files.value.find(f => f.filename === file.filename))
+  // openedFile.value = files.value[index.value]
+  openedFile.value = file
+  // remove extension and push to the url
+  pushToUrl(openedFile.value)
+}
+
+// add to url
+const pushToUrl = (file) => {
+  const filename = file.filename.split('.').slice(0, -1).join('.')
+  history.pushState({}, '', '/album/' + page + '/' + filename)
 }
 
 const closeModal = () => {
   showModal.value = false
+  history.pushState({}, '', '/album/' + page);
 }
 
 const prev = () => {
@@ -37,13 +109,20 @@ const prev = () => {
     index.value--;
   }
   openedFile.value = files.value[index.value];
+  pushToUrl(openedFile.value)
 }
 
-const next = () => {
+const next = async () => {
   if (index.value < files.value.length - 1) {
+    index.value++;
+  } 
+  else if (index.value < totalFiles - 1) {
+    page++;
+    await loadMedia(page)
     index.value++;
   }
   openedFile.value = files.value[index.value];
+  pushToUrl(openedFile.value)
 }
 
 const handleEscapePress = (event) => {
@@ -56,68 +135,81 @@ const handleEscapePress = (event) => {
   }
 };
 
-// lifecycle hooks to manage event listener
-onMounted(() => {
-  window.addEventListener('keydown', handleEscapePress);
-});
+// touch events
+const startX = ref(0);
+const endX = ref(0);
 
-onBeforeUnmount(() => {
-  window.removeEventListener('keydown', handleEscapePress);
-});
+const handleTouchStart = (event) => {
+  startX.value = event.touches[0].clientX;
+};
+
+const handleTouchMove = (event) => {
+  endX.value = event.touches[0].clientX;
+};
+
+const handleTouchEnd = () => {
+  const diffX = endX.value - startX.value;
+  // threshold of 50 pixels for the slide to be considered a navigation gesture
+  if (diffX > 50) {
+    prev();
+  } else if (diffX < -50) {
+    next();
+  }
+};
 </script>
 
 <template>
-  <ContentSection type="light">
+  <ContentSection type="dark">
     <Loading v-if="isLoading">A carregar...</Loading>
     <ul v-else>
-      <li v-for="file, index in files" :key="file" @click="openModal(index)"> 
-        <img :src="mediaUrl + file.filename" />
-        <!-- <img v-if="file.type === 'image'" :src="mediaUrl + file.filename" />
-        <video v-else-if="file.type === 'video'" controls>
-          <source :src="mediaUrl + file.filename" :type="'video/' + file.extension">
-        </video> -->
+      <li v-for="file, index in files" :key="file" @click="openModal(file)"> 
+        <img :src="mediaUrl + file.filename">
       </li>
     </ul>
-
-    <Teleport to="body">
-      <div class="modal" v-if="showModal">
-        <button class="close" @click="closeModal">&#x2715;</button>
-        <button class="nav prev" @click="prev" :disabled="index === 0">&#8249;</button>
-        <button class="nav next" @click="next" :disabled="index === files.length - 1">&#8250;</button>
-        <img :src="mediaUrl + openedFile.filename" />
-        <!-- <img v-if="openedFile.type === 'image'" :src="mediaUrl + openedFile.filename" />
-        <video v-else-if="openedFile.type === 'video'" controls>
-          <source :src="mediaUrl + openedFile.filename" :type="'video/' + openedFile.extension">
-        </video> -->
-      </div>
-    </Teleport>
   </ContentSection>
+
+  <Modal v-if="showModal" @close="closeModal">
+    <div class="touch-target"
+      @touchstart="handleTouchStart"
+      @touchmove="handleTouchMove"
+      @touchend="handleTouchEnd">
+      <button class="nav prev" @click="prev" :disabled="index === 0">&#8249;</button>
+      <button class="nav next" @click="next" :disabled="index === totalFiles - 1">&#8250;</button>
+      <transition name="fade">
+        <img :src="mediaUrl + openedFile.filename" :key="openedFile.filename">
+      </transition>
+    </div>
+  </Modal>
 </template>
 
 <style lang="scss" scoped>
 .content-section {
-  padding: 1px;
+  padding: 2rem;
 }
 
 ul {
   display: flex;
-  gap: 0rem;
+  gap: 1.6rem .8rem;
   flex-wrap: wrap;
   justify-content: flex-start;
 
   li {
-    height: 20rem;
-    margin-top: -1px;
-    margin-left: -1px;
+    flex: 1 1 auto;
+    height: 19vh;
+    min-height: 15rem;
+    //height: 20rem;
+    //margin-top: -1px;
+    //margin-left: -1px;
 
-    @media (max-width: 760px) {
-      height: 15rem;
-    }  
-    
+    //@media (max-width: 760px) {
+    //  height: 15rem;
+    //}  
+
     img,
     video {
       cursor: pointer;
-      max-width: 30rem;
+      //max-width: 30rem;
+      width: 100%;
       height: 100%;
       object-fit: cover;
       opacity: .9;
@@ -125,7 +217,7 @@ ul {
       border: 1px solid transparent;
 
       @media (max-width: 760px) {
-        max-width: 15rem;
+        //max-width: 15rem;
       }  
 
       &:hover {
@@ -137,40 +229,15 @@ ul {
 }
 
 .modal {
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-  top: 0;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: var(--color-terciary);
-
-  button {
+  .touch-target {
     position: absolute;
-    width: 4rem;
-    height: 4rem;
-    border-radius: 2rem;
-    border: 0;
-    background-color: var(--color-primary);
-    font-family: arial, sans-serif;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-
-    &:active {
-      background-color: var(--color-secondary);
-    }
-    
-    &.close {
-      font-size: 2rem;
-      top: 2rem;
-      right: 2rem;
-    }
-
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  
+  button {
     &.nav {
       font-size: 3rem;
       top: 50%;
@@ -198,11 +265,20 @@ ul {
       }
     }
   }
- 
+
   img,
   video {
-    max-width: 87vw;
-    max-height: 87vh;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    z-index: 0;
   }
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 100ms ease-in-out;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
 }
 </style>
