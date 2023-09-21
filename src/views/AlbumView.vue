@@ -71,10 +71,11 @@ onBeforeUnmount(() => {
     <Loading v-if="isLoading">A carregar...</Loading>
     <ul v-else>
       <li v-for="file, index in files" :key="file" @click="openModal(index)"> 
-        <img v-if="file.type === 'image'" :src="mediaUrl + file.filename" />
+        <img :src="mediaUrl + file.filename" />
+        <!-- <img v-if="file.type === 'image'" :src="mediaUrl + file.filename" />
         <video v-else-if="file.type === 'video'" controls>
           <source :src="mediaUrl + file.filename" :type="'video/' + file.extension">
-        </video>
+        </video> -->
       </li>
     </ul>
 
@@ -83,10 +84,11 @@ onBeforeUnmount(() => {
         <button class="close" @click="closeModal">&#x2715;</button>
         <button class="nav prev" @click="prev" :disabled="index === 0">&#8249;</button>
         <button class="nav next" @click="next" :disabled="index === files.length - 1">&#8250;</button>
-        <img v-if="openedFile.type === 'image'" :src="mediaUrl + openedFile.filename" />
+        <img :src="mediaUrl + openedFile.filename" />
+        <!-- <img v-if="openedFile.type === 'image'" :src="mediaUrl + openedFile.filename" />
         <video v-else-if="openedFile.type === 'video'" controls>
           <source :src="mediaUrl + openedFile.filename" :type="'video/' + openedFile.extension">
-        </video>
+        </video> -->
       </div>
     </Teleport>
   </ContentSection>
@@ -115,7 +117,7 @@ ul {
     img,
     video {
       cursor: pointer;
-      max-width: 20rem;
+      max-width: 30rem;
       height: 100%;
       object-fit: cover;
       opacity: .9;
@@ -125,7 +127,6 @@ ul {
       @media (max-width: 760px) {
         max-width: 15rem;
       }  
-      
 
       &:hover {
         opacity: 1;
@@ -158,7 +159,7 @@ ul {
     display: flex;
     justify-content: center;
     align-items: center;
-    
+
 
     &:active {
       background-color: var(--color-secondary);

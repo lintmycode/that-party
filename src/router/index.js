@@ -21,6 +21,12 @@ const router = createRouter({
       name: 'album',
       component: AlbumView
     },
+    {
+      path: '/album/:filename',
+      name: 'album detail',
+      component: AlbumView,
+      props: true
+    }
   ]
 })
 

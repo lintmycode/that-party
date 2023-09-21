@@ -84,6 +84,12 @@ const uploadFiles = async () => {
   }
 };
 
+const router = useRouter();
+
+const viewMedia = (filename) => {
+  router.push({ name: 'media', params: { filename: filename } });
+};
+
 </script>
 
 <template>

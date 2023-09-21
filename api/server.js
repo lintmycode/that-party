@@ -6,7 +6,7 @@ const path = require('path');
 const cors = require('cors');
 const { createClient } = require('@supabase/supabase-js');
 
-// initialize Supabase client
+// initialize supabase client
 const supabaseUrl = process.env.VITE_SUPABASE_URL;
 const supabaseServiceRoleKey = process.env.VITE_SUPABASE_KEY;
 const supabase = createClient(supabaseUrl, supabaseServiceRoleKey);
@@ -37,7 +37,7 @@ const fileFilter = (req, file, cb) => {
 
 app.use(cors(corsOptions));
 
-// Configuring multer storage options
+// multer storage options
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, uploadsDir);
@@ -51,7 +51,7 @@ const upload = multer({
   storage: storage, 
   fileFilter: fileFilter,
   limits: {
-    fileSize: 30 * 1024 * 1024 // 30 MB in bytes limit per file
+    fileSize: 5 * 1024 * 1024 // 5 MB in bytes limit per file
   }
 });
 
@@ -60,7 +60,7 @@ app.post('/upload', upload.array('files'), async (req, res) => {
   const { files } = req;
   const { email } = req.body;
 
-  // Save to Supabase
+  // save to supabase
   try {
     const { data, error } = await supabase
       .from('media')
@@ -83,7 +83,7 @@ app.post('/upload', upload.array('files'), async (req, res) => {
 app.get('/getFiles', (req, res) => {
   const directoryPath = path.join(__dirname, '../' + uploadsDir);
   
-  // Read directory and send array of filenames
+  // read directory and send array of filenames
   fs.readdir(directoryPath, function (err, files) {
     if (err) {
       return res.status(500).send('Unable to scan directory: ' + directoryPath + err);
@@ -91,36 +91,60 @@ app.get('/getFiles', (req, res) => {
 
     const filesWithTypes = files.map((file) => {
       const extension = path.extname(file).toLowerCase();
-      let type = 'unknown';
+      let type = 'image';
 
-      if (['.jpg', '.jpeg', '.png', '.gif'].includes(extension)) {
-        type = 'image';
-      } else if (['.mp4', '.webm', '.ogg'].includes(extension)) {
-        type = 'video';
-      }
+      // let type = 'unknown';
+      // if (['.jpg', '.jpeg', '.png', '.gif'].includes(extension)) {
+      //   type = 'image';
+      // } else if (['.mp4', '.webm', '.ogg'].includes(extension)) {
+      //   type = 'video';
+      // }
 
       return { filename: file, type: type, extension: file.split('.').pop() };
     });
 
     res.status(200).json(filesWithTypes);
-
-    // res.status(200).json(files);
   });
 });
 
 // get file
 app.get('/media/:filename', async (req, res) => {
-  // Here you can implement any authentication or permission checks
+  // todo: ermission checks
   
   const filename = req.params.filename;
- const filePath = path.join(__dirname, '../' + uploadsDir, filename);
-
-  // Check if file exists
+  const filePath = path.join(__dirname, '../' + uploadsDir, filename);
   if (fs.existsSync(filePath)) {
-    // Set appropriate headers for image type, if needed
-    res.setHeader('Content-Type', 'image/jpeg'); // or image/png, etc.
+    
+    // determine content type
+    const ext = path.extname(filename).toLowerCase();
+    let contentType = 'application/octet-stream';  // default to binary stream
 
-    // Read and send the file data
+    switch (ext) {
+      case '.jpg':
+      case '.jpeg':
+          contentType = 'image/jpeg';
+          break;
+      case '.png':
+          contentType = 'image/png';
+          break;
+      case '.gif':
+          contentType = 'image/gif';
+          break;
+      // case '.webm':
+      //     contentType = 'video/webm';
+      //     break;
+      // case '.mp4':
+      //     contentType = 'video/mp4';
+      //     break;
+      // case '.ogg':
+      //     contentType = 'video/ogg';
+      //     break;
+    }
+
+    // set header
+    res.setHeader('Content-Type', contentType);
+
+    // read and send the file data
     const fileStream = fs.createReadStream(filePath);
     fileStream.pipe(res);
   } else {
@@ -128,7 +152,7 @@ app.get('/media/:filename', async (req, res) => {
   }
 });
 
-// Start the server
+// start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
