@@ -91,9 +91,10 @@ app.post('/upload', upload.array('files'), async (req, res) => {
 app.get('/get-files', (req, res) => {
   const directoryPath = path.join(__dirname, '../' + uploadsDir);
 
-   // page and limit parameters
-   const limit = parseInt(req.query.limit) || 20; // Default limit to 20, change as needed
-   const page = parseInt(req.query.page) || 1;
+  // page and limit parameters
+  const limit = parseInt(req.query.limit) || 20; // default limit to 20, change as needed
+  const page = parseInt(req.query.page) || 1;
+  const reqFilename = req.query.filename; // get the specific filename from query params
   
   // read directory and send array of filenames
   fs.readdir(directoryPath, function (err, files) {
@@ -105,6 +106,15 @@ app.get('/get-files', (req, res) => {
       const extension = path.extname(file).toLowerCase();
       return ['.jpg', '.jpeg', '.png', '.gif'].includes(extension);
     })
+
+    // if a file has been requested (modal opened) make sure it is in the returned list
+    if (reqFilename) {
+      const specificFile = filesWithTypes.find(file => file.split('.').slice(0, -1).join('.') === reqFilename);
+      if (specificFile) {
+        // add the specific file to the start (or end) of the list.
+        filesWithTypes.unshift(specificFile);
+      }
+  }
 
     const totalFiles = filesWithTypes.length;
     filesWithTypes = filesWithTypes.slice((page - 1) * limit, page * limit);

@@ -57,7 +57,9 @@ onBeforeUnmount(() => {
 
 // load media
 const loadMedia = async (currentPage) => {
-  const { data } = await axios.get(import.meta.env.VITE_SERVER_URL + 'get-files?page=' + currentPage + '&limit=' + limit)
+  const reqFilename = route.params.filename ? '&filename=' + route.params.filename : ''
+  const { data } = await axios.get(import.meta.env.VITE_SERVER_URL + 'get-files?page=' 
+    + currentPage + '&limit=' + limit + reqFilename)
   files.value = [].concat(files.value, data.files)
   totalPages = data.totalPages
   totalFiles = data.totalFiles
@@ -197,14 +199,7 @@ ul {
     flex: 1 1 auto;
     height: 19vh;
     min-height: 15rem;
-    //height: 20rem;
-    //margin-top: -1px;
-    //margin-left: -1px;
-
-    //@media (max-width: 760px) {
-    //  height: 15rem;
-    //}  
-
+    
     img,
     video {
       cursor: pointer;
@@ -215,10 +210,6 @@ ul {
       opacity: .9;
       transition: all 100ms ease-in;
       border: 1px solid transparent;
-
-      @media (max-width: 760px) {
-        //max-width: 15rem;
-      }  
 
       &:hover {
         opacity: 1;
