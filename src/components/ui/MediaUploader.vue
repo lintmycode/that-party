@@ -135,6 +135,12 @@ const uploadFiles = async () => {
 .wrapper {
   width: 100%;
 
+  h2 {
+    font-family: 'AnonymousPro';
+    font-size: 4rem;
+    margin-bottom: 2rem;
+  }
+
   .form-item {
     max-width: 50rem;
     
@@ -144,14 +150,14 @@ const uploadFiles = async () => {
   }
 }
 
-
 ul {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
   .preview {
     
-    img {
+    img,
+    video {
       height: 200px;
       max-width: 200px;
       object-fit: cover;

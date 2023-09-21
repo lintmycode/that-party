@@ -55,12 +55,18 @@ const toggleAudio = () => {
   }
   isPlaying.value = !isPlaying.value
 }
+
+//
+const upload = () => {
+  window.location.href = '/upload'
+}
 </script>
 
 <template>
   <section v-if="!isPartyStarted">
     <p class="who">-&gt; Preparado? &lt;-</p>
     <PrimaryButton class="pink" @click="getThisPartyStarted">Claro!</PrimaryButton>
+    <PrimaryButton class="upload" @click="upload">Enviar fotos da festa -&gt;</PrimaryButton>
   </section>
 
   <section v-else>
@@ -98,6 +104,20 @@ section {
   justify-content: center;
   gap: 8rem;
   padding: 4rem;
+
+  .upload {
+    position: absolute;
+    top: 4rem;
+    right: 4rem;
+
+    @media (max-width: 480px) {
+      top: 2rem;
+      left: 2rem;
+      right: 2rem;
+      padding-left: 4rem;
+      padding-right: 4rem;
+    } 
+  }
 
   p {
     text-transform: uppercase;

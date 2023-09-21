@@ -88,7 +88,23 @@ app.get('/getFiles', (req, res) => {
     if (err) {
       return res.status(500).send('Unable to scan directory: ' + directoryPath + err);
     } 
-    res.status(200).json(files);
+
+    const filesWithTypes = files.map((file) => {
+      const extension = path.extname(file).toLowerCase();
+      let type = 'unknown';
+
+      if (['.jpg', '.jpeg', '.png', '.gif'].includes(extension)) {
+        type = 'image';
+      } else if (['.mp4', '.webm', '.ogg'].includes(extension)) {
+        type = 'video';
+      }
+
+      return { filename: file, type: type, extension: file.split('.').pop() };
+    });
+
+    res.status(200).json(filesWithTypes);
+
+    // res.status(200).json(files);
   });
 });
 
