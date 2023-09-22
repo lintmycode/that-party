@@ -5,6 +5,7 @@ import axios from 'axios';
 import ContentSection from '../components/layout/ContentSection.vue';
 import Loading from '../components/ui/Loading.vue';
 import Modal from '../components/ui/Modal.vue';
+import Gallery from '../components/ui/Gallery.vue';
 
 defineProps({
   page: {
@@ -163,11 +164,11 @@ const handleTouchEnd = () => {
 <template>
   <ContentSection type="dark">
     <Loading v-if="isLoading">A carregar...</Loading>
-    <ul v-else>
+    <Gallery v-else>
       <li v-for="file, index in files" :key="file" @click="openModal(file)"> 
         <img :src="mediaUrl + file.filename">
       </li>
-    </ul>
+    </Gallery>
   </ContentSection>
 
   <Modal v-if="showModal" @close="closeModal">
@@ -187,36 +188,6 @@ const handleTouchEnd = () => {
 <style lang="scss" scoped>
 .content-section {
   padding: 2rem;
-}
-
-ul {
-  display: flex;
-  gap: 1.6rem .8rem;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-
-  li {
-    flex: 1 1 auto;
-    height: 19vh;
-    min-height: 15rem;
-    
-    img,
-    video {
-      cursor: pointer;
-      //max-width: 30rem;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: .9;
-      transition: all 100ms ease-in;
-      border: 1px solid transparent;
-
-      &:hover {
-        opacity: 1;
-        border-color: var(--color-secondary);
-      }
-    }
-  }
 }
 
 .modal {

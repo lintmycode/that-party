@@ -5,6 +5,7 @@ import PrimaryButton from './PrimaryButton.vue';
 import SectionTitle from '../atoms/SectionTitle.vue';
 import emailjs from '@emailjs/browser';
 import Loading from './Loading.vue';
+import Gallery from './Gallery.vue';
 
 const email = ref("");
 const emailRef = ref("");
@@ -103,11 +104,11 @@ const uploadFiles = async () => {
 
       <!-- Preview Area -->
       <div class="form-item gallery">
-        <ul>
+        <Gallery>
           <li v-for="file in files" :key="file.name" class="preview">
             <img v-if="file.type.includes('image')" :src="file.preview" />
           </li>
-        </ul>
+        </Gallery>
       </div>
 
       <div class="form-item">
@@ -142,21 +143,6 @@ const uploadFiles = async () => {
     
     &.gallery {
       max-width: 100%;
-    }
-  }
-}
-
-ul {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  .preview {
-    
-    img,
-    video {
-      height: 200px;
-      max-width: 200px;
-      object-fit: cover;
     }
   }
 }
