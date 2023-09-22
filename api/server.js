@@ -28,7 +28,8 @@ const corsOptions = {
 
 // Filter for media files
 const fileFilter = (req, file, cb) => {
-  if (file.mimetype.startsWith('image/') || file.mimetype.startsWith('video/')) {
+  // if (file.mimetype.startsWith('image/') || file.mimetype.startsWith('video/')) {
+  if (file.mimetype.startsWith('image/')) {
     // Accept file
     cb(null, true);
   } else {
@@ -58,7 +59,7 @@ const upload = multer({
   storage: storage, 
   fileFilter: fileFilter,
   limits: {
-    fileSize: 5 * 1024 * 1024 // 5 MB in bytes limit per file
+    fileSize: 2 * 1024 * 1024 //  2MB in bytes limit per file
   }
 });
 

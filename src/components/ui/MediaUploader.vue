@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import axios from 'axios';
 import PrimaryButton from './PrimaryButton.vue';
 import SectionTitle from '../atoms/SectionTitle.vue';
@@ -10,6 +10,7 @@ import Gallery from './Gallery.vue';
 const email = ref("");
 const emailRef = ref("");
 const message = ref("")
+const status = ref("")
 const files = ref([]);
 const uploaded = ref(false)
 const loading = ref(false)
@@ -84,6 +85,30 @@ const uploadFiles = async () => {
     message.value = 'Ocorreu um erro... tenta outra vez.'
   }
 };
+
+onMounted(() => {
+  fileInput.value.addEventListener('change', function(e) {
+    const files = e.target.files;
+    const maxSize = 20 * 1024 * 1024
+    let totalSize = 0;
+    for (let i = 0; i < files.length; i++) {
+      totalSize += files[i].size;
+    }
+    if (totalSize > maxSize) {
+      status.value = "O tamanho total não pode ultrapassar 20MB"
+      e.target.value = '';
+    }
+    const availableSize = ((maxSize - totalSize) / (1024 * 1024)).toFixed(2);
+    status.value = `Espaço disponível: ${availableSize} MB`;
+    
+    setTimeout(() => {
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: 'smooth'
+      })
+    }, 200)
+  });
+})
 </script>
 
 <template>
@@ -111,6 +136,7 @@ const uploadFiles = async () => {
         </Gallery>
       </div>
 
+      <div class="form-item message" v-if="status" v-html="status"></div>
       <div class="form-item">
         <PrimaryButton @click="uploadFiles" :hidden="files.length === 0" :disabled="loading">Enviar -&gt;</PrimaryButton>
       </div>
