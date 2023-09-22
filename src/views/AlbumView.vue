@@ -58,8 +58,8 @@ onBeforeUnmount(() => {
 // load media
 const loadMedia = async (currentPage) => {
   const reqFilename = route.params.filename ? '&filename=' + route.params.filename : ''
-  const { data } = await axios.get(import.meta.env.VITE_SERVER_URL + 'get-files?page=' 
-    + currentPage + '&limit=' + limit + reqFilename)
+  const { data } = await axios.get(
+    import.meta.env.VITE_SERVER_URL + 'get-files?page=' + currentPage + '&limit=' + limit + reqFilename)
   files.value = [].concat(files.value, data.files)
   totalPages = data.totalPages
   totalFiles = data.totalFiles

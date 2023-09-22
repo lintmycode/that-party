@@ -20,11 +20,10 @@ const uploadsDir = process.env.UPLOADS_DIR
 
 // cors options
 const corsOptions = {
-  origin: '*',
-  // origin: 'http://127.0.0.1:5173',
+  origin: process.env.VITE_BASE_URL.replace(/\/$/, ""),
   optionsSuccessStatus: 204,
   methods: 'POST, GET, PUT, DELETE, OPTIONS',
-  allowedHeaders: 'Content-Type, Authorization'
+  allowedHeaders: 'Content-Type, Authorization',
 };
 
 // Filter for media files
