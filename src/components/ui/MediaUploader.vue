@@ -98,7 +98,7 @@ const uploadFiles = async () => {
 
       <div class="form-item">
         <PrimaryButton @click="triggerFileInput">Escolher fotos</PrimaryButton>
-        <input type="file" @change="handleFiles" ref="fileInput" multiple accept="image/*,video/*" hidden>
+        <input type="file" @change="handleFiles" ref="fileInput" multiple accept="image/*" hidden>
       </div>
 
       <!-- Preview Area -->
@@ -106,9 +106,6 @@ const uploadFiles = async () => {
         <ul>
           <li v-for="file in files" :key="file.name" class="preview">
             <img v-if="file.type.includes('image')" :src="file.preview" />
-            <video v-if="file.type.includes('video')" controls>
-              <source :src="file.preview" :type="file.type">
-            </video>
           </li>
         </ul>
       </div>
