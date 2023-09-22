@@ -8,9 +8,12 @@ export default defineConfig({
   plugins: [
     vue(),
   ],
+  server: {
+    historyApiFallback: true,
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
-  }
+  },
 })
