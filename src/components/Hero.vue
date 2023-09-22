@@ -70,6 +70,7 @@ const upload = () => {
   </section>
 
   <section v-else>
+    <PrimaryButton class="upload" @click="upload">Enviar fotos da festa -&gt;</PrimaryButton>
     <div class="content hidden" ref="content">
       <p class="who">-&gt; Filipa &amp; Nuno convidam para &lt;-</p>
       <h1>Aquela Festa</h1>

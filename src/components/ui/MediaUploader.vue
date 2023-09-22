@@ -86,6 +86,13 @@ const uploadFiles = async () => {
   }
 };
 
+// email check
+const isValidEmail = () => {
+  const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  return emailRegex.test(email.value);
+}
+
+// live cycle events
 onMounted(() => {
   fileInput.value.addEventListener('change', function(e) {
     const files = e.target.files;
@@ -117,13 +124,12 @@ onMounted(() => {
       <SectionTitle>Carrega aqui as tuas fotos</SectionTitle>
       <div class="form-item">
         <form>
-          <input type="email" v-model="email" ref="emailRef" name="email" placeholder="Email *">
+          <input type="email" v-model="email" ref="emailRef" name="email" placeholder="Email *" required>
         </form>
       </div>
-      <div class="form-item message" v-if="message" v-html="message"></div>
-
+      
       <div class="form-item">
-        <PrimaryButton @click="triggerFileInput">Escolher fotos</PrimaryButton>
+        <PrimaryButton @click="triggerFileInput" :disabled="!isValidEmail()">Escolher fotos</PrimaryButton>
         <input type="file" @change="handleFiles" ref="fileInput" multiple accept="image/*" hidden>
       </div>
 
@@ -136,6 +142,7 @@ onMounted(() => {
         </Gallery>
       </div>
 
+      <div class="form-item message" v-if="message" v-html="message"></div>
       <div class="form-item message" v-if="status" v-html="status"></div>
       <div class="form-item">
         <PrimaryButton @click="uploadFiles" :hidden="files.length === 0" :disabled="loading">Enviar -&gt;</PrimaryButton>
