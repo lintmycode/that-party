@@ -208,6 +208,7 @@ const handleTouchEnd = () => {
       line-height: 3rem;
       padding-bottom: 4px;
       z-index: 1;
+      width: 4rem;
 
       @media (max-width: 760px) {
         top: auto;
