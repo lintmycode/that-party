@@ -53,6 +53,7 @@ section {
     justify-content: center;
     align-items: center;
     z-index: 1;
+    color: var(--color-text);
 
     &:active {
       background-color: var(--color-secondary);
