@@ -31,13 +31,6 @@ const handleFiles = (event) => {
   // const availableSize = ((maxSize - totalSize) / (1024 * 1024)).toFixed(2);
   // status.value = `Espaço disponível: ${availableSize} MB`;
   
-  setTimeout(() => {
-    window.scrollTo({
-      top: document.body.scrollHeight,
-      behavior: 'smooth'
-    })
-  }, 200)
-  
   for (const file of selectedFiles) {
     const reader = new FileReader();
     
@@ -51,6 +44,13 @@ const handleFiles = (event) => {
       reader.readAsDataURL(file);
     }
   }
+
+  setTimeout(() => {
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: 'smooth'
+    })
+  }, 200)
 };
 
 // fake file input
