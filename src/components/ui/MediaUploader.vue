@@ -9,14 +9,34 @@ import Gallery from './Gallery.vue';
 
 const email = ref("");
 const emailRef = ref("");
-const message = ref("")
-const status = ref("")
+const message = ref("* vamos enviar-te o link do álbum para o email")
 const files = ref([]);
 const uploaded = ref(false)
 const loading = ref(false)
 
 const handleFiles = (event) => {
   const selectedFiles = event.target.files;
+  message.value = ""
+
+  const maxSize = 200 * 1024 * 1024
+  let totalSize = 0;
+  for (let i = 0; i < selectedFiles.length; i++) {
+    totalSize += selectedFiles[i].size;
+  }
+  if (totalSize > maxSize) {
+    message.value = "O tamanho total não pode ultrapassar 200MB"
+    e.target.value = '';
+    return
+  }
+  // const availableSize = ((maxSize - totalSize) / (1024 * 1024)).toFixed(2);
+  // status.value = `Espaço disponível: ${availableSize} MB`;
+  
+  setTimeout(() => {
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: 'smooth'
+    })
+  }, 200)
   
   for (const file of selectedFiles) {
     const reader = new FileReader();
@@ -91,37 +111,12 @@ const isValidEmail = () => {
   const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
   return emailRegex.test(email.value);
 }
-
-// live cycle events
-onMounted(() => {
-  fileInput.value.addEventListener('change', function(e) {
-    const files = e.target.files;
-    const maxSize = 20 * 1024 * 1024
-    let totalSize = 0;
-    for (let i = 0; i < files.length; i++) {
-      totalSize += files[i].size;
-    }
-    if (totalSize > maxSize) {
-      status.value = "O tamanho total não pode ultrapassar 20MB"
-      e.target.value = '';
-    }
-    const availableSize = ((maxSize - totalSize) / (1024 * 1024)).toFixed(2);
-    status.value = `Espaço disponível: ${availableSize} MB`;
-    
-    setTimeout(() => {
-      window.scrollTo({
-        top: document.body.scrollHeight,
-        behavior: 'smooth'
-      })
-    }, 200)
-  });
-})
 </script>
 
 <template>
   <div class="wrapper">
     <template v-if="!uploaded">
-      <SectionTitle>Carrega aqui as tuas fotos</SectionTitle>
+      <SectionTitle>Carrega aqui as tuas fotos *</SectionTitle>
       <div class="form-item">
         <form>
           <input type="email" v-model="email" ref="emailRef" name="email" placeholder="Email *" required>
@@ -144,7 +139,6 @@ onMounted(() => {
       </div>
 
       <div class="form-item message" v-if="message" v-html="message"></div>
-      <div class="form-item message" v-if="status" v-html="status"></div>
       <div class="form-item">
         <PrimaryButton @click="uploadFiles" :hidden="files.length === 0" :disabled="loading">Enviar -&gt;</PrimaryButton>
       </div>
