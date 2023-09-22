@@ -58,7 +58,7 @@ const toggleAudio = () => {
 
 //
 const upload = () => {
-  window.location.href = '/upload'
+  window.location.href = '/carrega'
 }
 </script>
 
