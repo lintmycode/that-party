@@ -9,7 +9,7 @@ import Gallery from './Gallery.vue';
 
 const email = ref("");
 const emailRef = ref("");
-const message = ref("* vamos enviar-te o link do álbum para o email")
+const message = ref("")
 const files = ref([]);
 const uploaded = ref(false)
 const loading = ref(false)
@@ -116,7 +116,8 @@ const isValidEmail = () => {
 <template>
   <div class="wrapper">
     <template v-if="!uploaded">
-      <SectionTitle>Carrega aqui as tuas fotos *</SectionTitle>
+      <SectionTitle>Carrega aqui as tuas fotos</SectionTitle>
+      <p>-&gt; queremos o teu email apenas para te enviar o link do álbum<br><br></p>
       <div class="form-item">
         <form>
           <input type="email" v-model="email" ref="emailRef" name="email" placeholder="Email *" required>
@@ -171,6 +172,18 @@ const isValidEmail = () => {
     
     &.gallery {
       max-width: 100%;
+    }
+  }
+
+  .preview {
+    opacity: 1;
+    
+    &:hover {
+      border-color: transparent;
+    }
+
+    img {
+      cursor: default;
     }
   }
 }
