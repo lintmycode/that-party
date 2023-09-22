@@ -165,7 +165,8 @@ const handleTouchEnd = () => {
   <ContentSection type="dark">
     <Loading v-if="isLoading">A carregar...</Loading>
     <Gallery v-else>
-      <li v-for="file, index in files" :key="file" @click="openModal(file)"> 
+      <li v-for="file, index in files" :key="file" @click="openModal(file)" 
+        :style="'background-image: url(' + mediaUrl + file.filename + ')'"> 
         <img :src="mediaUrl + file.filename">
       </li>
     </Gallery>

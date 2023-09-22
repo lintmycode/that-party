@@ -136,7 +136,8 @@ onMounted(() => {
       <!-- Preview Area -->
       <div class="form-item gallery">
         <Gallery>
-          <li v-for="file in files" :key="file.name" class="preview">
+          <li v-for="file in files" :key="file.name" class="preview"
+            :style="'background-image: url(' + file.preview + ')'">
             <img v-if="file.type.includes('image')" :src="file.preview" />
           </li>
         </Gallery>
