@@ -17,6 +17,7 @@ const supabase = createClient(supabaseUrl, supabaseServiceRoleKey);
 const app = express();
 const port = 3000;
 const uploadsDir = process.env.UPLOADS_DIR
+const optimizedDir = process.env.OPTIMIZED_DIR
 
 // cors options
 const corsOptions = {
@@ -89,7 +90,7 @@ app.post('/upload', upload.array('files'), async (req, res) => {
 
 // get files
 app.get('/get-files', (req, res) => {
-  const directoryPath = path.join(__dirname, '../' + uploadsDir);
+  const directoryPath = path.join(__dirname, '../' + optimizedDir);
 
   // page and limit parameters
   const limit = parseInt(req.query.limit) || 20; // default limit to 20, change as needed
@@ -135,7 +136,7 @@ app.get('/media/:filename', async (req, res) => {
   // todo: permission checks
   
   const filename = req.params.filename;
-  const filePath = path.join(__dirname, '../' + uploadsDir, filename);
+  const filePath = path.join(__dirname, '../' + optimizedDir, filename);
   if (fs.existsSync(filePath)) {
 
     // determine content type
