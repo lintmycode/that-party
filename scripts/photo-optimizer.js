@@ -5,7 +5,10 @@ const fs = require('fs');
 const path = require('path');
 
 const uploadsDir = process.env.UPLOADS_DIR;
-const BATCH_SIZE = 5;
+const BATCH_SIZE = 2; // reduced batch size
+
+// Limit sharp's concurrency
+sharp.concurrency(1);
 
 fs.readdir(uploadsDir, (err, files) => {
     if (err) {
@@ -13,10 +16,8 @@ fs.readdir(uploadsDir, (err, files) => {
         return;
     }
 
-    // Filter and get only image files
     const imageFiles = files.filter(file => ['.jpg', '.jpeg', '.png'].includes(path.extname(file).toLowerCase()));
 
-    // Function to process a batch of images
     const processBatch = (batchFiles) => {
         const promises = batchFiles.map(file => {
             const filePath = path.join(uploadsDir, file);
@@ -36,7 +37,6 @@ fs.readdir(uploadsDir, (err, files) => {
         return Promise.all(promises);
     };
 
-    // Function to process all batches sequentially
     const processAllBatches = async () => {
         for (let i = 0; i < imageFiles.length; i += BATCH_SIZE) {
             const batchFiles = imageFiles.slice(i, i + BATCH_SIZE);
