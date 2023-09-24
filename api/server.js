@@ -7,6 +7,7 @@ const path = require('path');
 const cors = require('cors');
 const { createClient } = require('@supabase/supabase-js');
 const crypto = require('crypto');
+const sharp = require('sharp');
 
 // initialize supabase client
 const supabaseUrl = process.env.VITE_SUPABASE_URL;
@@ -69,6 +70,17 @@ app.post('/upload', upload.array('files'), async (req, res) => {
   const { files } = req;
   const { email } = req.body;
 
+  // optimize and move to folder
+  await Promise.all(files.map(async file => {
+    const inputPath =  path.join(__dirname, '..',  file.path);
+    const outputPath = path.join(__dirname, '..', file.path.replace('uploads', optimizedDir));
+
+    await sharp(inputPath)
+      .resize({ width: 1920, height: 1080, fit: 'inside' })
+      .jpeg({ quality: 80, progressive: true })
+      .toFile(outputPath);
+    }));
+  
   // save to supabase
   try {
     const { data, error } = await supabase
