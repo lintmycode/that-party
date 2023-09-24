@@ -24,7 +24,7 @@ fs.readdir(uploadsDir, (err, files) => {
 
             return sharp(filePath)
                 .resize({ width: 1920 }) // Resize to 1920 pixels width, height is auto to maintain aspect ratio
-                .toFormat('jpeg', { quality: 80 })
+                .toFormat('jpeg', { quality: 80, progressive: true  })
                 .toFile(outputPath)
                 .then(() => {
                     console.log('Optimized and resized:', file);
