@@ -76,6 +76,7 @@ app.post('/upload', upload.array('files'), async (req, res) => {
     const outputPath = path.join(__dirname, '..', file.path.replace('uploads', optimizedDir));
 
     await sharp(inputPath)
+      .rotate()
       .resize({ width: 1920, height: 1080, fit: 'inside' })
       .jpeg({ quality: 80, progressive: true })
       .toFile(outputPath);

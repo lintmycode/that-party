@@ -23,6 +23,7 @@ fs.readdir(uploadsDir, (err, files) => {
             const outputPath = path.join(uploadsDir, '../photos', file);
 
             return sharp(filePath)
+                .rotate()  // Auto rotate based on the orientation EXIF tag
                 .resize({ width: 1920 }) // Resize to 1920 pixels width, height is auto to maintain aspect ratio
                 .toFormat('jpeg', { quality: 80, progressive: true  })
                 .toFile(outputPath)
