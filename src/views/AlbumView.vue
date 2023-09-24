@@ -56,7 +56,7 @@ onMounted(async () => {
   // wait a bit longer for better ui
   setTimeout(() => {
     isLoading.value = false
-  }, 500);
+  }, 2000);
 })
 
 onBeforeUnmount(() => {
