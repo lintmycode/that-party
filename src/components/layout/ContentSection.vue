@@ -4,7 +4,7 @@ const slots = useSlots()
 
 defineProps({
   type: {
-    type: String, 
+    type: String
   }
 })
 </script>
@@ -85,7 +85,7 @@ defineProps({
 
       @media (max-width: 480px) {
         left: -1rem;
-      }     
+      }
     }
 
     :slotted(p) {
@@ -94,7 +94,7 @@ defineProps({
       @media (max-width: 768px) {
         font-size: 2rem;
       }
-      
+
       strong {
         font-weight: 700;
       }
@@ -105,7 +105,7 @@ defineProps({
       line-height: 1.2;
       display: inline-block;
       font-weight: 700;
-      letter-spacing: .2rem;
+      letter-spacing: 0.2rem;
       text-transform: uppercase;
     }
   }

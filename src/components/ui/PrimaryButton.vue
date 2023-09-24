@@ -1,7 +1,7 @@
 <script setup>
 const clicked = (e) => {
   // blur after click because styles
-  e.target.blur();
+  e.target.blur()
 }
 </script>
 
@@ -13,7 +13,7 @@ const clicked = (e) => {
 
 <style lang="scss" scoped>
 button {
-  padding: .6rem 8rem;
+  padding: 0.6rem 8rem;
   color: var(--color-background);
   background-color: var(--color-secondary);
   border-radius: 0;

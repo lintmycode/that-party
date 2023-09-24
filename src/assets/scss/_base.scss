@@ -13,7 +13,7 @@
   /* these will be overriden in the theme.config.js */
   --c-primary: #e0fa06;
   --c-secondary: #ef06d1;
-  --c-terciary: #1B0630;
+  --c-terciary: #1b0630;
 }
 
 /* semantic color variables for this project */
@@ -96,13 +96,13 @@ strong {
   display: flex;
   gap: 1rem;
   align-items: center;
-  
+
   @media (max-width: 768px) {
     gap: 1rem;
   }
-  
+
   @media (max-width: 480px) {
-    gap: .6rem;
+    gap: 0.6rem;
   }
 
   // & > * {

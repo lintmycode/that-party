@@ -6,12 +6,12 @@ const close = () => {
 </script>
 
 <template>
-<Teleport to="body">
-  <section class="modal">
-    <button class="close" @click="close">&#x2715;</button>
-    <slot />
-  </section>
-</Teleport>
+  <Teleport to="body">
+    <section class="modal">
+      <button class="close" @click="close">&#x2715;</button>
+      <slot />
+    </section>
+  </Teleport>
 </template>
 
 <style lang="scss" scoped>
@@ -34,12 +34,12 @@ section {
     right: 0;
     bottom: 0;
     //background-color: rgba(27, 6, 48, .6);
-    background-color: rgba(0, 0, 0, .5);
+    background-color: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(20px);
     z-index: 0;
   }
 
-  button, 
+  button,
   :slotted(button) {
     position: absolute;
     width: 4rem;
@@ -58,13 +58,12 @@ section {
     &:active {
       background-color: var(--color-secondary);
     }
-    
+
     &.close {
       font-size: 2rem;
       top: 2rem;
       right: 2rem;
     }
   }
-
 }
 </style>

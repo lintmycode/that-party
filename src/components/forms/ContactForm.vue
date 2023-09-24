@@ -9,8 +9,7 @@ const { contact } = storeToRefs(partyStore)
 <template>
   <form>
     <div class="form-item v-flex">
-      <label for="email"
-        >Email</label>
+      <label for="email">Email</label>
       <input
         type="email"
         name="email"

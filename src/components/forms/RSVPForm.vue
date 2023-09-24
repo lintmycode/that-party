@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { usePartyStore } from '@/stores/partyStore.js'
-import SecondaryButton from '../ui/SecondaryButton.vue';
+import SecondaryButton from '../ui/SecondaryButton.vue'
 
 const partyStore = usePartyStore()
 const { attendees } = storeToRefs(partyStore)
@@ -23,7 +23,7 @@ const plusOne = () => {
 
 // rm a guest
 const removeAttendee = (index) => {
-  attendees.value.splice(index, 1);
+  attendees.value.splice(index, 1)
 }
 
 // rm error if name is valid
@@ -50,13 +50,27 @@ const focusLastName = () => {
         placeholder="Nome *"
         @keyup="nameEdited"
       />
-    
+
       <span class="age">
-        <input type="radio" v-model="attendee.isChild" :value="false" :id="'adult-' + index"><label :for="'adult-' + index">Adulto</label>
-        <input type="radio" v-model="attendee.isChild" :value="true" :id="'child-' + index"><label :for="'child-' + index">Criança</label>
+        <input
+          type="radio"
+          v-model="attendee.isChild"
+          :value="false"
+          :id="'adult-' + index"
+        /><label :for="'adult-' + index">Adulto</label>
+        <input type="radio" v-model="attendee.isChild" :value="true" :id="'child-' + index" /><label
+          :for="'child-' + index"
+          >Criança</label
+        >
       </span>
-      <button @click.prevent="removeAttendee(index)" class="remove" title="Remover" :disabled="index === 0">&#x2715;</button>
-      
+      <button
+        @click.prevent="removeAttendee(index)"
+        class="remove"
+        title="Remover"
+        :disabled="index === 0"
+      >
+        &#x2715;
+      </button>
     </div>
     <div class="form-item message" v-if="message" v-html="message"></div>
     <SecondaryButton @click="plusOne" class="add">+ adicionar acompanhante</SecondaryButton>
@@ -82,7 +96,7 @@ button {
       visibility: hidden;
     }
   }
-} 
+}
 
 .age {
   display: flex;
@@ -107,7 +121,7 @@ button {
       border: 1px solid var(--color-text);
       padding: 0 1rem;
       color: var(--color-text-soft);
-      opacity: .5;
+      opacity: 0.5;
       cursor: pointer;
       transition: 100ms all;
       text-transform: uppercase;
@@ -115,19 +129,19 @@ button {
 
       @media (max-width: 480px) {
         font-size: 1.4rem;
-        padding: 0 .5rem;
+        padding: 0 0.5rem;
       }
     }
 
     &:first-of-type {
       & + label {
-        border-radius: .5rem 0 0 .5rem;
+        border-radius: 0.5rem 0 0 0.5rem;
       }
     }
-    
+
     &:last-of-type {
       & + label {
-        border-radius: 0 .5rem .5rem 0;
+        border-radius: 0 0.5rem 0.5rem 0;
         margin-left: -1px;
       }
     }
@@ -142,7 +156,7 @@ button {
   }
 
   input {
-    &[type=text] {
+    &[type='text'] {
       flex: 1 0 50%;
     }
   }

@@ -2,7 +2,7 @@
 import { ref, computed } from 'vue'
 import { storeToRefs } from 'pinia'
 import { usePartyStore } from '@/stores/partyStore.js'
-import { useScroll } from '@/lib/useScroll';
+import { useScroll } from '@/lib/useScroll'
 import StepsContent from '../components/StepsContent.vue'
 import RSVPSummary from '../components/RSVPSummary.vue'
 import RSVPForm from '../components/forms/RSVPForm.vue'
@@ -11,10 +11,9 @@ import ContactForm from '../components/forms/ContactForm.vue'
 import ContentSection from './layout/ContentSection.vue'
 import PrimaryButton from './ui/PrimaryButton.vue'
 
+const formOpen = ref(import.meta.env.VITE_FORM_OPEN === 'true' ? true : false)
 
-const formOpen = ref(import.meta.env.VITE_FORM_OPEN === "true" ? true : false)
-
-const { scrollToElementById } = useScroll();
+const { scrollToElementById } = useScroll()
 
 const formSubmitted = ref(false)
 const contentSectionType = ref('')
@@ -95,7 +94,6 @@ const nav = computed(() => [
       <h2>-&gt; Obrigado &lt;-</h2>
       <p>* Até já! Vêmo-nos n'AQUELA FESTA! *</p>
       <PrimaryButton @click="scrollToElementById('location')"> Mapa &#x25BC;</PrimaryButton>
-      
     </template>
   </ContentSection>
 </template>

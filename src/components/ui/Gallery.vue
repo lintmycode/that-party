@@ -1,5 +1,4 @@
-<script setup>
-</script>
+<script setup></script>
 
 <template>
   <ul>
@@ -10,7 +9,7 @@
 <style lang="scss" scoped>
 ul {
   display: flex;
-  gap: 1.6rem .8rem;
+  gap: 1.6rem 0.8rem;
   flex-wrap: wrap;
   justify-content: flex-start;
 
@@ -21,24 +20,23 @@ ul {
     position: relative;
     transition: all 100ms ease-in;
     border: 1px solid transparent;
-    opacity: .9;
+    opacity: 0.9;
     background-repeat: no-repeat;
     background-position: 50%;
     background-size: cover;
-      
+
     &:hover {
       opacity: 1;
       border-color: var(--color-secondary);
     }
-    
+
     img {
       cursor: pointer;
       //width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0;   
+      opacity: 0;
     }
   }
 }
-
 </style>

@@ -27,7 +27,7 @@ const submit = () => {
 <template>
   <section>
     <ul>
-      <li v-for="(item, index) in nav" :key="index" >
+      <li v-for="(item, index) in nav" :key="index">
         <template v-if="activeIndex === index">
           <SectionTitle>{{ item.name }}</SectionTitle>
           <p v-if="item.note" class="note">{{ item.note }}</p>
@@ -77,8 +77,8 @@ section {
         text-transform: uppercase;
         font-family: 'AnonymousPro';
         font-weight: 600;
-        letter-spacing: .6rem;
-        
+        letter-spacing: 0.6rem;
+
         @media (max-width: 480px) {
           font-size: 4rem;
           letter-spacing: 0;
@@ -90,7 +90,7 @@ section {
         line-height: 1.2;
         display: inline-block;
         font-weight: 700;
-        letter-spacing: .2rem;
+        letter-spacing: 0.2rem;
         text-transform: uppercase;
         margin-top: 2rem;
         margin-bottom: 4rem;

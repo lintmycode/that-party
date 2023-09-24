@@ -14,7 +14,7 @@ const { attendees, contributions, contact } = storeToRefs(partyStore)
         {{ attendee.name + (attendee.isChild ? ' (criança)' : '') }}
       </li>
     </ul>
-    
+
     <h3>Vou levar</h3>
     <ul v-if="contributions.length > 0">
       <li v-for="(contribution, index) in contributions" :key="'contribution-' + index">
@@ -50,7 +50,7 @@ ul {
 li,
 p {
   font-size: 2rem;
-  
+
   + h3 {
     margin-top: 2rem;
   }

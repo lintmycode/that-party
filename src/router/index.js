@@ -26,7 +26,7 @@ const router = createRouter({
       name: 'album',
       component: AlbumView,
       props: true
-    },
+    }
   ]
 })
 

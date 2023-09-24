@@ -2,7 +2,7 @@
 import { storeToRefs } from 'pinia'
 import { ref, onMounted, watch } from 'vue'
 import { usePartyStore } from '@/stores/partyStore.js'
-import Loading from '../ui/Loading.vue';
+import Loading from '../ui/Loading.vue'
 
 const partyStore = usePartyStore()
 const { contributions, loading } = storeToRefs(partyStore)
@@ -12,7 +12,7 @@ const categories = ref([])
 const myContributions = ref([])
 onMounted(async () => {
   categories.value = await partyStore.getAvailableContributions()
-  myContributions.value = contributions.value.map(c => c.id)
+  myContributions.value = contributions.value.map((c) => c.id)
 })
 
 // toggle visible category
@@ -24,20 +24,20 @@ onMounted(async () => {
 // move local contributions to store
 watch(myContributions, (val) => {
   contributions.value = []
-  val.forEach(c => {
-    categories.value.forEach(cat => {
-      cat.contributions.forEach(contrib => {
+  val.forEach((c) => {
+    categories.value.forEach((cat) => {
+      cat.contributions.forEach((contrib) => {
         if (c === contrib.id) {
-          contributions.value.push({...contrib, qty: 1})
+          contributions.value.push({ ...contrib, qty: 1 })
         }
       })
     })
   })
-});
+})
 </script>
 
 <template>
-  <template v-if="!loading">    
+  <template v-if="!loading">
     <ul class="categories">
       <template v-for="(cat, catIndex) in categories" :key="'cat-' + catIndex">
         <li class="category">
@@ -48,7 +48,13 @@ watch(myContributions, (val) => {
               :key="'cat-' + catIndex + '-' + itemIndex"
             >
               <li v-if="item.availableQty > 0" class="item form-item">
-                <input type="checkbox" name="" :value="item.id" v-model="myContributions" :id="'check-' + item.id">
+                <input
+                  type="checkbox"
+                  name=""
+                  :value="item.id"
+                  v-model="myContributions"
+                  :id="'check-' + item.id"
+                />
                 <label :for="'check-' + item.id">{{ item.name }}</label>
               </li>
             </template>
@@ -56,9 +62,8 @@ watch(myContributions, (val) => {
         </li>
       </template>
     </ul>
-    
   </template>
-  
+
   <template v-else>
     <Loading>a pensar...</Loading>
   </template>
@@ -68,7 +73,7 @@ watch(myContributions, (val) => {
 ul {
   display: flex;
   flex-direction: column;
-  
+
   &.categories {
     gap: 2rem;
     width: 100%;

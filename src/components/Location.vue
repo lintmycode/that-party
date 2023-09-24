@@ -1,12 +1,12 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import ExternalLink from './ui/ExternalLink.vue';
+import ExternalLink from './ui/ExternalLink.vue'
 
 const scriptLoaded = ref(false)
 const destination = { lat: 41.781351, lng: -8.8617906 }
 
-const center = window.innerWidth >= 768 ? 
-{ lat: 41.781351, lng: -8.845 } : { lat: 41.77, lng: -8.860 }
+const center =
+  window.innerWidth >= 768 ? { lat: 41.781351, lng: -8.845 } : { lat: 41.77, lng: -8.86 }
 
 const initMap = () => {
   const map = new window.google.maps.Map(document.getElementById('map'), {
@@ -59,12 +59,14 @@ onMounted(async () => {
       <ExternalLink
         :href="`https://www.google.com/maps/dir/?q=${destination.lat},${destination.lng}`"
         target="_blank"
-        ><i>Como chegar</i> -&gt;</ExternalLink>
-      <br>
+        ><i>Como chegar</i> -&gt;</ExternalLink
+      >
+      <br />
       <ExternalLink
         href="https://www.booking.com/searchresults.pt-pt.html?ss=Afife%2C+Regi%C3%A3o+do+Norte%2C+Portugal&label=pt-pt-booking-desktop-dI1M0QVmAjqhgb5bsivrqAS652828998886%3Apl%3Ata%3Ap1%3Ap2%3Aac%3Aap%3Aneg%3Afi%3Atikwd-1427534005%3Alp1011709%3Ali%3Adec%3Adm&aid=2311236&lang=pt-pt&sb=1&src_elem=sb&src=index&dest_id=-2157112&dest_type=city&ac_position=0&ac_click_type=b&ac_langcode=pt&ac_suggestion_list_length=5&search_selected=true&search_pageview_id=c55a6c879b64010f&ac_meta=GhBjNTVhNmM4NzliNjQwMTBmIAAoATICcHQ6BWFmaWZlQABKAFAA&checkin=2023-09-16&checkout=2023-09-17&group_adults=2&no_rooms=1&group_children=0&sb_travel_purpose=leisure"
         target="_blank"
-        ><i>Onde ficar</i> -&gt;</ExternalLink>
+        ><i>Onde ficar</i> -&gt;</ExternalLink
+      >
     </div>
     <!-- Map and Location Details: Embed a Google Maps (or any map service) location of the park and provide any necessary details for finding the specific spot within the park. Also, include information about parking and public transportation options if available. -->
   </section>

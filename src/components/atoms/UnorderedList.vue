@@ -24,7 +24,7 @@ ul {
       color: var(--color-secondary);
       margin-bottom: 1rem;
       line-height: 1.4;
-    }    
+    }
 
     .highlight {
       color: var(--color-secondary);

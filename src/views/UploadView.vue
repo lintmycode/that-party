@@ -1,6 +1,6 @@
 <script setup>
 import MediaUploader from '../components/ui/MediaUploader.vue'
-import ContentSection from '../components/layout/ContentSection.vue';
+import ContentSection from '../components/layout/ContentSection.vue'
 </script>
 
 <template>
@@ -9,5 +9,4 @@ import ContentSection from '../components/layout/ContentSection.vue';
   </ContentSection>
 </template>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

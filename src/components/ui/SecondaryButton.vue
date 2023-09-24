@@ -10,9 +10,9 @@ button {
   align-items: center;
   gap: 1rem;
   border: none;
-  padding: .8rem 2rem;
+  padding: 0.8rem 2rem;
   font-size: 1.8rem;
-  letter-spacing: .2rem;
+  letter-spacing: 0.2rem;
   background-color: var(--color-text);
   color: var(--color-background);
   cursor: pointer;

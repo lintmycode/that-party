@@ -1,9 +1,9 @@
 <script setup>
 import { ref } from 'vue'
-import { useScroll } from '@/lib/useScroll';
+import { useScroll } from '@/lib/useScroll'
 import PrimaryButton from './ui/PrimaryButton.vue'
 
-const debug = ref(import.meta.env.VITE_DEBUG === "true" ? true : false)
+const debug = ref(import.meta.env.VITE_DEBUG === 'true' ? true : false)
 const { scrollToElementById } = useScroll()
 const content = ref(null)
 
@@ -11,33 +11,33 @@ const isPartyStarted = ref(false)
 let audio = null
 if (!debug.value) {
   audio = new Audio('/mp3/comanchero.mp3')
-  
-  // preload media
-  document.addEventListener("DOMContentLoaded", function() {
-    audio.preload = "auto";
-    audio.load();
 
-    var video = document.createElement("video");
-    if (video.canPlayType("video/mp4")) {
-      video.src = "/video/aquela-festa.mp4";
+  // preload media
+  document.addEventListener('DOMContentLoaded', function () {
+    audio.preload = 'auto'
+    audio.load()
+
+    var video = document.createElement('video')
+    if (video.canPlayType('video/mp4')) {
+      video.src = '/video/aquela-festa.mp4'
     }
-    video.preload = "auto";
-    video.load();
-  });
+    video.preload = 'auto'
+    video.load()
+  })
 } else {
   isPartyStarted.value = false
   emit('entered')
 }
 
 // display video and start the music
-const isPlaying = ref(false);
+const isPlaying = ref(false)
 const emit = defineEmits(['entered'])
 const getThisPartyStarted = () => {
   isPartyStarted.value = true
   setTimeout(() => {
     content.value.classList.remove('hidden')
   }, 6000)
- 
+
   emit('entered')
   if (!debug.value) {
     audio.play()
@@ -49,9 +49,9 @@ const getThisPartyStarted = () => {
 // pause/play music
 const toggleAudio = () => {
   if (isPlaying.value) {
-    audio.pause();
+    audio.pause()
   } else {
-    audio.play();
+    audio.play()
   }
   isPlaying.value = !isPlaying.value
 }
@@ -75,9 +75,11 @@ const upload = () => {
       <p class="who">-&gt; Filipa &amp; Nuno convidam para &lt;-</p>
       <h1>Aquela Festa</h1>
       <p class="when">16 Setembro - Afife</p>
-      <PrimaryButton @click="scrollToElementById('header')">Quero Saber Tudo &#x25BC;</PrimaryButton>  
+      <PrimaryButton @click="scrollToElementById('header')"
+        >Quero Saber Tudo &#x25BC;</PrimaryButton
+      >
     </div>
-    
+
     <video playsinline autoplay muted loop id="bgVideo" v-if="!debug">
       <source src="/video/aquela-festa.mp4" type="video/mp4" />
     </video>
@@ -117,7 +119,7 @@ section {
       right: 2rem;
       padding-left: 4rem;
       padding-right: 4rem;
-    } 
+    }
   }
 
   p {
@@ -160,7 +162,7 @@ section {
 
       @media (max-width: 480px) {
         margin: 0 auto 3rem;
-      } 
+      }
     }
 
     button {
