@@ -18,7 +18,7 @@ ul {
     height: 19vh;
     min-height: 15rem;
     position: relative;
-    transition: all 100ms ease-in;
+    transition: opacity, border 100ms ease-in;
     border: 1px solid transparent;
     opacity: 0.9;
     background-repeat: no-repeat;

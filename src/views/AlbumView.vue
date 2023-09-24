@@ -52,7 +52,11 @@ onMounted(async () => {
   }
   window.addEventListener('keydown', handleEscapePress)
   window.addEventListener('scroll', handleScroll)
-  isLoading.value = false
+
+  // wait a bit longer for better ui
+  setTimeout(() => {
+    isLoading.value = false
+  }, 500);
 })
 
 onBeforeUnmount(() => {
