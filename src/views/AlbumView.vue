@@ -19,11 +19,11 @@ defineProps({
 })
 
 const isLoading = ref(true)
-const mediaUrl = ref(import.meta.env.VITE_SERVER_URL + 'media/')
 const showModal = ref(false)
 const openedFile = ref('')
 const index = ref(0)
 const loadingMedia = ref(false)
+let mediaUrl = import.meta.env.VITE_SERVER_URL + 'media/'
 
 // route parameters
 const route = useRoute()
@@ -37,9 +37,12 @@ let totalFiles = 0
 // lifecycle hooks to manage event listener
 onMounted(async () => {
   try {
+    // load filenames
     for (let i = 1; i <= page; i++) {
       await loadMedia(i)
     }
+
+    // open image in modal?
     if (route.params.filename) {
       openModal(
         files.value.find(
@@ -47,16 +50,24 @@ onMounted(async () => {
         )
       )
     }
+    
+    // preload
+    for (let i = 0; i < Math.min(limit, files.value.length); i++) {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'image';
+      link.href = mediaUrl + files.value[i].filename;
+      document.head.appendChild(link);
+    }
+
   } catch (error) {
     console.error('An error occurred while fetching data:', error)
   }
   window.addEventListener('keydown', handleEscapePress)
   window.addEventListener('scroll', handleScroll)
 
-  // wait a bit longer for better ui
-  setTimeout(() => {
-    isLoading.value = false
-  }, 2000);
+  // todo: prerender the first LIMIT images
+  isLoading.value = false
 })
 
 onBeforeUnmount(() => {
