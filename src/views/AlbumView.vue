@@ -6,6 +6,7 @@ import ContentSection from '../components/layout/ContentSection.vue'
 import Loading from '../components/ui/Loading.vue'
 import Modal from '../components/ui/Modal.vue'
 import Gallery from '../components/ui/Gallery.vue'
+import PrimaryButton from '../components/ui/PrimaryButton.vue'
 
 defineProps({
   page: {
@@ -30,7 +31,7 @@ const route = useRoute()
 
 const files = ref([])
 const limit = 30
-let page = parseInt(route.params.page) || 1
+const page = ref(parseInt(route.params.page) || 1)
 let totalPages = 0
 let totalFiles = 0
 
@@ -38,7 +39,7 @@ let totalFiles = 0
 onMounted(async () => {
   try {
     // load filenames
-    for (let i = 1; i <= page; i++) {
+    for (let i = 1; i <= page.value; i++) {
       await loadMedia(i)
     }
 
@@ -104,11 +105,11 @@ const loadMedia = async (currentPage) => {
 async function handleScroll() {
   const nearBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 1
 
-  if (nearBottom && page < totalPages && !loadMedia.value) {
+  if (nearBottom && page.value < totalPages && !loadMedia.value) {
     // load next page
     loadingMedia.value = true
-    page++
-    await loadMedia(page)
+    page.value++
+    await loadMedia(page.value)
     setTimeout(() => {
       loadingMedia.value = false
     }, 100)
@@ -129,12 +130,12 @@ const openModal = (file) => {
 // add to url
 const pushToUrl = (file) => {
   const filename = file.filename.split('.').slice(0, -1).join('.')
-  history.pushState({}, '', '/album/' + page + '/' + filename)
+  history.pushState({}, '', '/album/' + page.value + '/' + filename)
 }
 
 const closeModal = () => {
   showModal.value = false
-  history.pushState({}, '', '/album/' + page)
+  history.pushState({}, '', '/album/' + page.value)
 }
 
 const prev = () => {
@@ -149,8 +150,8 @@ const next = async () => {
   if (index.value < files.value.length - 1) {
     index.value++
   } else if (index.value < totalFiles - 1) {
-    page++
-    await loadMedia(page)
+    page.value++
+    await loadMedia(page.value)
     index.value++
   }
   openedFile.value = files.value[index.value]
@@ -203,6 +204,7 @@ const handleTouchEnd = () => {
         <img :src="mediaUrl + file.filename" />
       </li>
     </Gallery>
+    <PrimaryButton v-if="page < totalPages" @click="loadMedia(page++)">Carregar mais...</PrimaryButton>
   </ContentSection>
 
   <Modal v-if="showModal" @close="closeModal">
