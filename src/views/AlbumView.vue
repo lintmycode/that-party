@@ -53,11 +53,18 @@ onMounted(async () => {
     
     // preload
     for (let i = 0; i < Math.min(limit, files.value.length); i++) {
-      const link = document.createElement('link');
-      link.rel = 'preload';
-      link.as = 'image';
-      link.href = mediaUrl + files.value[i].filename;
-      document.head.appendChild(link);
+
+      await (async () => {
+        const promises = urls.map(url => {
+          return new Promise((resolve, reject) => {
+            const img = new Image();
+            img.src = url;
+            img.onload = resolve;
+            img.onerror = reject;
+          });
+        });
+        return Promise.all(promises);
+      })()
     }
 
   } catch (error) {
