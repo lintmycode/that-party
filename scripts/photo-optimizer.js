@@ -41,6 +41,7 @@ fs.readdir(uploadsDir, (err, files) => {
         for (let i = 0; i < imageFiles.length; i += BATCH_SIZE) {
             const batchFiles = imageFiles.slice(i, i + BATCH_SIZE);
             await processBatch(batchFiles);
+            console.log('Batch #' + i + ' done.')
         }
     };
 
