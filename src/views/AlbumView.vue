@@ -52,21 +52,18 @@ onMounted(async () => {
     }
     
     // preload
-    for (let i = 0; i < Math.min(limit, files.value.length); i++) {
-
-      await (async () => {
-        const promises = urls.map(url => {
-          return new Promise((resolve, reject) => {
-            const img = new Image();
-            img.src = url;
-            img.onload = resolve;
-            img.onerror = reject;
-          });
+    await (async (filenames) => {
+      const promises = filenames.map(filename => {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+          img.src = mediaUrl + filename;
+          img.onload = resolve;
+          img.onerror = reject;
         });
-        return Promise.all(promises);
-      })()
-    }
-
+      });
+      return Promise.all(promises);
+    })(files.value.slice(0, limit).map(f => f.filename))
+  
   } catch (error) {
     console.error('An error occurred while fetching data:', error)
   }
@@ -76,6 +73,7 @@ onMounted(async () => {
   // todo: prerender the first LIMIT images
   isLoading.value = false
 })
+
 
 onBeforeUnmount(() => {
   window.removeEventListener('keydown', handleEscapePress)
