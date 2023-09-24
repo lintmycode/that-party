@@ -5,9 +5,8 @@ const fs = require('fs');
 const path = require('path');
 
 const uploadsDir = process.env.UPLOADS_DIR;
-const BATCH_SIZE = 1; // reduced batch size
+const BATCH_SIZE = 1;
 
-// Limit sharp's concurrency
 sharp.concurrency(1);
 
 fs.readdir(uploadsDir, (err, files) => {
@@ -24,10 +23,11 @@ fs.readdir(uploadsDir, (err, files) => {
             const outputPath = path.join(uploadsDir, '../photos', file);
 
             return sharp(filePath)
+                .resize({ width: 1920 }) // Resize to 1920 pixels width, height is auto to maintain aspect ratio
                 .toFormat('jpeg', { quality: 80 })
                 .toFile(outputPath)
                 .then(() => {
-                    console.log('Optimized:', file);
+                    console.log('Optimized and resized:', file);
                 })
                 .catch(err => {
                     console.error('Error processing file:', file, err);
@@ -41,7 +41,6 @@ fs.readdir(uploadsDir, (err, files) => {
         for (let i = 0; i < imageFiles.length; i += BATCH_SIZE) {
             const batchFiles = imageFiles.slice(i, i + BATCH_SIZE);
             await processBatch(batchFiles);
-            console.log('Batch #' + i + ' done.')
         }
     };
 
