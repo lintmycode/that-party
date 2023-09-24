@@ -5,7 +5,7 @@ const fs = require('fs');
 const path = require('path');
 
 const uploadsDir = process.env.UPLOADS_DIR;
-const BATCH_SIZE = 2; // reduced batch size
+const BATCH_SIZE = 1; // reduced batch size
 
 // Limit sharp's concurrency
 sharp.concurrency(1);
