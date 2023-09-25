@@ -72,11 +72,8 @@ onMounted(async () => {
   }
   window.addEventListener('keydown', handleEscapePress)
   window.addEventListener('scroll', handleScroll)
-
-  // todo: prerender the first LIMIT images
   isLoading.value = false
 })
-
 
 onBeforeUnmount(() => {
   window.removeEventListener('keydown', handleEscapePress)
@@ -171,17 +168,13 @@ const handleEscapePress = (event) => {
 }
 
 // touch events
-
 watch(() => showModal.value, (newVal) => {
   if (newVal) {
     nextTick(() => {
-      // hammerManager = new Hammer.Manager(document.getElementById('touch-target'))
       hammerManager = new Hammer(document.getElementById('touch-target'), {
         touchAction: 'auto',
       });
       hammerManager.get('swipe').set({ direction: Hammer.DIRECTION_HORIZONTAL });
-      // hammerManager.add([new Hammer.Swipe()])
-      // hammerManager.get('pinch').set({ enable: true, preventDefault: false });
       hammerManager.on('swipeleft', () => { next() })
       hammerManager.on('swiperight', () => { prev() })
     })
@@ -192,30 +185,6 @@ watch(() => showModal.value, (newVal) => {
     }
   }
 });
-// const startX = ref(0)
-// const endX = ref(0)
-
-// const handleTouchStart = (event) => {
-//   if(event.touches.length === 1) {
-//     startX.value = event.touches[0].clientX
-//   }
-// }
-
-// const handleTouchMove = (event) => {
-//   if(event.touches.length === 1) {
-//     endX.value = event.touches[0].clientX
-//   }
-// }
-
-// const handleTouchEnd = () => {
-//   const diffX = endX.value - startX.value
-//   // threshold of 50 pixels for the slide to be considered a navigation gesture
-//   if (diffX > 50) {
-//     prev()
-//   } else if (diffX < -50) {
-//     next()
-//   }
-// }
 
 const manualLoad = () => {
   page.value++
