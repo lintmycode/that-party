@@ -189,6 +189,11 @@ const handleTouchEnd = () => {
     next()
   }
 }
+
+const manualLoad = () => {
+  page.value++
+  loadMedia(page.value)
+}
 </script>
 
 <template>
@@ -204,7 +209,7 @@ const handleTouchEnd = () => {
         <img :src="mediaUrl + file.filename" />
       </li>
     </Gallery>
-    <PrimaryButton v-if="page < totalPages" @click="loadMedia(page++)">Carregar mais...</PrimaryButton>
+    <PrimaryButton v-if="page < totalPages" @click="manualLoad">Carregar mais...</PrimaryButton>
   </ContentSection>
 
   <Modal v-if="showModal" @close="closeModal">
