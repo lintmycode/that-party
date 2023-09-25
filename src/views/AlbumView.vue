@@ -175,11 +175,15 @@ const handleEscapePress = (event) => {
 watch(() => showModal.value, (newVal) => {
   if (newVal) {
     nextTick(() => {
-      hammerManager = new Hammer.Manager(document.getElementById('touch-target'))
-      hammerManager.add([new Hammer.Swipe(), new Hammer.Pinch()])
-      hammerManager.get('pinch').set({ enable: true, preventDefault: false });
-      hammerManager.on('swipeleft', () => { next() })
-      hammerManager.on('swiperight', () => { prev() })
+      // hammerManager = new Hammer.Manager(document.getElementById('touch-target'))
+      hammerManager = new Hammer(document.getElementById('touch-target'), {
+        touchAction: 'auto',
+      });
+      hammerManager.get('swipe').set({ direction: Hammer.DIRECTION_HORIZONTAL });
+      // hammerManager.add([new Hammer.Swipe()])
+      // hammerManager.get('pinch').set({ enable: true, preventDefault: false });
+      // hammerManager.on('swipeleft', () => { next() })
+      // hammerManager.on('swiperight', () => { prev() })
     })
   } else {
     if (hammerManager) {
