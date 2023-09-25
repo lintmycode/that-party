@@ -111,35 +111,51 @@ app.get('/get-files', (req, res) => {
   const reqFilename = req.query.filename; // get the specific filename from query params
   
   // read directory and send array of filenames
-  fs.readdir(directoryPath, function (err, files) {
+  fs.readdir(directoryPath, function(err, files) {
     if (err) {
-      return res.status(500).send('Unable to scan directory: ' + directoryPath + err);
-    } 
+        return res.status(500).send('Unable to scan directory: ' + directoryPath + err);
+    }
 
-    let filesWithTypes = files.filter((file) => {
-      const extension = path.extname(file).toLowerCase();
-      return ['.jpg', '.jpeg', '.png', '.gif'].includes(extension);
+    let validFiles = files.filter(file => ['.jpg', '.jpeg', '.png', '.gif'].includes(path.extname(file).toLowerCase()));
+
+    // Get file sizes in an asynchronous manner
+    Promise.all(validFiles.map(file => {
+        return new Promise((resolve, reject) => {
+            fs.stat(path.join(directoryPath, file), (err, stats) => {
+                if (err) return reject(err);
+                if (stats.size > 0) {
+                    resolve(file);
+                } else {
+                    resolve(null); // resolve with null for files with size <= 0
+                }
+            });
+        });
+    }))
+    .then(filesWithSize => {
+        let filesWithTypes = filesWithSize.filter(Boolean); // Remove null values
+
+        if (reqFilename) {
+            const specificFile = filesWithTypes.find(file => file.split('.').slice(0, -1).join('.') === reqFilename);
+            if (specificFile) {
+                // add the specific file to the start (or end) of the list.
+                filesWithTypes.unshift(specificFile);
+            }
+        }
+
+        const totalFiles = filesWithTypes.length;
+        filesWithTypes = filesWithTypes.slice((page - 1) * limit, page * limit);
+        filesWithTypes = filesWithTypes.map(file => {
+            return { filename: file, type: 'image', extension: file.split('.').pop() };
+        });
+
+        res.status(200).json({
+            files: filesWithTypes,
+            totalPages: Math.ceil(totalFiles / limit),
+            totalFiles: totalFiles,
+        });
     })
-
-    // if a file has been requested (modal opened) make sure it is in the returned list
-    if (reqFilename) {
-      const specificFile = filesWithTypes.find(file => file.split('.').slice(0, -1).join('.') === reqFilename);
-      if (specificFile) {
-        // add the specific file to the start (or end) of the list.
-        filesWithTypes.unshift(specificFile);
-      }
-  }
-
-    const totalFiles = filesWithTypes.length;
-    filesWithTypes = filesWithTypes.slice((page - 1) * limit, page * limit);
-    filesWithTypes = filesWithTypes.map((file) => {
-      return { filename: file, type: 'image', extension: file.split('.').pop() };
-    });
-
-    res.status(200).json({
-      files: filesWithTypes,
-      totalPages: Math.ceil(totalFiles / limit),
-      totalFiles: totalFiles,
+    .catch(error => {
+        res.status(500).send('Error processing files: ' + error);
     });
   });
 });
