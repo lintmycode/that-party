@@ -1,6 +1,7 @@
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { ref, onMounted, onBeforeUnmount, watch, nextTick } from 'vue'
 import { useRoute } from 'vue-router'
+import Hammer from 'hammerjs';
 import axios from 'axios'
 import ContentSection from '../components/layout/ContentSection.vue'
 import Loading from '../components/ui/Loading.vue'
@@ -24,6 +25,7 @@ const showModal = ref(false)
 const openedFile = ref('')
 const index = ref(0)
 const loadingMedia = ref(false)
+let hammerManager = null;
 let mediaUrl = import.meta.env.VITE_SERVER_URL + 'media/'
 
 // route parameters
@@ -169,33 +171,46 @@ const handleEscapePress = (event) => {
 }
 
 // touch events
-const startX = ref(0)
-const endX = ref(0)
 
-const handleTouchStart = (event) => {
-  if(event.touches.length > 1) {
-    // more than one touch point detected, likely pinch-to-zoom
-    return;
+watch(() => showModal.value, (newVal) => {
+  if (newVal) {
+    nextTick(() => {
+      hammerManager = new Hammer.Manager(document.getElementById('touch-target'))
+      hammerManager.add([new Hammer.Swipe(), new Hammer.Pinch()])
+      hammerManager.on('swipeleft', () => { next() })
+      hammerManager.on('swiperight', () => { prev() })
+    })
+  } else {
+    if (hammerManager) {
+      hammerManager.destroy();
+      hammerManager = null;
+    }
   }
-  startX.value = event.touches[0].clientX
-}
+});
+// const startX = ref(0)
+// const endX = ref(0)
 
-const handleTouchMove = (event) => {
-  if(event.touches.length > 1) {
-    return;
-  }
-  endX.value = event.touches[0].clientX
-}
+// const handleTouchStart = (event) => {
+//   if(event.touches.length === 1) {
+//     startX.value = event.touches[0].clientX
+//   }
+// }
 
-const handleTouchEnd = () => {
-  const diffX = endX.value - startX.value
-  // threshold of 50 pixels for the slide to be considered a navigation gesture
-  if (diffX > 50) {
-    prev()
-  } else if (diffX < -50) {
-    next()
-  }
-}
+// const handleTouchMove = (event) => {
+//   if(event.touches.length === 1) {
+//     endX.value = event.touches[0].clientX
+//   }
+// }
+
+// const handleTouchEnd = () => {
+//   const diffX = endX.value - startX.value
+//   // threshold of 50 pixels for the slide to be considered a navigation gesture
+//   if (diffX > 50) {
+//     prev()
+//   } else if (diffX < -50) {
+//     next()
+//   }
+// }
 
 const manualLoad = () => {
   page.value++
@@ -220,12 +235,7 @@ const manualLoad = () => {
   </ContentSection>
 
   <Modal v-if="showModal" @close="closeModal">
-    <div
-      class="touch-target"
-      @touchstart="handleTouchStart"
-      @touchmove="handleTouchMove"
-      @touchend="handleTouchEnd"
-    >
+    <div id="touch-target" class="touch-target">
       <button class="nav prev" @click="prev" :disabled="index === 0">&#8249;</button>
       <button class="nav next" @click="next" :disabled="index === totalFiles - 1">&#8250;</button>
       <transition name="fade">
