@@ -182,8 +182,8 @@ watch(() => showModal.value, (newVal) => {
       hammerManager.get('swipe').set({ direction: Hammer.DIRECTION_HORIZONTAL });
       // hammerManager.add([new Hammer.Swipe()])
       // hammerManager.get('pinch').set({ enable: true, preventDefault: false });
-      // hammerManager.on('swipeleft', () => { next() })
-      // hammerManager.on('swiperight', () => { prev() })
+      hammerManager.on('swipeleft', () => { next() })
+      hammerManager.on('swiperight', () => { prev() })
     })
   } else {
     if (hammerManager) {
