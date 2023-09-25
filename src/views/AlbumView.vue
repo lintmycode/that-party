@@ -177,6 +177,7 @@ watch(() => showModal.value, (newVal) => {
     nextTick(() => {
       hammerManager = new Hammer.Manager(document.getElementById('touch-target'))
       hammerManager.add([new Hammer.Swipe(), new Hammer.Pinch()])
+      hammerManager.get('pinch').set({ enable: true, preventDefault: false });
       hammerManager.on('swipeleft', () => { next() })
       hammerManager.on('swiperight', () => { prev() })
     })
