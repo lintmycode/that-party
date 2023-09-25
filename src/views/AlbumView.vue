@@ -173,10 +173,17 @@ const startX = ref(0)
 const endX = ref(0)
 
 const handleTouchStart = (event) => {
+  if(event.touches.length > 1) {
+    // more than one touch point detected, likely pinch-to-zoom
+    return;
+  }
   startX.value = event.touches[0].clientX
 }
 
 const handleTouchMove = (event) => {
+  if(event.touches.length > 1) {
+    return;
+  }
   endX.value = event.touches[0].clientX
 }
 
@@ -209,7 +216,7 @@ const manualLoad = () => {
         <img :src="mediaUrl + file.filename" />
       </li>
     </Gallery>
-    <PrimaryButton v-if="page < totalPages" @click="manualLoad">Carregar mais...</PrimaryButton>
+    <PrimaryButton v-if="page < totalPages" @click="manualLoad">Carregar mais</PrimaryButton>
   </ContentSection>
 
   <Modal v-if="showModal" @close="closeModal">
