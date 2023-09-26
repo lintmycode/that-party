@@ -170,15 +170,17 @@ const handleEscapePress = (event) => {
 // touch events
 watch(() => showModal.value, (newVal) => {
   if (newVal) {
+    document.body.style.overflow = 'hidden'
     nextTick(() => {
       hammerManager = new Hammer(document.getElementById('touch-target'), {
         touchAction: 'auto',
       });
       hammerManager.get('swipe').set({ direction: Hammer.DIRECTION_HORIZONTAL });
-      hammerManager.on('swipeleft', () => { next() })
-      hammerManager.on('swiperight', () => { prev() })
+      hammerManager.on('swipeleft', () => { console.log('next'); next() })
+      hammerManager.on('swiperight', () => { console.log('prev'); prev() })
     })
   } else {
+    document.body.style.overflow = ''
     if (hammerManager) {
       hammerManager.destroy();
       hammerManager = null;
