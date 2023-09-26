@@ -173,7 +173,7 @@ watch(() => showModal.value, (newVal) => {
     document.body.style.overflow = 'hidden'
     nextTick(() => {
       hammerManager = new Hammer(document.getElementById('touch-target'), {
-        touchAction: 'auto',
+        touchAction: 'pan-y',
       });
       hammerManager.get('swipe').set({ direction: Hammer.DIRECTION_HORIZONTAL });
       hammerManager.on('swipeleft', () => { console.log('next'); next() })
