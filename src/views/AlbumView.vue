@@ -176,8 +176,8 @@ watch(() => showModal.value, (newVal) => {
         touchAction: 'auto',
       });
       // hammerManager.get('swipe').set({ direction: Hammer.DIRECTION_HORIZONTAL });
-      hammerManager.on('swipeleft', () => { console.log('next'); next() })
-      hammerManager.on('swiperight', () => { console.log('prev'); prev() })
+      hammerManager.on('swipeleft', () => { next() })
+      hammerManager.on('swiperight', () => { prev() })
     })
   } else {
     document.body.style.overflow = ''
