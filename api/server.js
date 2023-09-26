@@ -27,6 +27,7 @@ const corsOptions = {
   methods: 'POST, GET, PUT, DELETE, OPTIONS',
   allowedHeaders: 'Content-Type, Authorization',
 };
+app.use(cors(corsOptions));
 
 // Filter for media files
 const fileFilter = (req, file, cb) => {
@@ -39,8 +40,6 @@ const fileFilter = (req, file, cb) => {
     cb(null, false);
   }
 };
-
-app.use(cors(corsOptions));
 
 // multer storage options
 const storage = multer.diskStorage({
